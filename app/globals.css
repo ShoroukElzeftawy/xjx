@@ -104,3 +104,15 @@ body:has(.inner-page){background:#151515}
 .footer-brand p,.footer-signup p{font-size:12px;line-height:1.6}.footer-links span,.footer-signup>span{font-size:11px}.footer-links button{font-size:12px;line-height:1.45}.footer-signup input{font-size:11px}.ref-footer .legal{font-size:10px}
 @media(max-width:900px){.footer-main{grid-template-columns:1.4fr 1fr 1fr;row-gap:35px}.footer-signup{grid-column:2/4}.footer-main>div:nth-child(4){border-left:0}.footer-main>div{padding:0 18px}}
 @media(max-width:600px){.ref-footer{padding:38px 22px 20px}.footer-main{grid-template-columns:1fr 1fr}.footer-brand,.footer-signup{grid-column:1/-1}.footer-main>div{border-left:0;padding:0;min-height:auto}.footer-links{padding-top:20px!important}.footer-signup{padding-top:25px!important;border-top:1px solid #ffffff2b}.ref-footer .legal{gap:12px;flex-direction:column}.footer-brand .footer-logo{width:220px}}
+
+/* Clean reference navigation */
+.reference-home header,.inner-page header{height:76px;padding:0 7.1vw;position:relative}
+.reference-home .wordmark,.inner-page .wordmark{width:145px;height:48px;background-size:100% auto;background-position:center 50%}
+.reference-home .wordmark span,.inner-page .wordmark span{display:none}
+.reference-home header nav,.inner-page header nav{position:absolute;left:50%;top:0;transform:translateX(-50%);height:76px;gap:48px}
+.reference-home header nav button,.inner-page header nav button{height:76px;padding:0;font:11px "Gotham XJX",sans-serif;letter-spacing:.04em;color:#f4f4f2}
+.reference-home header nav button.active:after,.inner-page header nav button.active:after{height:2px;background:var(--blue);bottom:12px}
+.reference-home .tools,.inner-page .tools{gap:24px}.reference-home .tools button,.inner-page .tools button{font:11px "IBM Plex XJX",monospace;letter-spacing:.04em}
+.reference-home .tools button:first-child,.inner-page .tools button:first-child{font-size:25px;font-weight:300;line-height:1}
+.reference-home .signal,.inner-page .signal{padding:0 7.1vw;font-size:9px;letter-spacing:.08em}
+@media(max-width:850px){.reference-home header,.inner-page header{height:68px;padding:0 22px}.reference-home .wordmark,.inner-page .wordmark{width:122px;height:42px}.reference-home header nav,.inner-page header nav{display:none}.reference-home .tools,.inner-page .tools{gap:14px}.reference-home .menu,.inner-page .menu{display:block!important}.reference-home .mobile-nav,.inner-page .mobile-nav{top:106px;padding:28px 22px;border-top:1px solid #ffffff22}.reference-home .mobile-nav button,.inner-page .mobile-nav button{font-family:"Gotham XJX",sans-serif;font-weight:700}}
