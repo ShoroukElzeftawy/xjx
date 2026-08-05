@@ -58,7 +58,7 @@ export default function XjxSite() {
   };
 
   return (
-    <main className={route === "home" ? "reference-home" : ""}>
+    <main className={`site-shell page-${route} ${route === "home" ? "reference-home" : "inner-page"}`}>
       <Header route={route} go={go} bag={bag} open={menuOpen} setOpen={setMenuOpen} />
       {route === "home" && <Home go={go} add={add} catalog={catalog} openProduct={openProduct} />}
       {route === "shop" && <Shop go={go} add={add} catalog={catalog} collections={collections} openProduct={openProduct} />}
