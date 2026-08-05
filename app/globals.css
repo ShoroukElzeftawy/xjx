@@ -107,7 +107,7 @@ body:has(.inner-page){background:#151515}
 
 /* Clean reference navigation */
 .reference-home header,.inner-page header{height:76px;padding:0 7.1vw;position:relative}
-.reference-home .wordmark,.inner-page .wordmark{width:145px;height:48px;background-size:100% auto;background-position:center 50%}
+.reference-home .wordmark,.inner-page .wordmark{width:195px;height:60px;background-size:100% auto;background-position:center 50%}
 .reference-home .wordmark span,.inner-page .wordmark span{display:none}
 .reference-home header nav,.inner-page header nav{position:absolute;left:50%;top:0;transform:translateX(-50%);height:76px;gap:48px}
 .reference-home header nav button,.inner-page header nav button{height:76px;padding:0;font:11px "Gotham XJX",sans-serif;letter-spacing:.04em;color:#f4f4f2}
@@ -115,4 +115,4 @@ body:has(.inner-page){background:#151515}
 .reference-home .tools,.inner-page .tools{gap:24px}.reference-home .tools button,.inner-page .tools button{font:11px "IBM Plex XJX",monospace;letter-spacing:.04em}
 .reference-home .tools button:first-child,.inner-page .tools button:first-child{font-size:25px;font-weight:300;line-height:1}
 .reference-home .signal,.inner-page .signal{padding:0 7.1vw;font-size:9px;letter-spacing:.08em}
-@media(max-width:850px){.reference-home header,.inner-page header{height:68px;padding:0 22px}.reference-home .wordmark,.inner-page .wordmark{width:122px;height:42px}.reference-home header nav,.inner-page header nav{display:none}.reference-home .tools,.inner-page .tools{gap:14px}.reference-home .menu,.inner-page .menu{display:block!important}.reference-home .mobile-nav,.inner-page .mobile-nav{top:106px;padding:28px 22px;border-top:1px solid #ffffff22}.reference-home .mobile-nav button,.inner-page .mobile-nav button{font-family:"Gotham XJX",sans-serif;font-weight:700}}
+@media(max-width:850px){.reference-home header,.inner-page header{height:68px;padding:0 22px}.reference-home .wordmark,.inner-page .wordmark{width:150px;height:50px}.reference-home header nav,.inner-page header nav{display:none}.reference-home .tools,.inner-page .tools{gap:14px}.reference-home .menu,.inner-page .menu{display:block!important}.reference-home .mobile-nav,.inner-page .mobile-nav{top:106px;padding:28px 22px;border-top:1px solid #ffffff22}.reference-home .mobile-nav button,.inner-page .mobile-nav button{font-family:"Gotham XJX",sans-serif;font-weight:700}}
