@@ -73,3 +73,4 @@ body:has(.inner-page){background:#151515}
 /* Brighter hero photography */
 .ref-hero{filter:none;background-image:linear-gradient(90deg,rgba(5,6,6,.38),rgba(5,6,6,.03) 55%,rgba(5,6,6,.14)),url('https://cdn.shopify.com/s/files/1/0808/2194/4571/files/13_800x800.png?v=1777473725')}
 .ref-hero:after{background:linear-gradient(180deg,rgba(0,0,0,.08),transparent 55%,rgba(0,0,0,.25))}
+.ref-hero{color:#203b91}.hero-notes{background:rgba(244,244,242,.68);backdrop-filter:blur(4px);padding:10px 12px;text-shadow:0 1px 0 #fff}.hero-ref{color:#203b91;border-color:#203b91;text-shadow:0 1px 0 rgba(255,255,255,.8)}
