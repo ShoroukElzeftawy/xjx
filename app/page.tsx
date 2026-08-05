@@ -3,15 +3,14 @@
 import { useEffect, useMemo, useState } from "react";
 
 type Route = "home" | "shop" | "product" | "custom" | "materials" | "about";
-type ProductItem = { name: string; price: string; type: string; tone: string; code: string; image?: string; handle?: string };
+type ProductItem = { name: string; price: string; type: string; tone: string; code: string; image?: string; images?: string[]; handle?: string; options?: string };
 
 const products: ProductItem[] = [
-  { name: "Axis Ring 01", price: "€210", type: "RINGS", tone: "silver", code: "XR–001" },
-  { name: "Tension Cuff", price: "€280", type: "BRACELETS", tone: "blue", code: "XB–014" },
-  { name: "Orbit Pendant", price: "€245", type: "NECKLACES", tone: "gold", code: "XN–008" },
-  { name: "Fold Ear 02", price: "€165", type: "EARRINGS", tone: "dark", code: "XE–022" },
-  { name: "Frame Ring 03", price: "€230", type: "RINGS", tone: "gold", code: "XR–019" },
-  { name: "Line Chain", price: "€320", type: "NECKLACES", tone: "silver", code: "XN–031" },
+  { name: "XJ4 — 10KT Thick Earrings", price: "$0.00 CAD", type: "EARRINGS", tone: "silver", code: "XJ4–01", handle: "xj4-10kt-thick-earrings", options: "1.67G", image: "https://cdn.shopify.com/s/files/1/0808/2194/4571/files/1.67g_Model_1_800x800.jpg?v=1785932912", images: ["https://cdn.shopify.com/s/files/1/0808/2194/4571/files/1.67g_Model_1_800x800.jpg?v=1785932912", "https://cdn.shopify.com/s/files/1/0808/2194/4571/files/1.67g_Product_2_800x800.png?v=1785932912"] },
+  { name: "XJ4 — 10KT White Gold Thick Hoop", price: "$0.00 CAD", type: "EARRINGS", tone: "silver", code: "XJ4–02", handle: "xj4-10kt-white-gold-thick-hoop", options: "2.35G / 3.15G", image: "https://cdn.shopify.com/s/files/1/0808/2194/4571/files/2.35g_Model_1_800x800.jpg?v=1785932003", images: ["https://cdn.shopify.com/s/files/1/0808/2194/4571/files/2.35g_Model_1_800x800.jpg?v=1785932003", "https://cdn.shopify.com/s/files/1/0808/2194/4571/files/3.15g_Product_2_800x800.jpg?v=1785932045"] },
+  { name: "XJ4 — 10KT Versace Thick Earrings", price: "$0.00 CAD", type: "EARRINGS", tone: "gold", code: "XJ4–03", handle: "xj4-10kt-versace-thick-earrings", options: "5.31G", image: "https://cdn.shopify.com/s/files/1/0808/2194/4571/files/5.31g_Model_1_b0fcc55f-e41f-4462-9d44-69fdae394b27_800x800.jpg?v=1785930967", images: ["https://cdn.shopify.com/s/files/1/0808/2194/4571/files/5.31g_Model_1_b0fcc55f-e41f-4462-9d44-69fdae394b27_800x800.jpg?v=1785930967", "https://cdn.shopify.com/s/files/1/0808/2194/4571/files/5.31g_Product_1_3ad0f463-e817-4762-b4d6-f55751d56ffd_800x800.jpg?v=1785930967"] },
+  { name: "XJ4 — 10KT Versace Thin Earrings", price: "$0.00 CAD", type: "EARRINGS", tone: "gold", code: "XJ4–04", handle: "xj4-10kt-versace-thin-earrings", options: "4 WEIGHTS", image: "https://cdn.shopify.com/s/files/1/0808/2194/4571/files/Model_1_800x800.jpg?v=1785929002", images: ["https://cdn.shopify.com/s/files/1/0808/2194/4571/files/Model_1_800x800.jpg?v=1785929002", "https://cdn.shopify.com/s/files/1/0808/2194/4571/files/3.13g_Product_1_800x800.jpg?v=1785930155"] },
+  { name: "18KT Gucci Chain", price: "$0.00 CAD", type: "NECKLACES", tone: "gold", code: "XJ1–01", handle: "18kt-gucci-4mm-4-5mm-6mm-8mm", options: "4MM / 4.5MM / 6MM / 8MM", image: "https://cdn.shopify.com/s/files/1/0808/2194/4571/files/13_800x800.png?v=1777473725", images: ["https://cdn.shopify.com/s/files/1/0808/2194/4571/files/13_800x800.png?v=1777473725", "https://cdn.shopify.com/s/files/1/0808/2194/4571/files/7_800x800.png?v=1777473725"] },
 ];
 
 const routeFromPath = (): Route => {
@@ -25,8 +24,9 @@ export default function XjxSite() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [bag, setBag] = useState(0);
   const [notice, setNotice] = useState("");
+  const [selected, setSelected] = useState<ProductItem>(products[0]);
   const [catalog, setCatalog] = useState<ProductItem[]>(products);
-  const [collections, setCollections] = useState<string[]>(["RINGS", "EARRINGS", "NECKLACES", "BRACELETS"]);
+  const [collections, setCollections] = useState<string[]>(["EARRINGS", "NECKLACES"]);
 
   useEffect(() => {
     setRoute(routeFromPath());
@@ -52,12 +52,17 @@ export default function XjxSite() {
     window.setTimeout(() => setNotice(""), 2600);
   };
 
+  const openProduct = (item: ProductItem) => {
+    setSelected(item);
+    go("product");
+  };
+
   return (
     <main>
       <Header route={route} go={go} bag={bag} open={menuOpen} setOpen={setMenuOpen} />
-      {route === "home" && <Home go={go} add={add} catalog={catalog} />}
-      {route === "shop" && <Shop go={go} add={add} catalog={catalog} collections={collections} />}
-      {route === "product" && <Product add={add} go={go} />}
+      {route === "home" && <Home go={go} add={add} catalog={catalog} openProduct={openProduct} />}
+      {route === "shop" && <Shop go={go} add={add} catalog={catalog} collections={collections} openProduct={openProduct} />}
+      {route === "product" && <Product item={selected} add={add} go={go} />}
       {route === "custom" && <Custom />}
       {route === "materials" && <Materials />}
       {route === "about" && <About go={go} />}
@@ -80,7 +85,7 @@ function Header({ route, go, bag, open, setOpen }: { route: Route; go: (r: Route
   </>;
 }
 
-function Home({ go, add, catalog }: { go: (r: Route) => void; add: (n?: string) => void; catalog: ProductItem[] }) {
+function Home({ go, add, catalog, openProduct }: { go: (r: Route) => void; add: (n?: string) => void; catalog: ProductItem[]; openProduct: (p: ProductItem) => void }) {
   return <>
     <section className="hero">
       <div className="hero-copy"><p className="eyebrow">[ COLLECTION 01 / 2026 ]</p><h1>PRECISION<br/><i>IN TENSION.</i></h1><p className="lede">Jewelry engineered as wearable structure. Recycled metal, deliberate weight, no excess.</p><button className="arrow-link" onClick={() => go("shop")}>EXPLORE THE COLLECTION <b>↗</b></button></div>
@@ -89,37 +94,35 @@ function Home({ go, add, catalog }: { go: (r: Route) => void; add: (n?: string) 
     </section>
     <Marquee />
     <section className="intro"><p>01 / THE SYSTEM</p><h2>NOT DECORATION.<br/><span>AN OBJECT WITH INTENT.</span></h2><div><p>XJEWELRYX studies the meeting point between body and structure. Each piece begins with geometry, is refined by hand, and ends with the wearer.</p><button className="text-link" onClick={() => go("about")}>READ OUR APPROACH →</button></div></section>
-    <ProductGrid items={catalog.slice(0, 4)} go={go} add={add} title="SELECTED OBJECTS" />
+    <ProductGrid items={catalog.slice(0, 4)} go={go} add={add} openProduct={openProduct} title="SELECTED OBJECTS" />
     <section className="editorial split"><div className="image-panel home-crop"><span>FORM STUDY / 01</span></div><div className="statement"><p>02 / CUSTOM</p><h2>BUILT AROUND<br/><i>YOUR IDEA.</i></h2><p>One-off objects developed through a precise, collaborative process—from first line to final polish.</p><button className="outline" onClick={() => go("custom")}>BEGIN A COMMISSION ↗</button></div></section>
     <section className="material-callout"><p>[ MATERIAL STANDARD ]</p><h2>THE MATERIAL IS<br/>PART OF THE MESSAGE.</h2><div><p>Recycled silver and gold. Traceable stones. Transparent production. Designed to remain in circulation.</p><button className="arrow-link" onClick={() => go("materials")}>TRACE THE MATERIALS <b>↗</b></button></div></section>
   </>;
 }
 
-function Shop({ go, add, catalog, collections }: { go: (r: Route) => void; add: (n?: string) => void; catalog: ProductItem[]; collections: string[] }) {
+function Shop({ go, add, catalog, collections, openProduct }: { go: (r: Route) => void; add: (n?: string) => void; catalog: ProductItem[]; collections: string[]; openProduct: (p: ProductItem) => void }) {
   const [filter, setFilter] = useState("ALL");
   const filtered = useMemo(() => filter === "ALL" ? catalog : catalog.filter(p => p.type === filter), [filter, catalog]);
   return <>
     <section className="page-head"><p className="eyebrow">[ COLLECTION 01 / 2026 ]</p><h1>OBJECTS FOR<br/><i>THE BODY.</i></h1><p>{String(filtered.length).padStart(2, "0")} PIECES / RECYCLED METAL / MADE TO ORDER</p></section>
     <div className="filters">{["ALL", ...collections].map(x => <button className={filter === x ? "active" : ""} onClick={() => setFilter(x)} key={x}>{x}</button>)}<button className="sort">SORT: FEATURED ↓</button></div>
-    <ProductGrid items={filtered} go={go} add={add} />
+    <ProductGrid items={filtered} go={go} add={add} openProduct={openProduct} />
     <section className="shop-note"><span>NO. 01</span><h2>SMALL RUN.<br/>LONG LIFE.</h2><p>Every object is produced in limited quantities or made to order. This lets us control quality, reduce waste, and keep the process human.</p></section>
   </>;
 }
 
-function ProductGrid({ items, go, add, title }: { items: ProductItem[]; go: (r: Route) => void; add: (n?: string) => void; title?: string }) {
-  return <section className="products">{title && <div className="section-title"><p>03 / SHOP</p><h2>{title}</h2><button onClick={() => go("shop")}>VIEW ALL ↗</button></div>}<div className="product-grid">{items.map((p, i) => <article className="product-card" key={p.code}><button className={`product-visual ${p.tone} ${p.image ? "has-image" : ""}`} style={p.image ? { backgroundImage: `url(${p.image})` } : undefined} onClick={() => go("product")} aria-label={`View ${p.name}`}>{!p.image && <span className={`jewel jewel-${i % 4}`}></span>}<small>{p.code}<br/>SCALE 1:1.8</small></button><div className="product-info"><button onClick={() => go("product")}><b>{p.name}</b><span>{p.type.replace(/S$/, "")} / XJEWELRYX</span></button><div><b>{p.price}</b><button className="plus" onClick={() => add(p.name)}>＋</button></div></div></article>)}</div></section>;
+function ProductGrid({ items, go, add, openProduct, title }: { items: ProductItem[]; go: (r: Route) => void; add: (n?: string) => void; openProduct: (p: ProductItem) => void; title?: string }) {
+  return <section className="products">{title && <div className="section-title"><p>03 / SHOPIFY CATALOG</p><h2>{title}</h2><button onClick={() => go("shop")}>VIEW ALL ↗</button></div>}<div className="product-grid">{items.map((p) => <article className="product-card" key={p.code}><button className={`product-visual ${p.tone} has-image`} style={{ backgroundImage: `url(${p.image})` }} onClick={() => openProduct(p)} aria-label={`View ${p.name}`}><small>{p.code}<br/>SHOPIFY / ACTIVE</small></button><div className="product-info"><button onClick={() => openProduct(p)}><b>{p.name}</b><span>{p.type.replace(/S$/, "")} / {p.options}</span></button><div><b>{p.price}</b><button className="plus" onClick={() => add(p.name)}>＋</button></div></div></article>)}</div></section>;
 }
 
-function Product({ add, go }: { add: (n?: string) => void; go: (r: Route) => void }) {
-  const [finish, setFinish] = useState("Silver");
-  const [size, setSize] = useState("54");
+function Product({ item, add, go }: { item: ProductItem; add: (n?: string) => void; go: (r: Route) => void }) {
   return <>
     <section className="product-page">
-      <div className="product-gallery"><div className="gallery-main"><span className="giant-ring"></span><small>FRONT / XR–001</small></div><div className="gallery-detail product-crop"></div></div>
-      <div className="buy-panel"><p className="eyebrow">XR–001 / RING</p><h1>AXIS RING 01</h1><p className="price">€210.00 <span>TAX INCLUDED</span></p><p className="description">A continuous plane folded around the finger. Weight is concentrated at the axis; every surface is finished by hand.</p><fieldset><legend>FINISH / <b>{finish.toUpperCase()}</b></legend>{["Silver", "Oxidised", "Gold"].map(x => <button onClick={() => setFinish(x)} className={finish === x ? "selected" : ""} key={x}>{x}</button>)}</fieldset><fieldset><legend>SIZE / <b>{size}</b> <a>SIZE GUIDE ↗</a></legend>{["50", "52", "54", "56", "58", "60"].map(x => <button onClick={() => setSize(x)} className={size === x ? "selected" : ""} key={x}>{x}</button>)}</fieldset><button className="add" onClick={() => add()}>ADD TO BAG — €210 <b>↗</b></button><div className="specs"><span>MADE TO ORDER<br/><b>2–3 WEEKS</b></span><span>MATERIAL<br/><b>925 RECYCLED SILVER</b></span><span>WEIGHT<br/><b>18.6 G</b></span></div></div>
+      <div className="product-gallery"><div className="gallery-main imported" style={{backgroundImage:`url(${item.images?.[0]})`}}><small>FRONT / {item.code}</small></div><div className="gallery-detail imported" style={{backgroundImage:`url(${item.images?.[1] || item.images?.[0]})`}}></div></div>
+      <div className="buy-panel"><p className="eyebrow">{item.code} / {item.type.replace(/S$/, "")}</p><h1>{item.name}</h1><p className="price">{item.price} <span>SHOPIFY PRICE</span></p><p className="description">An original XJEWELRYX object, imported from the active Shopify catalog. Select the available size, weight, colour and length options at checkout.</p><fieldset><legend>AVAILABLE OPTIONS</legend><button className="selected">{item.options}</button></fieldset><button className="add" onClick={() => add(item.name)}>ADD TO BAG — {item.price} <b>↗</b></button><div className="specs"><span>CATALOG<br/><b>SHOPIFY ACTIVE</b></span><span>CATEGORY<br/><b>{item.type}</b></span><span>REFERENCE<br/><b>{item.code}</b></span></div></div>
     </section>
     <section className="detail-story"><p>01 / CONSTRUCTION</p><h2>ONE LINE.<br/><i>CONTROLLED FORCE.</i></h2><p>The Axis ring begins as a flat architectural profile. It is cut, bent, joined and finished until the seam disappears.</p></section>
-    <section className="next-object"><p>NEXT OBJECT</p><button onClick={() => go("shop")}>TENSION CUFF <span>↗</span></button></section>
+    <section className="next-object"><p>RETURN TO COLLECTION</p><button onClick={() => go("shop")}>VIEW ALL OBJECTS <span>↗</span></button></section>
   </>;
 }
 
