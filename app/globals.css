@@ -101,5 +101,6 @@ body:has(.inner-page){background:#151515}
 .footer-signup input{min-width:0;flex:1;border:0;background:none;color:white;padding:13px;font:9px "IBM Plex XJX",monospace;outline:none}
 .footer-signup label button{width:42px;border:0;background:none;color:white;font-size:18px}
 .ref-footer .legal{padding-top:19px;font-size:8px;border-color:#ffffff2b}
+.footer-brand p,.footer-signup p{font-size:12px;line-height:1.6}.footer-links span,.footer-signup>span{font-size:11px}.footer-links button{font-size:12px;line-height:1.45}.footer-signup input{font-size:11px}.ref-footer .legal{font-size:10px}
 @media(max-width:900px){.footer-main{grid-template-columns:1.4fr 1fr 1fr;row-gap:35px}.footer-signup{grid-column:2/4}.footer-main>div:nth-child(4){border-left:0}.footer-main>div{padding:0 18px}}
 @media(max-width:600px){.ref-footer{padding:38px 22px 20px}.footer-main{grid-template-columns:1fr 1fr}.footer-brand,.footer-signup{grid-column:1/-1}.footer-main>div{border-left:0;padding:0;min-height:auto}.footer-links{padding-top:20px!important}.footer-signup{padding-top:25px!important;border-top:1px solid #ffffff2b}.ref-footer .legal{gap:12px;flex-direction:column}.footer-brand .footer-logo{width:220px}}
