@@ -115,9 +115,13 @@ function ProductGrid({ items, go, add, openProduct, title }: { items: ProductIte
 }
 
 function Product({ item, add, go }: { item: ProductItem; add: (n?: string) => void; go: (r: Route) => void }) {
+  const [imageIndex, setImageIndex] = useState(0);
+  const galleryImages = item.images?.length ? item.images : item.image ? [item.image] : [];
+  useEffect(() => setImageIndex(0), [item.code]);
+  const moveImage = (direction: number) => setImageIndex((current) => (current + direction + galleryImages.length) % galleryImages.length);
   return <>
     <section className="product-page">
-      <div className="product-gallery"><div className="gallery-main imported" style={{backgroundImage:`url(${item.images?.[0]})`}}><small>FRONT / {item.code}</small></div><div className="gallery-detail imported" style={{backgroundImage:`url(${item.images?.[1] || item.images?.[0]})`}}></div></div>
+      <div className="product-gallery carousel" tabIndex={0} onKeyDown={(event) => { if (event.key === "ArrowLeft") moveImage(-1); if (event.key === "ArrowRight") moveImage(1); }} aria-label={`${item.name} image gallery`}><div className="gallery-main imported" style={{backgroundImage:`url(${galleryImages[imageIndex]})`}}><small>{item.code} / IMAGE {String(imageIndex + 1).padStart(2,"0")} OF {String(galleryImages.length).padStart(2,"0")}</small>{galleryImages.length > 1 && <div className="gallery-controls"><button onClick={() => moveImage(-1)} aria-label="Previous product image">←</button><button onClick={() => moveImage(1)} aria-label="Next product image">→</button></div>}</div></div>
       <div className="buy-panel"><p className="eyebrow">{item.code} / {item.type.replace(/S$/, "")}</p><h1>{item.name}</h1><p className="price">{item.price} <span>SHOPIFY PRICE</span></p><p className="description">An original XJEWELRYX object, imported from the active Shopify catalog. Select the available size, weight, colour and length options at checkout.</p><fieldset><legend>AVAILABLE OPTIONS</legend><button className="selected">{item.options}</button></fieldset><button className="add" onClick={() => add(item.name)}>ADD TO BAG — {item.price} <b>↗</b></button><div className="specs"><span>CATALOG<br/><b>SHOPIFY ACTIVE</b></span><span>CATEGORY<br/><b>{item.type}</b></span><span>REFERENCE<br/><b>{item.code}</b></span></div></div>
     </section>
     <section className="detail-story"><p>01 / CONSTRUCTION</p><h2>ONE LINE.<br/><i>CONTROLLED FORCE.</i></h2><p>The Axis ring begins as a flat architectural profile. It is cut, bent, joined and finished until the seam disappears.</p></section>
