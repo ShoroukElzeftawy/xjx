@@ -172,3 +172,7 @@ body:has(.inner-page){background:#151515}
 .reference-home .hero-ref{right:7.1vw;bottom:24px;width:46%;padding-top:8px}
 @media(max-width:850px){.reference-home .hero-notes.top{left:22px}.reference-home .hero-notes.bottom{right:22px}.reference-home .hero-editorial-copy{left:22px;top:220px;width:min(470px,58vw)}.reference-home .hero-editorial-copy h1{font-size:clamp(32px,5vw,44px)}.reference-home .ref-hero-logo{right:22px;bottom:44px;width:280px;height:50px}.reference-home .hero-ref{right:22px;bottom:18px;width:55%}}
 @media(max-width:520px){.reference-home .hero-notes.top,.reference-home .hero-notes.bottom{display:none}.reference-home .hero-editorial-copy{left:20px;right:20px;top:82px;width:auto}.reference-home .hero-editorial-copy h1{font-size:28px;line-height:.98}.reference-home .hero-editorial-copy p{max-width:290px}.reference-home .ref-hero-logo{right:20px;bottom:38px;width:220px;height:40px}.reference-home .hero-ref{right:20px;bottom:14px;width:62%}}
+
+/* Compact XJX navigation mark */
+.reference-home .wordmark,.inner-page .wordmark{width:112px;height:60px;background-image:url('/brand-assets/logos/xjx-white-mark.png');background-size:100% auto;background-position:center;background-repeat:no-repeat}
+@media(max-width:850px){.reference-home .wordmark,.inner-page .wordmark{width:96px;height:50px}}
