@@ -189,3 +189,19 @@ body:has(.inner-page){background:#151515}
 .reference-home .hero-editorial-copy p{font-family:"DM Sans XJX",Arial,sans-serif;font-size:14px;font-weight:400;line-height:1.55;color:rgba(242,242,240,.86);text-shadow:0 1px 8px rgba(0,0,0,.65)}
 @media(max-width:850px){.reference-home .hero-editorial-copy{width:min(440px,58vw)}.reference-home .hero-editorial-copy h1{font-size:clamp(29px,4.5vw,40px)}}
 @media(max-width:520px){.reference-home .hero-editorial-copy{width:auto}.reference-home .hero-editorial-copy h1{font-size:25px}.reference-home .hero-editorial-copy p{font-size:12px}}
+
+/* Airier landing composition */
+.reference-home .hero-notes{width:210px;font-size:12px;line-height:1.45;letter-spacing:.04em}
+.reference-home .hero-notes.top{top:32px;left:7.1vw}
+.reference-home .hero-notes.bottom{top:34px;right:7.1vw}
+.reference-home .hero-notes span{margin:5px 14px}.reference-home .hero-notes small{margin:8px 14px;font-size:9px}
+.reference-home .hero-editorial-copy{top:190px;left:8.5vw;width:min(490px,37vw)}
+.reference-home .hero-editorial-copy h1{font-size:clamp(30px,2.3vw,43px);line-height:1.01}
+.reference-home .hero-editorial-copy p{margin:18px 0 22px;max-width:390px}
+.reference-home .hero-editorial-copy button{width:290px;padding:15px 22px}
+@media(max-width:850px){.reference-home .hero-editorial-copy{top:175px;left:32px;width:min(430px,60vw)}.reference-home .hero-editorial-copy h1{font-size:clamp(28px,4.3vw,38px)}}
+@media(max-width:520px){.reference-home .hero-editorial-copy{top:68px;left:20px;right:20px;width:auto}.reference-home .hero-editorial-copy h1{font-size:24px}.reference-home .hero-editorial-copy button{width:245px}}
+
+/* Simplified navigation */
+.site-shell>.signal{display:none}
+@media(max-width:850px){.reference-home .mobile-nav,.inner-page .mobile-nav{top:68px}}
