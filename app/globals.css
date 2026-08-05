@@ -81,7 +81,7 @@ body:has(.inner-page){background:#151515}
 /* Reference-matched manifesto panel */
 .ref-manifesto{min-height:0;height:auto;aspect-ratio:3.18/1;padding:3.2vw 7.1vw 4.8vw;grid-template-columns:39% 25% 1fr;gap:5%;align-items:start}
 .ref-manifesto h2{font-size:clamp(58px,6.15vw,118px);line-height:.78;letter-spacing:-.065em}
-.manifesto-image{width:100%;height:auto;aspect-ratio:.94/1;background-image:url('/editorial-home.png');background-size:cover;background-position:center 54%;filter:none;margin:0}
+.manifesto-image{width:100%;height:auto;aspect-ratio:.94/1;background-size:cover;background-position:center 54%;filter:none;margin:0}
 .blue-note{font-size:clamp(11px,1.15vw,20px);line-height:1.55;padding-top:3.4vw;color:var(--blue)}
 .blue-note span{margin:1vw 2vw}.gold-line{left:7.1vw;right:7.1vw;bottom:2.3vw;padding-top:.7vw}.gold-line b{font-family:"Gotham XJX",sans-serif;letter-spacing:.12em}
 @media(max-width:850px){.ref-manifesto{aspect-ratio:auto;min-height:500px;padding:44px 22px 70px;grid-template-columns:1fr 1fr;gap:28px}.ref-manifesto h2{font-size:54px}.manifesto-image{height:310px;aspect-ratio:auto}.blue-note{display:none}.gold-line{left:22px;right:22px;bottom:30px}}
