@@ -205,3 +205,7 @@ body:has(.inner-page){background:#151515}
 /* Simplified navigation */
 .site-shell>.signal{display:none}
 @media(max-width:850px){.reference-home .mobile-nav,.inner-page .mobile-nav{top:68px}}
+
+/* Minimal monochrome hero annotations */
+.reference-home .hero-notes{display:none}
+.reference-home .hero-ref{color:var(--paper);border-color:rgba(242,242,240,.82);text-shadow:0 1px 4px var(--ink)}
