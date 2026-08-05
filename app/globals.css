@@ -33,6 +33,9 @@ body:has(.reference-home){background:#151515}.reference-home{max-width:1240px;ma
 .wordmark,.reference-home .wordmark{background-size:contain;background-position:left center}
 .footer-logo{background-size:contain;background-position:left center}
 .ref-hero-logo{background-size:contain}
+.ref-hero-logo{left:24px;right:24px;height:210px;background-size:100% auto;background-position:center 50%;background-repeat:no-repeat}
+@media(max-width:850px){.ref-hero-logo{left:12px;right:12px;height:150px;background-size:100% auto}}
+@media(max-width:520px){.ref-hero-logo{left:8px;right:8px;height:100px;background-size:100% auto}}
 
 /* Consistent inner-page system */
 body:has(.inner-page){background:#151515}
