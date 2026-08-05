@@ -144,3 +144,9 @@ body:has(.inner-page){background:#151515}
 .reference-home .material-spec span small{font-size:13px}.reference-home .material-spec span b{font-size:16px}
 .reference-home .material-spec em{font-size:12px;line-height:1.6}
 @media(max-width:520px){.reference-home .hero-notes{font-size:13px}.reference-home .material-intro p{font-size:13px}.reference-home .material-spec em{font-size:11px}}
+
+/* Supplied monochrome landing photograph */
+.ref-hero{background:#0b0d0d;isolation:isolate;filter:none}
+.ref-hero:before{content:"";position:absolute;inset:0;z-index:0;background:url('/landing-hero.png') center 42%/cover no-repeat;filter:grayscale(1) contrast(1.06)}
+.ref-hero:after{z-index:1;background:linear-gradient(90deg,rgba(0,0,0,.38),rgba(0,0,0,.03) 58%,rgba(0,0,0,.18)),linear-gradient(180deg,rgba(0,0,0,.04),transparent 55%,rgba(0,0,0,.28))}
+@media(max-width:700px){.ref-hero:before{background-position:58% center}}
