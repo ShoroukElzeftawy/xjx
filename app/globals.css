@@ -216,3 +216,13 @@ body:has(.inner-page){background:#151515}
 .reference-home header .wordmark,.inner-page header .wordmark{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);margin:0}
 .reference-home header .tools,.inner-page header .tools{grid-column:3;grid-row:1;justify-self:end}
 @media(max-width:850px){.reference-home header,.inner-page header{display:grid}.reference-home header .wordmark,.inner-page header .wordmark{left:50%}.reference-home header .tools,.inner-page header .tools{grid-column:3}.reference-home header nav,.inner-page header nav{display:none}}
+
+/* Supplied XJX shape language */
+.reference-home .ref-shop,.reference-home .ref-materials,.reference-home .ref-manifesto,.inner-page .page-head{position:relative;isolation:isolate}
+.reference-home .ref-shop>* ,.reference-home .ref-materials>* ,.reference-home .ref-manifesto>* ,.inner-page .page-head>*{position:relative;z-index:1}
+.reference-home .ref-shop:before{content:"";position:absolute;z-index:0;right:5vw;top:25px;width:330px;height:78px;background:var(--blue);opacity:.13;mask:url('/brand-assets/shapes/xjx-shapes.png') center/contain no-repeat;-webkit-mask:url('/brand-assets/shapes/xjx-shapes.png') center/contain no-repeat;pointer-events:none}
+.reference-home .ref-manifesto:before{content:"";position:absolute;z-index:0;right:5vw;top:50%;width:240px;height:240px;transform:translateY(-50%) rotate(9deg);background:var(--gold);opacity:.1;mask:url('/brand-assets/shapes/xjx-logo-mark.png') center/contain no-repeat;-webkit-mask:url('/brand-assets/shapes/xjx-logo-mark.png') center/contain no-repeat;pointer-events:none}
+.reference-home .ref-materials:before{content:"";position:absolute;z-index:0;left:2vw;bottom:-12px;width:430px;height:102px;background:var(--blue);opacity:.09;mask:url('/brand-assets/shapes/xjx-shapes.png') center/contain no-repeat;-webkit-mask:url('/brand-assets/shapes/xjx-shapes.png') center/contain no-repeat;pointer-events:none}
+.inner-page .page-head:after{content:"";position:absolute;z-index:0;right:6vw;bottom:30px;width:300px;height:300px;background:var(--blue);opacity:.14;mask:url('/brand-assets/shapes/xjx-logo-mark.png') center/contain no-repeat;-webkit-mask:url('/brand-assets/shapes/xjx-logo-mark.png') center/contain no-repeat;pointer-events:none}
+@media(max-width:850px){.reference-home .ref-shop:before{width:210px;height:50px;right:18px}.reference-home .ref-manifesto:before{width:170px;height:170px}.reference-home .ref-materials:before{width:260px;height:62px}.inner-page .page-head:after{width:200px;height:200px;right:18px;opacity:.1}}
+@media(max-width:520px){.reference-home .ref-shop:before{display:none}.reference-home .ref-manifesto:before{right:-35px}.inner-page .page-head:after{right:-55px}}
