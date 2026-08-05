@@ -10,7 +10,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: "XJEWELRYX — Objects With Intent",
     description: "Architectural jewelry in recycled metals. Precision made, designed to remain.",
-    icons: { icon: "/favicon.svg" },
+    icons: { icon: "/brand-assets/logos/xjx-black-mark.png", shortcut: "/brand-assets/logos/xjx-black-mark.png" },
     openGraph: { title: "XJEWELRYX", description: "Objects with intent.", images: [image] },
     twitter: { card: "summary_large_image", title: "XJEWELRYX", description: "Objects with intent.", images: [image] },
   };

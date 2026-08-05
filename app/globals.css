@@ -17,8 +17,8 @@ body{font-family:"DM Sans XJX",Arial,sans-serif}
 h1,h2,h3{font-family:"DM Sans XJX",Arial,sans-serif}
 nav button,.tools button,.product-info b,.process-grid h3{font-family:"Gotham XJX",Arial,sans-serif}
 .signal,.eyebrow,.axis,.hero-object p,.section-title p,.page-head>p,.custom-hero p:first-child,.materials-hero p:first-child,.footer-grid span,.legal{font-family:"IBM Plex XJX",monospace}
-.wordmark{width:178px;height:58px;border:0;background-color:transparent;background-image:url('/brand-assets/logos/xjx-horizontal.png');background-size:cover;background-position:center 58%;background-repeat:no-repeat;position:relative;font-size:0}
+.wordmark{width:178px;height:58px;border:0;background-color:transparent;background-image:url('/brand-assets/logos/xjx-black-long.png');background-size:cover;background-position:center;background-repeat:no-repeat;position:relative;font-size:0}
 .wordmark span{position:absolute;bottom:0;left:2px;font:7px/1.5 "IBM Plex XJX",monospace;letter-spacing:.12em}
-.footer-logo{width:min(76vw,1100px);height:clamp(86px,14vw,210px);background-image:url('/brand-assets/logos/xjx-horizontal.png');background-size:cover;background-position:center 58%;background-repeat:no-repeat;filter:invert(1);mix-blend-mode:screen}
+.footer-logo{width:min(76vw,1100px);height:clamp(86px,14vw,210px);background-image:url('/brand-assets/logos/xjx-white-long.png');background-size:cover;background-position:center;background-repeat:no-repeat}
 @media(max-width:520px){.wordmark{width:135px;height:48px}.footer-logo{width:100%;height:90px}}
 .product-visual.has-image{background-size:cover;background-position:center}.product-visual.has-image:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 70%,#0004)}.product-visual.has-image small{z-index:1;color:white}

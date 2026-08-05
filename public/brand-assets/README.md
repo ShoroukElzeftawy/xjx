@@ -1,8 +1,10 @@
 # XJEWELRYX brand assets
 
 ## Logos
-- `logos/xjx-horizontal.png` — supplied horizontal XJEWELRYX seal
-- `logos/xjx-mark.png` — supplied XJX mark
+- `logos/xjx-black-long.png` — original black horizontal logo for light backgrounds
+- `logos/xjx-white-long.png` — original white horizontal logo for dark backgrounds
+- `logos/xjx-black-mark.png` — original black compact mark
+- `logos/xjx-white-mark.png` — original white compact mark
 
 ## Fonts
 - `fonts/DMSans-Regular.ttf` — primary brand typeface for headlines and paragraphs
