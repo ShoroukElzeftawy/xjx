@@ -135,3 +135,12 @@ body:has(.inner-page){background:#151515}
 .page-product .detail-story>p:last-child{font-size:18px;line-height:1.75}
 .page-product .detail-story>p:first-child{font-size:11px}
 @media(max-width:520px){.page-product .description{font-size:16px}.page-product .specs{font-size:10px;grid-template-columns:1fr;gap:14px}}
+
+/* More readable landing-page descriptions */
+.reference-home .hero-notes{font-size:16px;line-height:1.65}.reference-home .hero-notes small{font-size:11px}
+.reference-home .ref-section-head button{font-size:12px}.reference-home .ref-shop .product-info b{font-size:14px}
+.reference-home .ref-shop .product-info span{font-size:11px;line-height:1.4}.reference-home .ref-shop .product-info>div>b{font-size:13px}
+.reference-home .material-intro p{font-size:14px;line-height:1.7;max-width:340px}.reference-home .material-intro button{font-size:12px}
+.reference-home .material-spec span small{font-size:13px}.reference-home .material-spec span b{font-size:16px}
+.reference-home .material-spec em{font-size:12px;line-height:1.6}
+@media(max-width:520px){.reference-home .hero-notes{font-size:13px}.reference-home .material-intro p{font-size:13px}.reference-home .material-spec em{font-size:11px}}
