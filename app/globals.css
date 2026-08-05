@@ -176,3 +176,9 @@ body:has(.inner-page){background:#151515}
 /* Compact XJX navigation mark */
 .reference-home .wordmark,.inner-page .wordmark{width:112px;height:60px;background-image:url('/brand-assets/logos/xjx-white-mark.png');background-size:100% auto;background-position:center;background-repeat:no-repeat}
 @media(max-width:850px){.reference-home .wordmark,.inner-page .wordmark{width:96px;height:50px}}
+
+/* Restore the full hero wordmark without overlapping the editorial copy */
+.reference-home .ref-hero-logo{left:5vw;right:5vw;bottom:28px;width:auto;height:112px;background-image:url('/brand-assets/logos/xjx-white-long.png');background-size:100% auto;background-position:center;transform:none}
+.reference-home .hero-ref{bottom:146px;width:44%}
+@media(max-width:850px){.reference-home .ref-hero-logo{left:22px;right:22px;bottom:28px;width:auto;height:82px}.reference-home .hero-ref{bottom:116px}}
+@media(max-width:520px){.reference-home .ref-hero-logo{left:18px;right:18px;bottom:20px;width:auto;height:48px}.reference-home .hero-ref{bottom:72px}}
