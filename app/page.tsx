@@ -58,7 +58,7 @@ export default function XjxSite() {
   };
 
   return (
-    <main>
+    <main className={route === "home" ? "reference-home" : ""}>
       <Header route={route} go={go} bag={bag} open={menuOpen} setOpen={setMenuOpen} />
       {route === "home" && <Home go={go} add={add} catalog={catalog} openProduct={openProduct} />}
       {route === "shop" && <Shop go={go} add={add} catalog={catalog} collections={collections} openProduct={openProduct} />}
@@ -75,7 +75,7 @@ export default function XjxSite() {
 function Header({ route, go, bag, open, setOpen }: { route: Route; go: (r: Route) => void; bag: number; open: boolean; setOpen: (v: boolean) => void }) {
   const nav: [Route, string][] = [["shop", "SHOP"], ["custom", "CUSTOM"], ["materials", "MATERIALS"], ["about", "ABOUT"]];
   return <>
-    <div className="signal">PRECISION MADE · RECYCLED METALS · WORLDWIDE DELIVERY</div>
+    <div className="signal"><span>COMPLIMENTARY SHIPPING ON ALL ORDERS</span><i>MADE IN NEW YORK</i><b>USD $⌄</b></div>
     <header>
       <button className="wordmark" onClick={() => go("home")} aria-label="X Jewelry X home"><span>OBJECTS / 2026</span></button>
       <nav>{nav.map(([key, label]) => <button key={key} className={route === key ? "active" : ""} onClick={() => go(key)}>{label}</button>)}</nav>
@@ -87,16 +87,15 @@ function Header({ route, go, bag, open, setOpen }: { route: Route; go: (r: Route
 
 function Home({ go, add, catalog, openProduct }: { go: (r: Route) => void; add: (n?: string) => void; catalog: ProductItem[]; openProduct: (p: ProductItem) => void }) {
   return <>
-    <section className="hero">
-      <div className="hero-copy"><p className="eyebrow">[ COLLECTION 01 / 2026 ]</p><h1>PRECISION<br/><i>IN TENSION.</i></h1><p className="lede">Jewelry engineered as wearable structure. Recycled metal, deliberate weight, no excess.</p><button className="arrow-link" onClick={() => go("shop")}>EXPLORE THE COLLECTION <b>↗</b></button></div>
-      <div className="hero-object"><div className="ring-object"><span></span></div><p>OBJECT XR–001<br/>RECYCLED SILVER / 18.6 G</p></div>
-      <div className="axis axis-x">X / 028.4</div><div className="axis axis-y">Y / 061.7</div>
+    <section className="ref-hero">
+      <div className="hero-notes top">⌜<span>ENGINEERED<br/>IN NEW YORK.</span><small>40.7128° N, 74.0060° W</small>⌞</div>
+      <div className="ref-hero-logo" role="img" aria-label="XJEWELRYX"></div>
+      <div className="hero-notes bottom">⌜<span>BUILT WITHOUT<br/>THE MARKUP.</span>⌟</div>
+      <div className="hero-ref">XJX–001</div>
     </section>
-    <Marquee />
-    <section className="intro"><p>01 / THE SYSTEM</p><h2>NOT DECORATION.<br/><span>AN OBJECT WITH INTENT.</span></h2><div><p>XJEWELRYX studies the meeting point between body and structure. Each piece begins with geometry, is refined by hand, and ends with the wearer.</p><button className="text-link" onClick={() => go("about")}>READ OUR APPROACH →</button></div></section>
-    <ProductGrid items={catalog.slice(0, 4)} go={go} add={add} openProduct={openProduct} title="SELECTED OBJECTS" />
-    <section className="editorial split"><div className="image-panel home-crop"><span>FORM STUDY / 01</span></div><div className="statement"><p>02 / CUSTOM</p><h2>BUILT AROUND<br/><i>YOUR IDEA.</i></h2><p>One-off objects developed through a precise, collaborative process—from first line to final polish.</p><button className="outline" onClick={() => go("custom")}>BEGIN A COMMISSION ↗</button></div></section>
-    <section className="material-callout"><p>[ MATERIAL STANDARD ]</p><h2>THE MATERIAL IS<br/>PART OF THE MESSAGE.</h2><div><p>Recycled silver and gold. Traceable stones. Transparent production. Designed to remain in circulation.</p><button className="arrow-link" onClick={() => go("materials")}>TRACE THE MATERIALS <b>↗</b></button></div></section>
+    <section className="ref-shop"><div className="ref-section-head"><h2>SHOP NEW</h2><button onClick={() => go("shop")}>VIEW ALL　→</button></div><ProductGrid items={catalog.slice(0, 3)} go={go} add={add} openProduct={openProduct} /></section>
+    <section className="ref-manifesto"><h2>BUILT<br/>WITHOUT<br/>THE<br/>MARKUP.</h2><div className="manifesto-image" style={{backgroundImage:`url(${catalog[0]?.image})`}}></div><div className="blue-note">⌜<span>YOUNG.<br/>EXPERIENCED.<br/>BOLD.<br/>TRANSPARENT.</span>⌟</div><div className="gold-line"><b>XJX</b></div></section>
+    <section className="ref-materials"><div className="material-intro"><h2>MATERIAL /<br/>WEIGHT /<br/>ORIGIN</h2><p>WE BELIEVE IN TOTAL TRANSPARENCY. EVERY PIECE IS CRAFTED WITH PRECISION, USING PREMIUM MATERIALS AND RESPONSIBLE SOURCING.</p><button onClick={() => go("materials")}>LEARN MORE　→</button></div><div className="material-table">{[["METAL","925 SILVER","92.5% PURE SILVER\nALLOY: AG 925"],["CARAT","N/A","SOLID 925 SILVER\nNICKEL FREE"],["ORIGIN","USA / ITALY","SOURCED GLOBALLY\nMADE IN USA & ITALY"],["CRAFTSMANSHIP","HAND FINISHED","HAND POLISHED\nQUALITY INSPECTED"]].map((r,i)=><div className="material-spec" key={r[0]}><span><small>{r[0]}</small><b>{r[1]}</b></span><em>{r[2]}</em><i className={`texture texture-${i}`}></i></div>)}</div></section>
   </>;
 }
 
