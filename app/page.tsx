@@ -94,7 +94,7 @@ function Home({ go, add, catalog, openProduct }: { go: (r: Route) => void; add: 
       <div className="hero-ref">XJX–001</div>
     </section>
     <section className="ref-shop"><div className="ref-section-head"><h2>SHOP NEW</h2><button onClick={() => go("shop")}>VIEW ALL　→</button></div><ProductGrid items={catalog.slice(0, 3)} go={go} add={add} openProduct={openProduct} /></section>
-    <section className="ref-manifesto"><h2>BUILT<br/>WITHOUT<br/>THE<br/>MARKUP.</h2><div className="manifesto-image" style={{backgroundImage:`url(${catalog[0]?.image})`}}></div><div className="blue-note">⌜<span>YOUNG.<br/>EXPERIENCED.<br/>BOLD.<br/>TRANSPARENT.</span>⌟</div><div className="gold-line"><b>XJX</b></div></section>
+    <section className="ref-manifesto"><h2>BUILT<br/>WITHOUT<br/>THE<br/>MARKUP.</h2><div className="manifesto-image"></div><div className="blue-note">⌜<span>YOUNG.<br/>EXPERIENCED.<br/>BOLD.<br/>TRANSPARENT.</span>⌟</div><div className="gold-line"><b>XJX</b></div></section>
     <section className="ref-materials"><div className="material-intro"><h2>MATERIAL /<br/>WEIGHT /<br/>ORIGIN</h2><p>WE BELIEVE IN TOTAL TRANSPARENCY. EVERY PIECE IS CRAFTED WITH PRECISION, USING PREMIUM MATERIALS AND RESPONSIBLE SOURCING.</p><button onClick={() => go("materials")}>LEARN MORE　→</button></div><div className="material-table">{[["METAL","925 SILVER","92.5% PURE SILVER\nALLOY: AG 925"],["CARAT","N/A","SOLID 925 SILVER\nNICKEL FREE"],["ORIGIN","USA / ITALY","SOURCED GLOBALLY\nMADE IN USA & ITALY"],["CRAFTSMANSHIP","HAND FINISHED","HAND POLISHED\nQUALITY INSPECTED"]].map((r,i)=><div className="material-spec" key={r[0]}><span><small>{r[0]}</small><b>{r[1]}</b></span><em>{r[2]}</em><i className={`texture texture-${i}`}></i></div>)}</div></section>
   </>;
 }
