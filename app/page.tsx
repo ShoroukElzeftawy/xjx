@@ -89,6 +89,11 @@ function Home({ go, add, catalog, openProduct }: { go: (r: Route) => void; add: 
   return <>
     <section className="ref-hero">
       <div className="hero-notes top">⌜<span>ENGINEERED<br/>IN NEW YORK.</span><small>40.7128° N, 74.0060° W</small>⌞</div>
+      <div className="hero-editorial-copy">
+        <h1>HIGH-QUALITY AND<br/>CUSTOMIZABLE JEWELRY<br/>WITH TRANSPARENCY<br/>AND CRAFTSMANSHIP.</h1>
+        <p>Fine craft, directly from our makers to you.<br/>No mystery. No artificial inflation.</p>
+        <button onClick={() => go("shop")}>DISCOVER NOW <span>→</span></button>
+      </div>
       <div className="ref-hero-logo" role="img" aria-label="XJEWELRYX"></div>
       <div className="hero-notes bottom">⌜<span>BUILT WITHOUT<br/>THE MARKUP.</span>⌟</div>
       <div className="hero-ref">XJX–001</div>
