@@ -69,3 +69,7 @@ body:has(.inner-page){background:#151515}
 .page-about .values{background:#0b0d0d;color:white;border-top:2px solid #758ac8}.page-about .values article{border-color:#ffffff33}
 .page-about .founder{background:#f4f4f2}.inner-page footer{border-top:1px solid #ffffff20}.inner-page .footer-logo{max-width:520px;height:90px;background-size:contain}
 @media(max-width:850px){.inner-page{margin:0;border-radius:0}.inner-page .signal{padding:0 18px;grid-template-columns:1fr auto}.inner-page .signal i{display:none}.inner-page header{padding:0 18px}.inner-page .page-head{min-height:420px;padding:75px 22px 35px}.inner-page .filters,.inner-page .products{padding-left:18px;padding-right:18px}.inner-page .shop-note{padding:70px 22px}.page-product .buy-panel{border-left:0}.page-custom .custom-hero,.page-about .about-hero{min-height:auto}}
+
+/* Brighter hero photography */
+.ref-hero{filter:none;background-image:linear-gradient(90deg,rgba(5,6,6,.38),rgba(5,6,6,.03) 55%,rgba(5,6,6,.14)),url('https://cdn.shopify.com/s/files/1/0808/2194/4571/files/13_800x800.png?v=1777473725')}
+.ref-hero:after{background:linear-gradient(180deg,rgba(0,0,0,.08),transparent 55%,rgba(0,0,0,.25))}
