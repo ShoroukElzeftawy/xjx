@@ -1,20 +1,14 @@
 import type { Metadata } from "next";
-import { headers } from "next/headers";
 import "./globals.css";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const incoming = await headers();
-  const host = incoming.get("host") ?? "localhost:3000";
-  const protocol = host.startsWith("localhost") ? "http" : "https";
-  const image = `${protocol}://${host}/og.png`;
-  return {
-    title: "XJEWELRYX — Objects With Intent",
-    description: "Architectural jewelry in recycled metals. Precision made, designed to remain.",
-    icons: { icon: "/brand-assets/logos/xjx-black-mark.png", shortcut: "/brand-assets/logos/xjx-black-mark.png" },
-    openGraph: { title: "XJEWELRYX", description: "Objects with intent.", images: [image] },
-    twitter: { card: "summary_large_image", title: "XJEWELRYX", description: "Objects with intent.", images: [image] },
-  };
-}
+export const metadata: Metadata = {
+  metadataBase: new URL("https://xjewelryx-objects.elzeftawyshorouk.chatgpt.site"),
+  title: "XJEWELRYX — Objects With Intent",
+  description: "Architectural jewelry in recycled metals. Precision made, designed to remain.",
+  icons: { icon: "/brand-assets/logos/xjx-black-mark.png", shortcut: "/brand-assets/logos/xjx-black-mark.png" },
+  openGraph: { title: "XJEWELRYX", description: "Objects with intent.", images: ["/og.png"] },
+  twitter: { card: "summary_large_image", title: "XJEWELRYX", description: "Objects with intent.", images: ["/og.png"] },
+};
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return <html lang="en"><body>{children}</body></html>;
