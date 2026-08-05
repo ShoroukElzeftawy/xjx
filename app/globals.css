@@ -86,3 +86,20 @@ body:has(.inner-page){background:#151515}
 .blue-note span{margin:1vw 2vw}.gold-line{left:7.1vw;right:7.1vw;bottom:2.3vw;padding-top:.7vw}.gold-line b{font-family:"Gotham XJX",sans-serif;letter-spacing:.12em}
 @media(max-width:850px){.ref-manifesto{aspect-ratio:auto;min-height:500px;padding:44px 22px 70px;grid-template-columns:1fr 1fr;gap:28px}.ref-manifesto h2{font-size:54px}.manifesto-image{height:310px;aspect-ratio:auto}.blue-note{display:none}.gold-line{left:22px;right:22px;bottom:30px}}
 @media(max-width:520px){.ref-manifesto{grid-template-columns:1fr}.ref-manifesto h2{font-size:58px}.manifesto-image{height:310px}}
+
+/* Compact reference footer */
+.ref-footer{padding:42px 7.1vw 20px;background:#0b0d0d;color:#f4f4f2}
+.footer-main{display:grid;grid-template-columns:1.45fr .8fr .8fr .75fr 1.45fr;gap:0;padding-bottom:35px}
+.footer-main>div{min-height:155px;padding:0 28px;border-left:1px solid #ffffff2b}.footer-main>div:first-child{padding-left:0;border-left:0}
+.footer-brand .footer-logo{width:250px;height:42px;background-size:100% auto;background-position:center 50%;margin-bottom:13px}
+.footer-brand p,.footer-signup p{font:9px/1.55 "IBM Plex XJX",monospace;letter-spacing:.04em}
+.socials{display:flex;gap:22px;margin-top:25px}.socials a{color:white;font-size:18px}
+.footer-links,.footer-signup{display:flex;flex-direction:column;align-items:flex-start}
+.footer-links span,.footer-signup>span{font:9px "IBM Plex XJX",monospace;margin-bottom:18px;color:#f4f4f2}
+.footer-links button{border:0;background:none;color:#d8d8d6;padding:3px 0;font:9px "IBM Plex XJX",monospace;letter-spacing:.03em}
+.footer-signup label{display:flex;width:100%;border:1px solid #ffffff3d;margin-top:14px}
+.footer-signup input{min-width:0;flex:1;border:0;background:none;color:white;padding:13px;font:9px "IBM Plex XJX",monospace;outline:none}
+.footer-signup label button{width:42px;border:0;background:none;color:white;font-size:18px}
+.ref-footer .legal{padding-top:19px;font-size:8px;border-color:#ffffff2b}
+@media(max-width:900px){.footer-main{grid-template-columns:1.4fr 1fr 1fr;row-gap:35px}.footer-signup{grid-column:2/4}.footer-main>div:nth-child(4){border-left:0}.footer-main>div{padding:0 18px}}
+@media(max-width:600px){.ref-footer{padding:38px 22px 20px}.footer-main{grid-template-columns:1fr 1fr}.footer-brand,.footer-signup{grid-column:1/-1}.footer-main>div{border-left:0;padding:0;min-height:auto}.footer-links{padding-top:20px!important}.footer-signup{padding-top:25px!important;border-top:1px solid #ffffff2b}.ref-footer .legal{gap:12px;flex-direction:column}.footer-brand .footer-logo{width:220px}}
