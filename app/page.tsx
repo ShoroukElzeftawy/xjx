@@ -3,8 +3,9 @@
 import { useEffect, useMemo, useState } from "react";
 
 type Route = "home" | "shop" | "product" | "custom" | "materials" | "about";
+type ProductItem = { name: string; price: string; type: string; tone: string; code: string; image?: string; handle?: string };
 
-const products = [
+const products: ProductItem[] = [
   { name: "Axis Ring 01", price: "€210", type: "RINGS", tone: "silver", code: "XR–001" },
   { name: "Tension Cuff", price: "€280", type: "BRACELETS", tone: "blue", code: "XB–014" },
   { name: "Orbit Pendant", price: "€245", type: "NECKLACES", tone: "gold", code: "XN–008" },
@@ -24,11 +25,17 @@ export default function XjxSite() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [bag, setBag] = useState(0);
   const [notice, setNotice] = useState("");
+  const [catalog, setCatalog] = useState<ProductItem[]>(products);
+  const [collections, setCollections] = useState<string[]>(["RINGS", "EARRINGS", "NECKLACES", "BRACELETS"]);
 
   useEffect(() => {
     setRoute(routeFromPath());
     const pop = () => setRoute(routeFromPath());
     window.addEventListener("popstate", pop);
+    fetch("/api/shopify").then(r => r.ok ? r.json() : null).then(data => {
+      if (data?.products?.length) setCatalog(data.products);
+      if (data?.collections?.length) setCollections(data.collections);
+    }).catch(() => undefined);
     return () => window.removeEventListener("popstate", pop);
   }, []);
 
@@ -48,8 +55,8 @@ export default function XjxSite() {
   return (
     <main>
       <Header route={route} go={go} bag={bag} open={menuOpen} setOpen={setMenuOpen} />
-      {route === "home" && <Home go={go} add={add} />}
-      {route === "shop" && <Shop go={go} add={add} />}
+      {route === "home" && <Home go={go} add={add} catalog={catalog} />}
+      {route === "shop" && <Shop go={go} add={add} catalog={catalog} collections={collections} />}
       {route === "product" && <Product add={add} go={go} />}
       {route === "custom" && <Custom />}
       {route === "materials" && <Materials />}
@@ -65,7 +72,7 @@ function Header({ route, go, bag, open, setOpen }: { route: Route; go: (r: Route
   return <>
     <div className="signal">PRECISION MADE · RECYCLED METALS · WORLDWIDE DELIVERY</div>
     <header>
-      <button className="wordmark" onClick={() => go("home")} aria-label="X Jewelry X home">XJEWELRYX<span>OBJECTS / 2026</span></button>
+      <button className="wordmark" onClick={() => go("home")} aria-label="X Jewelry X home"><span>OBJECTS / 2026</span></button>
       <nav>{nav.map(([key, label]) => <button key={key} className={route === key ? "active" : ""} onClick={() => go(key)}>{label}</button>)}</nav>
       <div className="tools"><button aria-label="Search">⌕</button><button>BAG [{bag}]</button><button className="menu" onClick={() => setOpen(!open)}>MENU</button></div>
     </header>
@@ -73,7 +80,7 @@ function Header({ route, go, bag, open, setOpen }: { route: Route; go: (r: Route
   </>;
 }
 
-function Home({ go, add }: { go: (r: Route) => void; add: (n?: string) => void }) {
+function Home({ go, add, catalog }: { go: (r: Route) => void; add: (n?: string) => void; catalog: ProductItem[] }) {
   return <>
     <section className="hero">
       <div className="hero-copy"><p className="eyebrow">[ COLLECTION 01 / 2026 ]</p><h1>PRECISION<br/><i>IN TENSION.</i></h1><p className="lede">Jewelry engineered as wearable structure. Recycled metal, deliberate weight, no excess.</p><button className="arrow-link" onClick={() => go("shop")}>EXPLORE THE COLLECTION <b>↗</b></button></div>
@@ -82,25 +89,25 @@ function Home({ go, add }: { go: (r: Route) => void; add: (n?: string) => void }
     </section>
     <Marquee />
     <section className="intro"><p>01 / THE SYSTEM</p><h2>NOT DECORATION.<br/><span>AN OBJECT WITH INTENT.</span></h2><div><p>XJEWELRYX studies the meeting point between body and structure. Each piece begins with geometry, is refined by hand, and ends with the wearer.</p><button className="text-link" onClick={() => go("about")}>READ OUR APPROACH →</button></div></section>
-    <ProductGrid items={products.slice(0, 4)} go={go} add={add} title="SELECTED OBJECTS" />
+    <ProductGrid items={catalog.slice(0, 4)} go={go} add={add} title="SELECTED OBJECTS" />
     <section className="editorial split"><div className="image-panel home-crop"><span>FORM STUDY / 01</span></div><div className="statement"><p>02 / CUSTOM</p><h2>BUILT AROUND<br/><i>YOUR IDEA.</i></h2><p>One-off objects developed through a precise, collaborative process—from first line to final polish.</p><button className="outline" onClick={() => go("custom")}>BEGIN A COMMISSION ↗</button></div></section>
     <section className="material-callout"><p>[ MATERIAL STANDARD ]</p><h2>THE MATERIAL IS<br/>PART OF THE MESSAGE.</h2><div><p>Recycled silver and gold. Traceable stones. Transparent production. Designed to remain in circulation.</p><button className="arrow-link" onClick={() => go("materials")}>TRACE THE MATERIALS <b>↗</b></button></div></section>
   </>;
 }
 
-function Shop({ go, add }: { go: (r: Route) => void; add: (n?: string) => void }) {
+function Shop({ go, add, catalog, collections }: { go: (r: Route) => void; add: (n?: string) => void; catalog: ProductItem[]; collections: string[] }) {
   const [filter, setFilter] = useState("ALL");
-  const filtered = useMemo(() => filter === "ALL" ? products : products.filter(p => p.type === filter), [filter]);
+  const filtered = useMemo(() => filter === "ALL" ? catalog : catalog.filter(p => p.type === filter), [filter, catalog]);
   return <>
     <section className="page-head"><p className="eyebrow">[ COLLECTION 01 / 2026 ]</p><h1>OBJECTS FOR<br/><i>THE BODY.</i></h1><p>{String(filtered.length).padStart(2, "0")} PIECES / RECYCLED METAL / MADE TO ORDER</p></section>
-    <div className="filters">{["ALL", "RINGS", "EARRINGS", "NECKLACES", "BRACELETS"].map(x => <button className={filter === x ? "active" : ""} onClick={() => setFilter(x)} key={x}>{x}</button>)}<button className="sort">SORT: FEATURED ↓</button></div>
+    <div className="filters">{["ALL", ...collections].map(x => <button className={filter === x ? "active" : ""} onClick={() => setFilter(x)} key={x}>{x}</button>)}<button className="sort">SORT: FEATURED ↓</button></div>
     <ProductGrid items={filtered} go={go} add={add} />
     <section className="shop-note"><span>NO. 01</span><h2>SMALL RUN.<br/>LONG LIFE.</h2><p>Every object is produced in limited quantities or made to order. This lets us control quality, reduce waste, and keep the process human.</p></section>
   </>;
 }
 
-function ProductGrid({ items, go, add, title }: { items: typeof products; go: (r: Route) => void; add: (n?: string) => void; title?: string }) {
-  return <section className="products">{title && <div className="section-title"><p>03 / SHOP</p><h2>{title}</h2><button onClick={() => go("shop")}>VIEW ALL ↗</button></div>}<div className="product-grid">{items.map((p, i) => <article className="product-card" key={p.code}><button className={`product-visual ${p.tone}`} onClick={() => go("product")} aria-label={`View ${p.name}`}><span className={`jewel jewel-${i % 4}`}></span><small>{p.code}<br/>SCALE 1:1.8</small></button><div className="product-info"><button onClick={() => go("product")}><b>{p.name}</b><span>{p.type.slice(0, -1)} / RECYCLED {p.tone === "gold" ? "GOLD" : "SILVER"}</span></button><div><b>{p.price}</b><button className="plus" onClick={() => add(p.name)}>＋</button></div></div></article>)}</div></section>;
+function ProductGrid({ items, go, add, title }: { items: ProductItem[]; go: (r: Route) => void; add: (n?: string) => void; title?: string }) {
+  return <section className="products">{title && <div className="section-title"><p>03 / SHOP</p><h2>{title}</h2><button onClick={() => go("shop")}>VIEW ALL ↗</button></div>}<div className="product-grid">{items.map((p, i) => <article className="product-card" key={p.code}><button className={`product-visual ${p.tone} ${p.image ? "has-image" : ""}`} style={p.image ? { backgroundImage: `url(${p.image})` } : undefined} onClick={() => go("product")} aria-label={`View ${p.name}`}>{!p.image && <span className={`jewel jewel-${i % 4}`}></span>}<small>{p.code}<br/>SCALE 1:1.8</small></button><div className="product-info"><button onClick={() => go("product")}><b>{p.name}</b><span>{p.type.replace(/S$/, "")} / XJEWELRYX</span></button><div><b>{p.price}</b><button className="plus" onClick={() => add(p.name)}>＋</button></div></div></article>)}</div></section>;
 }
 
 function Product({ add, go }: { add: (n?: string) => void; go: (r: Route) => void }) {
@@ -147,5 +154,5 @@ function About({ go }: { go: (r: Route) => void }) {
 function Marquee() { return <div className="marquee"><span>RECYCLED METAL ✕ BUILT TO LAST ✕ MADE WITH INTENT ✕ RECYCLED METAL ✕ BUILT TO LAST ✕ MADE WITH INTENT ✕</span></div>; }
 
 function Footer({ go }: { go: (r: Route) => void }) {
-  return <footer><div className="footer-top"><h2>XJEWELRYX</h2><p>OBJECTS WITH WEIGHT.<br/>MADE WITH INTENT.</p></div><div className="footer-grid"><div><span>NAVIGATION</span>{(["shop","custom","materials","about"] as Route[]).map(x => <button onClick={() => go(x)} key={x}>{x.toUpperCase()}</button>)}</div><div><span>FOLLOW</span><a>INSTAGRAM ↗</a><a>PINTEREST ↗</a></div><div><span>NEWSLETTER</span><p>Occasional notes on objects, process and material.</p><label><input placeholder="EMAIL ADDRESS" type="email"/><button>→</button></label></div></div><div className="legal"><span>© 2026 XJEWELRYX</span><span>TERMS · PRIVACY · SHIPPING</span><span>CAIRO / BERLIN</span></div></footer>;
+  return <footer><div className="footer-top"><div className="footer-logo" role="img" aria-label="X Jewelry X"></div><p>OBJECTS WITH WEIGHT.<br/>MADE WITH INTENT.</p></div><div className="footer-grid"><div><span>NAVIGATION</span>{(["shop","custom","materials","about"] as Route[]).map(x => <button onClick={() => go(x)} key={x}>{x.toUpperCase()}</button>)}</div><div><span>FOLLOW</span><a>INSTAGRAM ↗</a><a>PINTEREST ↗</a></div><div><span>NEWSLETTER</span><p>Occasional notes on objects, process and material.</p><label><input placeholder="EMAIL ADDRESS" type="email"/><button>→</button></label></div></div><div className="legal"><span>© 2026 XJEWELRYX</span><span>TERMS · PRIVACY · SHIPPING</span><span>CAIRO / BERLIN</span></div></footer>;
 }
