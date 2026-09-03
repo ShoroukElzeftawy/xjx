@@ -1,43 +1,63 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { ProductGrid } from "../components/ProductGrid";
-import type { Go, ProductItem } from "../lib/types";
+import { PRODUCT_COLORS, PRODUCT_TYPES } from "../lib/taxonomy";
+import type { Go, ProductItem, ShopQuery } from "../lib/types";
 
 export function Shop({
   go,
   add,
   catalog,
-  collections,
+  query,
   openProduct,
 }: {
   go: Go;
   add: (item: ProductItem) => void;
   catalog: ProductItem[];
-  collections: string[];
+  query: ShopQuery;
   openProduct: (item: ProductItem) => void;
 }) {
-  const [filter, setFilter] = useState("ALL");
+  const type = query.type || "ALL";
+  const color = query.color || "ALL";
   const filtered = useMemo(
-    () => (filter === "ALL" ? catalog : catalog.filter((item) => item.type === filter)),
-    [filter, catalog],
+    () =>
+      catalog.filter((item) => (type === "ALL" || item.type === type) && (color === "ALL" || item.color === color)),
+    [catalog, type, color],
   );
+
+  const setQuery = (next: ShopQuery) => go("shop", undefined, next);
 
   return (
     <>
       <section className="page-head">
-        <p className="eyebrow">[ COLLECTION 01 / 2026 ]</p>
+        <p className="eyebrow">[ SHOP / TYPE & COLOR ]</p>
         <h1>OBJECTS FOR<br /><i>THE BODY.</i></h1>
-        <p>{String(filtered.length).padStart(2, "0")} PIECES / DIRECT FROM THE BENCH / MADE TO ORDER</p>
+        <p>{String(filtered.length).padStart(2, "0")} PIECES / {type === "ALL" ? "ALL TYPES" : type} / {color === "ALL" ? "ALL COLORS" : `${color} GOLD`}</p>
       </section>
-      <div className="filters">
-        {["ALL", ...collections].map((item) => (
-          <button className={filter === item ? "active" : ""} onClick={() => setFilter(item)} key={item}>
-            {item}
-          </button>
-        ))}
+      <div className="filters-stack">
+        <div className="filters" role="tablist" aria-label="Shop by type">
+          <span>TYPE</span>
+          {["ALL", ...PRODUCT_TYPES].map((item) => (
+            <button className={type === item ? "active" : ""} onClick={() => setQuery({ type: item, color })} key={`type-${item}`}>
+              {item}
+            </button>
+          ))}
+        </div>
+        <div className="filters" role="tablist" aria-label="Shop by color">
+          <span>COLOR</span>
+          {["ALL", ...PRODUCT_COLORS].map((item) => (
+            <button className={color === item ? "active" : ""} onClick={() => setQuery({ type, color: item })} key={`color-${item}`}>
+              {item === "ALL" ? "ALL" : `${item} GOLD`}
+            </button>
+          ))}
+        </div>
       </div>
-      <ProductGrid items={filtered} add={add} openProduct={openProduct} />
+      {filtered.length ? (
+        <ProductGrid items={filtered} add={add} openProduct={openProduct} />
+      ) : (
+        <p className="shop-empty">Nothing in this category yet. Try another type or color.</p>
+      )}
       <section className="shop-note">
         <span>NO. 01</span>
         <h2>SMALL RUN.<br />LONG LIFE.</h2>

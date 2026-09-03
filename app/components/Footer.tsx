@@ -15,11 +15,11 @@ export function Footer({ go }: { go: Go }) {
         </div>
         <div className="footer-links">
           <span>SHOP</span>
-          <button onClick={() => go("shop")}>NEW ARRIVALS</button>
-          <button onClick={() => go("shop")}>RINGS</button>
-          <button onClick={() => go("shop")}>CHAINS</button>
-          <button onClick={() => go("shop")}>EARRINGS</button>
-          <button onClick={() => go("shop")}>BRACELETS</button>
+          <button onClick={() => go("shop")}>ALL</button>
+          <button onClick={() => go("shop", undefined, { type: "RINGS" })}>RINGS</button>
+          <button onClick={() => go("shop", undefined, { type: "EARRINGS" })}>EARRINGS</button>
+          <button onClick={() => go("shop", undefined, { type: "BRACELETS" })}>BRACELETS</button>
+          <button onClick={() => go("shop", undefined, { type: "CHAINS" })}>CHAINS</button>
         </div>
         <div className="footer-links">
           <span>CUSTOM</span>
@@ -31,7 +31,7 @@ export function Footer({ go }: { go: Go }) {
           <span>ABOUT</span>
           <button onClick={() => go("about")}>OUR STORY</button>
           <button onClick={() => go("materials")}>MATERIALS</button>
-          <button onClick={() => go("about")}>CARE</button>
+          <button onClick={() => go("refer")}>REFER A FRIEND</button>
           <button onClick={() => go("about")}>FAQ</button>
         </div>
         <div className="footer-signup">

@@ -28,7 +28,7 @@ export function ProductGrid({
             <div className="product-info">
               <button onClick={() => openProduct(item)}>
                 <b>{item.name}</b>
-                <span>{item.type.replace(/S$/, "")} / {item.options}</span>
+                <span>{item.type.replace(/S$/, "")} / {item.color} GOLD / {item.options}</span>
               </button>
               <div>
                 <b>{item.price}</b>

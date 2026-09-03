@@ -1,5 +1,16 @@
 .page-head{min-height:500px;padding:95px 48px 48px;position:relative;isolation:isolate;background:var(--void);color:white}
-.page-head:before{content:"COLLECTION / LIVE CATALOG";color:var(--blue);font:10px var(--font-body);position:absolute;right:48px;top:55px}
+.page-head:before{content:"CATALOG / LIVE";color:var(--blue);font:10px var(--font-body);position:absolute;right:48px;top:55px}
+.page-shop .page-head:before{content:"SHOP / TYPE & COLOR"}
+.filters-stack .filters{align-items:center;gap:22px}
+.filters-stack .filters span{font:10px var(--font-body);letter-spacing:.12em;color:var(--blue);flex:none}
+.filters-stack .filters:first-child{border-bottom:0;padding-bottom:4px}
+.shop-empty{padding:80px 42px 60px;margin:0;font:16px/1.6 var(--font-body)}
+.refer-hero>div>p:last-child{font:16px/1.6 var(--font-body);max-width:440px}
+.refer-close{padding:110px 7vw 130px;background:var(--paper)}
+.refer-close>p:first-child{font:10px var(--font-body);letter-spacing:.08em}
+.refer-close h2{font-size:clamp(38px,5vw,74px);line-height:.9;margin:18px 0 28px}
+.refer-close p{line-height:1.7;max-width:560px}
+.refer-close .outline{display:inline-block;text-decoration:none;color:inherit}
 .page-head:after{
   content:"";position:absolute;right:6vw;bottom:30px;width:300px;height:300px;background:var(--blue);opacity:.14;
   mask:url('/brand-assets/shapes/xjx-logo-mark.png') center/contain no-repeat;
@@ -119,7 +130,8 @@
 @media(max-width:850px){
   .page-head{min-height:auto;padding:48px 22px 32px}
   .page-head h1{font-size:clamp(48px,12vw,90px);margin:36px 0 40px}
-  .filters,.inner-page .products{padding-left:18px;padding-right:18px}
+  .filters,.filters-stack .filters,.inner-page .products,.shop-empty{padding-left:18px;padding-right:18px}
+  .refer-close{padding:70px 22px}
   .shop-note,.detail-story,.material-row,.manifesto{grid-template-columns:1fr;padding:70px 22px;gap:35px}
   .shop-note h2{font-size:clamp(40px,10vw,64px)}
   .product-page,.founder,.custom-hero,.materials-hero,.about-hero{grid-template-columns:1fr}

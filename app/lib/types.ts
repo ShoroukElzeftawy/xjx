@@ -1,4 +1,9 @@
-export type Route = "home" | "shop" | "product" | "custom" | "materials" | "about";
+export type Route = "home" | "shop" | "product" | "custom" | "materials" | "about" | "refer";
+
+export type ShopQuery = {
+  type?: string;
+  color?: string;
+};
 
 export type ProductVariant = {
   id: string;
@@ -11,6 +16,7 @@ export type ProductItem = {
   name: string;
   price: string;
   type: string;
+  color: string;
   tone: string;
   code: string;
   image?: string;
@@ -30,4 +36,4 @@ export type BagLine = {
   quantity: number;
 };
 
-export type Go = (route: Route, handle?: string) => void;
+export type Go = (route: Route, handle?: string, query?: ShopQuery) => void;

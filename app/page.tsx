@@ -4,23 +4,23 @@ import { useEffect, useState } from "react";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 import { Toast } from "./components/Toast";
-import { fallbackCollections, fallbackProducts, productUrl } from "./lib/catalog";
+import { fallbackProducts, productUrl } from "./lib/catalog";
 import { pathFor, productFromHandle, routeFromPath } from "./lib/routes";
-import type { BagLine, ProductItem, Route } from "./lib/types";
+import type { BagLine, ProductItem, Route, ShopQuery } from "./lib/types";
 import { About } from "./sections/About";
 import { Custom } from "./sections/Custom";
 import { Home } from "./sections/Home";
 import { Materials } from "./sections/Materials";
 import { Product } from "./sections/Product";
+import { Refer } from "./sections/Refer";
 import { Shop } from "./sections/Shop";
 
 export default function XjxSite() {
-  const initial = routeFromPath();
-  const [route, setRoute] = useState<Route>(initial.route);
+  const [route, setRoute] = useState<Route>("home");
+  const [shopQuery, setShopQuery] = useState<ShopQuery>({ type: "ALL", color: "ALL" });
   const [menuOpen, setMenuOpen] = useState(false);
   const [notice, setNotice] = useState("");
   const [catalog, setCatalog] = useState<ProductItem[]>(fallbackProducts);
-  const [collections, setCollections] = useState<string[]>(fallbackCollections);
   const [selected, setSelected] = useState<ProductItem>(fallbackProducts[0]);
   const [bag, setBag] = useState<BagLine[]>([]);
   const [checkingOut, setCheckingOut] = useState(false);
@@ -34,6 +34,7 @@ export default function XjxSite() {
     const apply = () => {
       const next = routeFromPath();
       setRoute(next.route);
+      setShopQuery(next.query ?? { type: "ALL", color: "ALL" });
       if (next.handle) setSelected((current) => productFromHandle(catalog, next.handle) ?? current);
     };
     apply();
@@ -46,15 +47,15 @@ export default function XjxSite() {
           const { handle } = routeFromPath();
           setSelected(productFromHandle(data.products, handle));
         }
-        if (data?.collections?.length) setCollections(data.collections);
       })
       .catch(() => undefined);
     return () => window.removeEventListener("popstate", apply);
   }, []);
 
-  const go = (next: Route, handle?: string) => {
-    window.history.pushState({}, "", pathFor(next, handle));
+  const go = (next: Route, handle?: string, query?: ShopQuery) => {
+    window.history.pushState({}, "", pathFor(next, handle, query));
     setRoute(next);
+    setShopQuery(query ?? { type: "ALL", color: "ALL" });
     setMenuOpen(false);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -108,11 +109,12 @@ export default function XjxSite() {
     <main className={`site-shell page-${route} ${route === "home" ? "reference-home" : "inner-page"}`}>
       <Header route={route} go={go} bag={count} open={menuOpen} setOpen={setMenuOpen} onBag={checkout} />
       {route === "home" && <Home go={go} add={add} catalog={catalog} openProduct={openProduct} />}
-      {route === "shop" && <Shop go={go} add={add} catalog={catalog} collections={collections} openProduct={openProduct} />}
+      {route === "shop" && <Shop go={go} add={add} catalog={catalog} query={shopQuery} openProduct={openProduct} />}
       {route === "product" && <Product item={selected} add={add} go={go} />}
       {route === "custom" && <Custom />}
       {route === "materials" && <Materials />}
       {route === "about" && <About go={go} />}
+      {route === "refer" && <Refer />}
       <Footer go={go} />
       {notice && <Toast message={notice} onView={checkout} />}
     </main>

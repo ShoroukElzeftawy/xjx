@@ -76,8 +76,8 @@ export function Product({
           </a>
           <div className="specs">
             <span>ORIGIN<br /><b>47TH STREET</b></span>
-            <span>CATEGORY<br /><b>{item.type}</b></span>
-            <span>REFERENCE<br /><b>{item.code}</b></span>
+            <span>TYPE<br /><b>{item.type}</b></span>
+            <span>COLOR<br /><b>{item.color} GOLD</b></span>
           </div>
         </div>
       </section>

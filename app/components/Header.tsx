@@ -5,6 +5,7 @@ const nav: [Route, string][] = [
   ["custom", "CUSTOM"],
   ["materials", "MATERIALS"],
   ["about", "ABOUT"],
+  ["refer", "REFER"],
 ];
 
 export function Header({

@@ -5,7 +5,8 @@ export const fallbackProducts: ProductItem[] = [
     name: "XJ4 — 10KT Thick Earrings",
     price: "$0.00 CAD",
     type: "EARRINGS",
-    tone: "silver",
+    color: "YELLOW",
+    tone: "gold",
     code: "XJ4–01",
     handle: "xj4-10kt-thick-earrings",
     options: "1.67G",
@@ -19,6 +20,7 @@ export const fallbackProducts: ProductItem[] = [
     name: "XJ4 — 10KT White Gold Thick Hoop",
     price: "$0.00 CAD",
     type: "EARRINGS",
+    color: "WHITE",
     tone: "silver",
     code: "XJ4–02",
     handle: "xj4-10kt-white-gold-thick-hoop",
@@ -33,6 +35,7 @@ export const fallbackProducts: ProductItem[] = [
     name: "XJ4 — 10KT Versace Thick Earrings",
     price: "$0.00 CAD",
     type: "EARRINGS",
+    color: "YELLOW",
     tone: "gold",
     code: "XJ4–03",
     handle: "xj4-10kt-versace-thick-earrings",
@@ -47,6 +50,7 @@ export const fallbackProducts: ProductItem[] = [
     name: "XJ4 — 10KT Versace Thin Earrings",
     price: "$0.00 CAD",
     type: "EARRINGS",
+    color: "YELLOW",
     tone: "gold",
     code: "XJ4–04",
     handle: "xj4-10kt-versace-thin-earrings",
@@ -60,7 +64,8 @@ export const fallbackProducts: ProductItem[] = [
   {
     name: "18KT Gucci Chain",
     price: "$0.00 CAD",
-    type: "NECKLACES",
+    type: "CHAINS",
+    color: "YELLOW",
     tone: "gold",
     code: "XJ1–01",
     handle: "18kt-gucci-4mm-4-5mm-6mm-8mm",
@@ -73,7 +78,7 @@ export const fallbackProducts: ProductItem[] = [
   },
 ];
 
-export const fallbackCollections = ["EARRINGS", "NECKLACES"];
+export const fallbackCollections = ["EARRINGS", "CHAINS"];
 export const shopifyStoreUrl = "https://xjewelryx-2.myshopify.com";
 
 export function productUrl(handle?: string) {

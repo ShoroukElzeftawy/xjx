@@ -1,3 +1,4 @@
+import { inferColor, inferType, toneForColor } from "./taxonomy";
 import type { ProductItem } from "./types";
 
 export const shopifyDomain = process.env.SHOPIFY_STORE_DOMAIN || "xjewelryx-2.myshopify.com";
@@ -76,13 +77,16 @@ export function mapProduct(item: ShopifyProduct, index: number): ProductItem {
   const variants = item.variants?.nodes ?? [];
   const images = item.images?.nodes.map((image) => image.url) ?? [];
   const optionValues = item.options?.flatMap((option) => option.values) ?? [];
-  const collection = item.collections?.nodes[0]?.title || item.productType || "OBJECTS";
+  const source = [item.productType, item.title, optionValues.join(" ")].filter(Boolean).join(" ");
+  const type = inferType(source, inferType(item.productType || "", "NECKLACES"));
+  const color = inferColor(source);
   const price = variants[0]?.price ?? item.priceRange?.minVariantPrice ?? { amount: "0", currencyCode: "USD" };
   return {
     name: item.title,
     price: money(price),
-    type: collection.toUpperCase(),
-    tone: ["silver", "blue", "gold", "dark"][index % 4],
+    type,
+    color,
+    tone: toneForColor(color),
     code: `XJX-${String(index + 1).padStart(3, "0")}`,
     image: item.featuredImage?.url ?? images[0],
     images: images.length ? images : item.featuredImage?.url ? [item.featuredImage.url] : [],
