@@ -1,0 +1,37 @@
+.refer-hero > div > p:last-child {
+  font: 16px/1.6 var(--font-body);
+  max-width: 440px;
+}
+
+.refer-close {
+  padding: 110px 7vw 130px;
+  background: var(--paper);
+}
+
+.refer-close > p:first-child {
+  font: 10px var(--font-body);
+  letter-spacing: 0.08em;
+}
+
+.refer-close h2 {
+  font-size: clamp(38px, 5vw, 74px);
+  line-height: 0.9;
+  margin: 18px 0 28px;
+}
+
+.refer-close p {
+  line-height: 1.7;
+  max-width: 560px;
+}
+
+.refer-close .outline {
+  display: inline-block;
+  text-decoration: none;
+  color: inherit;
+}
+
+@media (max-width: 850px) {
+  .refer-close {
+    padding: 70px 22px;
+  }
+}

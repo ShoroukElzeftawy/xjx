@@ -1,0 +1,173 @@
+.ref-footer {
+  padding: 42px 7.1vw calc(20px + env(safe-area-inset-bottom));
+  background: var(--void);
+  color: #f4f4f2;
+}
+
+.footer-main {
+  display: grid;
+  grid-template-columns: 1.45fr 0.8fr 0.8fr 0.75fr 1.45fr;
+  padding-bottom: 35px;
+}
+
+.footer-main > div {
+  min-height: 190px;
+  padding: 0 28px;
+  border-left: 1px solid #ffffff2b;
+}
+
+.footer-main > div:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.footer-logo {
+  width: min(100%, 480px);
+  height: 88px;
+  margin-bottom: 18px;
+  overflow: hidden;
+  background: url("/brand-assets/logos/xjx-white-long.png") left 51%/100% auto no-repeat;
+}
+
+.footer-brand p,
+.footer-signup p {
+  font: 12px/1.6 var(--font-body);
+}
+
+.footer-mail {
+  display: inline-block;
+  margin-top: 10px;
+  color: var(--blue);
+  font: 11px var(--font-body);
+  text-decoration: none;
+}
+
+.socials {
+  display: flex;
+  gap: 22px;
+  margin-top: 25px;
+}
+
+.socials a {
+  color: white;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.footer-links,
+.footer-signup {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.footer-links span,
+.footer-signup > span {
+  font-size: 11px;
+  margin-bottom: 18px;
+}
+
+.footer-links button {
+  border: 0;
+  background: none;
+  color: #d8d8d6;
+  padding: 3px 0;
+  font: 12px var(--font-body);
+}
+
+.footer-signup label {
+  display: flex;
+  width: 100%;
+  border: 1px solid #ffffff3d;
+  margin-top: 14px;
+}
+
+.footer-signup input {
+  min-width: 0;
+  flex: 1;
+  border: 0;
+  background: none;
+  color: white;
+  padding: 13px;
+  font: 11px var(--font-body);
+  outline: none;
+}
+
+.footer-signup label button {
+  width: 42px;
+  border: 0;
+  background: none;
+  color: white;
+  font-size: 18px;
+}
+
+.legal {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #ffffff2b;
+  padding-top: 19px;
+  font: 10px var(--font-body);
+  color: #aeb2b1;
+}
+
+@media (max-width: 900px) {
+  .footer-main {
+    grid-template-columns: 1.4fr 1fr 1fr;
+    row-gap: 35px;
+  }
+
+  .footer-signup {
+    grid-column: 2/4;
+  }
+
+  .footer-main > div:nth-child(4) {
+    border-left: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .ref-footer {
+    padding: 32px 20px calc(20px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .footer-main {
+    grid-template-columns: 1fr 1fr;
+    row-gap: 8px;
+  }
+
+  .footer-brand,
+  .footer-signup {
+    grid-column: 1/-1;
+  }
+
+  .footer-main > div {
+    border-left: 0;
+    padding: 0;
+    min-height: auto;
+  }
+
+  .footer-logo {
+    width: min(100%, 320px);
+    height: 70px;
+    margin-bottom: 14px;
+  }
+
+  .footer-links {
+    padding-top: 22px;
+  }
+
+  .footer-links button {
+    min-height: 40px;
+    padding: 8px 0;
+  }
+
+  .footer-signup {
+    padding-top: 28px;
+    border-top: 1px solid #ffffff2b;
+  }
+
+  .legal {
+    flex-direction: column;
+    gap: 12px;
+  }
+}

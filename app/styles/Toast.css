@@ -1,0 +1,29 @@
+.toast {
+  position: fixed;
+  z-index: 90;
+  right: 25px;
+  bottom: calc(25px + env(safe-area-inset-bottom));
+  width: 300px;
+  background: var(--void);
+  color: var(--paper);
+  border: 1px solid var(--gold);
+  padding: 18px 20px;
+  font: 11px var(--font-body);
+}
+
+.toast button {
+  display: block;
+  margin-top: 12px;
+  border: 0;
+  background: none;
+  color: var(--blue);
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  .toast {
+    left: 18px;
+    right: 18px;
+    width: auto;
+  }
+}

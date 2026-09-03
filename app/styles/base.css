@@ -1,31 +1,139 @@
-@font-face{font-family:"DM Sans XJX";src:url('/brand-assets/fonts/DMSans-Regular.ttf') format('truetype');font-weight:100 900;font-display:swap}
-@font-face{font-family:"Bayon XJX";src:url('/brand-assets/fonts/Bayon-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
-
-:root{
-  --ink:#181a1a;
-  --paper:#f2f2f2;
-  --blue:#8797c5;
-  --gold:#b79740;
-  --void:#0b0d0d;
-  --line:rgba(24,26,26,.22);
-  --font-body:"DM Sans XJX",Arial,sans-serif;
-  --font-heading:"Bayon XJX","DM Sans XJX",sans-serif;
-  --font-accent:"Bayon XJX","DM Sans XJX",sans-serif;
-  --header-h:calc(76px + env(safe-area-inset-top, 0px));
+@font-face {
+  font-family: "DM Sans XJX";
+  src: url("/brand-assets/fonts/DMSans-Regular.ttf") format("truetype");
+  font-weight: 100 900;
+  font-display: swap;
 }
 
-*{box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{margin:0;background:#151515;color:var(--ink);font-family:var(--font-body);overflow-x:clip}
-button,input,select,textarea{font:inherit;color:inherit}
-button,a{cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
-input,select,textarea{font-size:16px;border-radius:0}
-h1,h2,h3{font-family:var(--font-heading);font-weight:400;letter-spacing:.02em;text-transform:uppercase}
-.eyebrow,.material-kicker,.hero-ref,.sold-out,.campaign-ticker,.gold-line{font-family:var(--font-accent)}
-nav button,.tools button,.legal,.footer-links span,.footer-signup>span,.material-spec em,.product-info b{font-family:var(--font-body)}
+@font-face {
+  font-family: "Bayon XJX";
+  src: url("/brand-assets/fonts/Bayon-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
 
-.site-shell{width:100%;overflow:hidden;background:var(--paper)}
-.reference-home,.inner-page{background:var(--paper)}
-body.menu-open{overflow:hidden;touch-action:none}
+:root {
+  --ink: #181a1a;
+  --paper: #f2f2f2;
+  --blue: #8797c5;
+  --gold: #b79740;
+  --void: #0b0d0d;
+  --line: rgba(24, 26, 26, 0.22);
+  --font-body: "DM Sans XJX", Arial, sans-serif;
+  --font-heading: "Bayon XJX", "DM Sans XJX", sans-serif;
+  --font-accent: "Bayon XJX", "DM Sans XJX", sans-serif;
+  --header-h: calc(76px + env(safe-area-inset-top, 0px));
+}
 
-@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: #151515;
+  color: var(--ink);
+  font-family: var(--font-body);
+  overflow-x: clip;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button,
+a {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+input,
+select,
+textarea {
+  font-size: 16px;
+  border-radius: 0;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.eyebrow,
+.material-kicker,
+.hero-ref,
+.sold-out,
+.campaign-ticker,
+.gold-line {
+  font-family: var(--font-accent);
+}
+
+nav button,
+.tools button,
+.legal,
+.footer-links span,
+.footer-signup > span,
+.material-spec em,
+.product-info b {
+  font-family: var(--font-body);
+}
+
+.site-shell {
+  width: 100%;
+  overflow: hidden;
+  background: var(--paper);
+}
+
+.reference-home,
+.inner-page {
+  background: var(--paper);
+}
+
+body.menu-open {
+  overflow: hidden;
+  touch-action: none;
+}
+
+.frame-label {
+  margin: 0 0 28px;
+  font: 11px var(--font-body);
+  letter-spacing: 0.16em;
+}
+
+.frame-label.inverse {
+  color: var(--paper);
+}
+
+.about-shot {
+  aspect-ratio: 0.82;
+  background: #111 center/cover no-repeat;
+  filter: grayscale(0.15) contrast(1.04);
+}
+
+.outline {
+  border: 1px solid;
+  padding: 16px 20px;
+  background: transparent;
+  font: 10px var(--font-body);
+  margin-top: 25px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto;
+  }
+}

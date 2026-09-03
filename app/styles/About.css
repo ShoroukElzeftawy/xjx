@@ -1,0 +1,268 @@
+.origin-block {
+  background: var(--void);
+  color: var(--paper);
+  padding: 72px 7.1vw 90px;
+}
+
+.origin-track {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  margin: 0 0 54px;
+  font: 400 clamp(42px, 8vw, 120px)/0.9 var(--font-heading);
+  color: rgba(242, 242, 242, 0.22);
+}
+
+.origin-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.origin-grid small {
+  display: block;
+  font: 10px var(--font-body);
+  letter-spacing: 0.14em;
+  color: var(--gold);
+}
+
+.origin-grid h3 {
+  margin: 12px 0 14px;
+  font-size: clamp(28px, 3vw, 42px);
+  line-height: 0.95;
+}
+
+.origin-grid p {
+  margin: 0 0 22px;
+  font: 15px/1.65 var(--font-body);
+  color: rgba(242, 242, 242, 0.82);
+}
+
+.cut-middle {
+  display: grid;
+  grid-template-columns: 34% 1fr;
+  gap: 6%;
+  padding: 90px 7.1vw;
+  background: var(--paper);
+}
+
+.cut-middle h2 {
+  margin: 0 0 22px;
+  font-size: clamp(48px, 7vw, 110px);
+  line-height: 0.82;
+  color: var(--gold);
+}
+
+.cut-middle > div > p {
+  max-width: 340px;
+  font: 16px/1.7 var(--font-body);
+}
+
+.cut-flow {
+  margin: 0 0 28px;
+  font: 12px var(--font-body);
+  letter-spacing: 0.14em;
+  color: var(--gold);
+}
+
+.cut-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.cut-grid figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 12px;
+}
+
+.cut-grid figcaption b {
+  font: 12px var(--font-body);
+  letter-spacing: 0.06em;
+}
+
+.cut-grid figcaption span {
+  font: 11px var(--font-body);
+  color: #666;
+}
+
+.craft-block {
+  background: var(--void);
+  color: var(--paper);
+  padding: 72px 7.1vw 110px;
+}
+
+.craft-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-bottom: 42px;
+}
+
+.craft-grid h3 {
+  margin: 18px 0 10px;
+  font-size: clamp(22px, 2.2vw, 32px);
+}
+
+.craft-grid p {
+  margin: 0;
+  font: 15px/1.6 var(--font-body);
+  color: rgba(242, 242, 242, 0.8);
+}
+
+.craft-block .outline {
+  color: var(--paper);
+  border-color: var(--paper);
+}
+
+.about-hero {
+  min-height: 690px;
+  display: grid;
+  grid-template-columns: 58% 42%;
+  background: var(--void);
+  color: var(--paper);
+}
+
+.about-hero > div:first-child {
+  padding: 110px 5vw;
+}
+
+.about-hero h1 {
+  font-size: clamp(60px, 8vw, 126px);
+  line-height: 0.8;
+  margin: 120px 0 40px;
+}
+
+.about-hero h1 i {
+  font-style: normal;
+  color: var(--blue);
+}
+
+.about-crop,
+.founder-image {
+  background: url("/editorial-about.jpg") center/cover no-repeat;
+  filter: grayscale(1) contrast(1.1);
+}
+
+.manifesto {
+  padding: 130px 5vw;
+  display: grid;
+  grid-template-columns: 16% 50% 28%;
+  gap: 3%;
+  background: var(--paper);
+}
+
+.manifesto > p,
+.founder p {
+  font: 10px var(--font-body);
+}
+
+.manifesto h2,
+.founder h2 {
+  font-size: clamp(38px, 5vw, 74px);
+  line-height: 0.9;
+  margin: 0;
+}
+
+.manifesto h2 span {
+  color: var(--blue);
+}
+
+.manifesto > div p {
+  line-height: 1.7;
+}
+
+.values {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  background: var(--void);
+  color: white;
+  border-top: 2px solid var(--blue);
+}
+
+.values article {
+  min-height: 320px;
+  padding: 35px;
+  border-right: 1px solid #ffffff33;
+}
+
+.values span {
+  font: 10px var(--font-body);
+  color: var(--blue);
+}
+
+.values h3 {
+  font-size: 26px;
+  margin-top: 100px;
+  letter-spacing: 0;
+}
+
+.founder {
+  display: grid;
+  grid-template-columns: 48% 52%;
+  min-height: 700px;
+  background: var(--paper);
+}
+
+.founder > div:last-child {
+  padding: 110px 7vw;
+}
+
+.founder h2 {
+  margin: 80px 0 30px;
+}
+
+@media (max-width: 850px) {
+  .cut-middle,
+  .manifesto {
+    grid-template-columns: 1fr;
+    padding: 70px 22px;
+    gap: 35px;
+  }
+
+  .origin-grid,
+  .cut-grid,
+  .craft-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .origin-block,
+  .craft-block {
+    padding: 56px 22px 72px;
+  }
+
+  .origin-track {
+    margin-bottom: 32px;
+  }
+
+  .cut-middle {
+    padding: 64px 22px;
+  }
+
+  .founder,
+  .about-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .about-crop,
+  .founder-image {
+    min-height: 380px;
+  }
+
+  .values {
+    grid-template-columns: 1fr;
+  }
+
+  .about-hero > div:first-child {
+    padding: 72px 6vw 40px;
+  }
+}
+
+@media (max-width: 520px) {
+  .about-hero h1 {
+    font-size: 50px;
+  }
+}

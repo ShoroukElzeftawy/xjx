@@ -1,5 +1,15 @@
 @import "tailwindcss";
+
 @import "./styles/base.css";
-@import "./styles/chrome.css";
-@import "./styles/home.css";
-@import "./styles/pages.css";
+@import "./styles/Header.css";
+@import "./styles/Hero.css";
+@import "./styles/Home.css";
+@import "./styles/Campaign.css";
+@import "./styles/Shop.css";
+@import "./styles/Product.css";
+@import "./styles/Custom.css";
+@import "./styles/Materials.css";
+@import "./styles/About.css";
+@import "./styles/Refer.css";
+@import "./styles/Footer.css";
+@import "./styles/Toast.css";
