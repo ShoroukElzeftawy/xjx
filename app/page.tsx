@@ -26,6 +26,11 @@ export default function XjxSite() {
   const [checkingOut, setCheckingOut] = useState(false);
 
   useEffect(() => {
+    document.body.classList.toggle("menu-open", menuOpen);
+    return () => document.body.classList.remove("menu-open");
+  }, [menuOpen]);
+
+  useEffect(() => {
     const apply = () => {
       const next = routeFromPath();
       setRoute(next.route);

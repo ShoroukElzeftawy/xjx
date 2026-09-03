@@ -11,7 +11,7 @@
   background:linear-gradient(90deg,rgba(0,0,0,.38),rgba(0,0,0,.03) 58%,rgba(0,0,0,.18)),linear-gradient(180deg,rgba(0,0,0,.04),transparent 55%,rgba(0,0,0,.28));
 }
 .hero-editorial-copy{
-  position:absolute;z-index:4;left:8.5vw;top:190px;width:min(490px,37vw);
+  position:absolute;z-index:4;left:8.5vw;top:150px;width:min(490px,37vw);
   color:var(--paper);text-shadow:0 2px 14px rgba(0,0,0,.55);
 }
 .hero-editorial-copy h1{
@@ -28,11 +28,11 @@
 }
 .hero-editorial-copy button:hover,.hero-editorial-copy button:focus-visible{background:var(--paper);color:var(--ink);outline:none}
 .ref-hero-logo{
-  position:absolute;z-index:2;left:5vw;right:5vw;bottom:28px;height:112px;
-  background:url('/brand-assets/logos/xjx-white-long.png') center/contain no-repeat;
+  position:absolute;z-index:2;left:3.5vw;right:3.5vw;bottom:6px;height:128px;overflow:hidden;
+  background:url('/brand-assets/logos/xjx-white-long.png') center 51%/100% auto no-repeat;
 }
 .hero-ref{
-  position:absolute;z-index:3;right:7.1vw;bottom:146px;width:44%;padding-top:8px;
+  position:absolute;z-index:3;right:7.1vw;bottom:166px;width:44%;padding-top:8px;
   border-top:1px solid rgba(242,242,240,.82);text-align:right;font-size:12px;letter-spacing:.16em;
 }
 
@@ -106,11 +106,13 @@
 .plus{border:1px solid;padding:2px 7px;background:none}
 
 @media(max-width:850px){
-  .ref-hero{height:620px}
-  .hero-editorial-copy{left:32px;top:175px;width:min(430px,60vw)}
-  .ref-hero-logo{left:22px;right:22px;height:82px}
+  .ref-hero{height:min(78dvh,680px);min-height:560px}
+  .hero-editorial-copy{left:32px;top:88px;width:min(460px,72vw)}
+  .hero-editorial-copy h1{font-size:clamp(26px,4.2vw,38px)}
+  .ref-hero-logo{left:18px;right:18px;height:96px;bottom:6px;background-position:center 51%}
   .hero-ref{right:22px;bottom:116px;width:55%}
   .ref-shop{padding:28px 18px}
+  .ref-shop .product-grid{grid-template-columns:repeat(2,1fr)}
   .ref-manifesto{aspect-ratio:auto;min-height:500px;padding:44px 22px 70px;grid-template-columns:1fr 1fr}
   .ref-manifesto h2{font-size:54px}
   .blue-note{display:none}
@@ -120,16 +122,20 @@
   .material-table{padding:0}
   .product-grid{grid-template-columns:repeat(2,1fr)}
 }
+@media(max-width:700px){
+  .ref-hero{height:auto;min-height:0;padding-bottom:92px}
+  .hero-editorial-copy{position:relative;left:auto;top:auto;right:auto;width:auto;padding:28px 20px 12px}
+  .hero-editorial-copy h1{font-size:clamp(24px,7vw,32px)}
+  .hero-editorial-copy button{width:min(260px,100%)}
+  .hero-ref{display:none}
+  .ref-hero:before{background-position:58% center}
+}
 @media(max-width:520px){
-  .ref-hero{height:520px}
-  .hero-editorial-copy{left:20px;right:20px;top:68px;width:auto}
-  .hero-editorial-copy h1{font-size:24px}
-  .hero-editorial-copy button{width:245px}
-  .ref-hero-logo{height:48px;bottom:20px}
-  .hero-ref{bottom:72px;width:62%}
+  .ref-hero-logo{height:72px;bottom:4px}
   .ref-shop .product-grid,.product-grid{grid-template-columns:1fr}
   .ref-manifesto{grid-template-columns:1fr}
+  .ref-manifesto h2{font-size:44px}
   .material-spec{grid-template-columns:1fr 1fr;gap:15px;padding:18px 0}
   .material-spec .texture{grid-column:1/-1}
+  .product-info{flex-direction:column;gap:10px}
 }
-@media(max-width:700px){.ref-hero:before{background-position:58% center}}

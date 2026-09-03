@@ -21,7 +21,7 @@ export function Home({
           <button onClick={() => go("shop")}>DISCOVER NOW <span>→</span></button>
         </div>
         <div className="ref-hero-logo" role="img" aria-label="XJEWELRYX" />
-        <div className="hero-ref">40.7580° N, 73.9808° W · XJX–001</div>
+        <div className="hero-ref">XJX–001</div>
       </section>
       <section className="ref-shop">
         <div className="ref-section-head">

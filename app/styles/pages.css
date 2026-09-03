@@ -111,17 +111,26 @@
 .founder h2{margin:80px 0 30px}
 .outline{border:1px solid;padding:16px 20px;background:transparent;font:10px "IBM Plex XJX",monospace;margin-top:25px}
 
+@media(max-width:1100px){
+  .page-head{min-height:380px;padding:75px 28px 35px}
+  .page-head:before{right:28px}
+  .filters,.inner-page .products{padding-left:22px;padding-right:22px}
+}
 @media(max-width:850px){
-  .page-head{min-height:420px;padding:75px 22px 35px}
+  .page-head{min-height:320px;padding:75px 22px 35px}
+  .page-head h1{font-size:clamp(48px,12vw,90px);margin:36px 0 40px}
   .filters,.inner-page .products{padding-left:18px;padding-right:18px}
   .shop-note,.detail-story,.material-row,.manifesto{grid-template-columns:1fr;padding:70px 22px;gap:35px}
+  .shop-note h2{font-size:clamp(40px,10vw,64px)}
   .product-page,.founder,.custom-hero,.materials-hero,.about-hero{grid-template-columns:1fr}
-  .buy-panel{border-left:0;padding:70px 6vw}
-  .gallery-main{min-height:620px}
-  .blueprint,.metal-disc,.about-crop,.founder-image{min-height:420px}
+  .buy-panel{border-left:0;padding:48px 6vw 70px}
+  .buy-panel h1{font-size:clamp(36px,8vw,52px)}
+  .gallery-main{min-height:min(70dvh,620px)}
+  .blueprint,.metal-disc,.about-crop,.founder-image{min-height:380px}
   .process-grid{grid-template-columns:1fr 1fr}
   .commission{grid-template-columns:1fr;padding:80px 6vw}
   .values{grid-template-columns:1fr}
+  .custom-hero>div:first-child,.materials-hero>div:first-child,.about-hero>div:first-child{padding:72px 6vw 40px}
 }
 @media(max-width:520px){
   .page-head h1,.custom-hero h1,.materials-hero h1,.about-hero h1{font-size:50px}

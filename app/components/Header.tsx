@@ -25,6 +25,7 @@ export function Header({
   return (
     <>
       <header>
+        <button className="wordmark" onClick={() => go("home")} aria-label="XJEWELRYX home" />
         <nav>
           {nav.map(([key, label]) => (
             <button key={key} className={route === key ? "active" : ""} onClick={() => go(key)}>
@@ -32,14 +33,14 @@ export function Header({
             </button>
           ))}
         </nav>
-        <button className="wordmark" onClick={() => go("home")} aria-label="XJEWELRYX home" />
         <div className="tools">
+          <button type="button" aria-label="Search">⌕</button>
           <button type="button" onClick={onBag}>BAG [{bag}]</button>
-          <button className="menu" onClick={() => setOpen(!open)}>MENU</button>
+          <button className="menu" aria-expanded={open} aria-controls="mobile-nav" onClick={() => setOpen(!open)}>MENU</button>
         </div>
       </header>
       {open && (
-        <div className="mobile-nav">
+        <div className="mobile-nav" id="mobile-nav">
           {nav.map(([key, label], index) => (
             <button key={key} onClick={() => go(key)}>
               <span>0{index + 1}</span>

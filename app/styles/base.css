@@ -13,15 +13,17 @@
 }
 
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:#151515;color:var(--ink);font-family:"DM Sans XJX",Arial,sans-serif}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:#151515;color:var(--ink);font-family:"DM Sans XJX",Arial,sans-serif;overflow-x:clip}
 button,input,select,textarea{font:inherit;color:inherit}
-button,a{cursor:pointer}
+button,a{cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+input,select,textarea{font-size:16px;border-radius:0}
 h1,h2,h3{font-family:"DM Sans XJX",Arial,sans-serif;letter-spacing:-.082em}
 .eyebrow,nav button,.tools button,.legal,.footer-links span,.footer-signup>span,.material-spec em,.hero-ref{font-family:"IBM Plex XJX",monospace}
 .product-info b,.process-grid h3,nav button{font-family:"Gotham XJX",Arial,sans-serif}
 
 .site-shell{width:100%;overflow:hidden;background:var(--paper)}
 .reference-home,.inner-page{background:var(--paper)}
+body.menu-open{overflow:hidden;touch-action:none}
 
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
