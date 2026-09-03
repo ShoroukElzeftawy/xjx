@@ -306,9 +306,7 @@
   .mat-board-grid {
     grid-template-columns: 1fr 1fr;
   }
-}
 
-@media (max-width: 850px) {
   .materials-hero {
     grid-template-columns: 1fr;
   }
@@ -329,14 +327,6 @@
     gap: 35px;
   }
 
-  .mat-board-grid,
-  .alloy-grid,
-  .care-grid,
-  .mat-build-shots {
-    grid-template-columns: 1fr;
-    gap: 28px;
-  }
-
   .mat-board,
   .mat-alloys {
     padding: 56px 22px;
@@ -351,8 +341,16 @@
   }
 }
 
-@media (max-width: 520px) {
+@media (max-width: 600px) {
   .materials-hero h1 {
     font-size: 50px;
+  }
+
+  .alloy-grid,
+  .care-grid,
+  .mat-board-grid,
+  .mat-build-shots {
+    grid-template-columns: 1fr;
+    gap: 28px;
   }
 }

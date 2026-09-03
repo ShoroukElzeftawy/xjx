@@ -11,7 +11,7 @@ export function Refer() {
         </div>
         <div className="about-crop" />
       </section>
-      <section className="values refer-steps">
+      <section className="values">
         <article>
           <span>01</span>
           <h3>ACCOUNT.</h3>

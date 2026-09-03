@@ -36,7 +36,7 @@
   padding: 0;
   font: 400 clamp(36px, 6.2vw, 96px)/1 var(--font-accent);
   letter-spacing: 0.04em;
-  color: #8797c5;
+  color: var(--blue);
   animation: ticker 22s linear infinite;
 }
 
@@ -82,7 +82,7 @@
   }
 }
 
-@media (max-width: 850px) {
+@media (max-width: 1100px) {
   .ref-campaign {
     min-height: 220px;
   }
@@ -99,9 +99,9 @@
   }
 }
 
-@media (max-width: 520px) {
+@media (max-width: 600px) {
   .ref-campaign {
-    aspect-ratio: 16/9;
+    aspect-ratio: 16 / 9;
     min-height: 200px;
   }
 

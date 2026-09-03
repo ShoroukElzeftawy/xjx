@@ -98,11 +98,6 @@ nav button,
   background: var(--paper);
 }
 
-.reference-home,
-.inner-page {
-  background: var(--paper);
-}
-
 body.menu-open {
   overflow: hidden;
   touch-action: none;

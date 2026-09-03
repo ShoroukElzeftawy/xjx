@@ -106,7 +106,7 @@ export default function XjxSite() {
   const count = bag.reduce((sum, line) => sum + line.quantity, 0);
 
   return (
-    <main className={`site-shell page-${route} ${route === "home" ? "reference-home" : "inner-page"}`}>
+    <main className={`site-shell page-${route}${route === "home" ? "" : " inner-page"}`}>
       <Header route={route} go={go} bag={count} open={menuOpen} setOpen={setMenuOpen} onBag={checkout} />
       {route === "home" && <Home go={go} add={add} catalog={catalog} openProduct={openProduct} />}
       {route === "shop" && <Shop go={go} add={add} catalog={catalog} query={shopQuery} openProduct={openProduct} />}

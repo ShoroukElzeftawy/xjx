@@ -15,7 +15,7 @@ export function ProductGrid({
         {items.map((item) => (
           <article className="product-card" key={item.code}>
             <button
-              className={`product-visual ${item.tone} has-image`}
+              className="product-visual has-image"
               style={{ backgroundImage: `url(${item.image})` }}
               onClick={() => openProduct(item)}
               aria-label={`View ${item.name}`}

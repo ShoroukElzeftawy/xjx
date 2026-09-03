@@ -255,7 +255,7 @@
   background: linear-gradient(135deg, #151515, #888, #222);
 }
 
-@media (max-width: 850px) {
+@media (max-width: 1100px) {
   .ref-shop {
     padding: 28px 18px 40px;
   }
@@ -302,7 +302,7 @@
   }
 }
 
-@media (max-width: 520px) {
+@media (max-width: 600px) {
   .ref-shop {
     padding: 24px 16px 36px;
   }
@@ -331,7 +331,7 @@
   }
 
   .material-spec .texture {
-    grid-column: 1/-1;
+    grid-column: 1 / -1;
     height: 56px;
   }
 }
