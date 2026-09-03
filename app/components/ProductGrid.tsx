@@ -20,7 +20,10 @@ export function ProductGrid({
               onClick={() => openProduct(item)}
               aria-label={`View ${item.name}`}
             >
-              <small>{item.code}<br />LIVE CATALOG</small>
+              <small>{item.code} / SHOPIFY / ACTIVE</small>
+              {item.variants && item.variants.every((variant) => !variant.available) && (
+                <em className="sold-out">Sold out</em>
+              )}
             </button>
             <div className="product-info">
               <button onClick={() => openProduct(item)}>

@@ -1,7 +1,5 @@
 @font-face{font-family:"DM Sans XJX";src:url('/brand-assets/fonts/DMSans-Regular.ttf') format('truetype');font-weight:100 900;font-display:swap}
-@font-face{font-family:"Gotham XJX";src:url('/brand-assets/fonts/Gotham-Book.ttf') format('truetype');font-weight:400;font-display:swap}
-@font-face{font-family:"Gotham XJX";src:url('/brand-assets/fonts/Gotham-Bold.ttf') format('truetype');font-weight:700 900;font-display:swap}
-@font-face{font-family:"IBM Plex XJX";src:url('/brand-assets/fonts/IBMPlexSans.ttf') format('truetype');font-weight:400;font-display:swap}
+@font-face{font-family:"Bayon XJX";src:url('/brand-assets/fonts/Bayon-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
 
 :root{
   --ink:#181a1a;
@@ -10,17 +8,21 @@
   --gold:#b79740;
   --void:#0b0d0d;
   --line:rgba(24,26,26,.22);
+  --font-body:"DM Sans XJX",Arial,sans-serif;
+  --font-heading:"Bayon XJX","DM Sans XJX",sans-serif;
+  --font-accent:"Bayon XJX","DM Sans XJX",sans-serif;
+  --header-h:calc(76px + env(safe-area-inset-top, 0px));
 }
 
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{margin:0;background:#151515;color:var(--ink);font-family:"DM Sans XJX",Arial,sans-serif;overflow-x:clip}
+body{margin:0;background:#151515;color:var(--ink);font-family:var(--font-body);overflow-x:clip}
 button,input,select,textarea{font:inherit;color:inherit}
 button,a{cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 input,select,textarea{font-size:16px;border-radius:0}
-h1,h2,h3{font-family:"DM Sans XJX",Arial,sans-serif;letter-spacing:-.082em}
-.eyebrow,nav button,.tools button,.legal,.footer-links span,.footer-signup>span,.material-spec em,.hero-ref{font-family:"IBM Plex XJX",monospace}
-.product-info b,.process-grid h3,nav button{font-family:"Gotham XJX",Arial,sans-serif}
+h1,h2,h3{font-family:var(--font-heading);font-weight:400;letter-spacing:.02em;text-transform:uppercase}
+.eyebrow,.material-kicker,.hero-ref,.sold-out,.campaign-ticker,.gold-line{font-family:var(--font-accent)}
+nav button,.tools button,.legal,.footer-links span,.footer-signup>span,.material-spec em,.product-info b{font-family:var(--font-body)}
 
 .site-shell{width:100%;overflow:hidden;background:var(--paper)}
 .reference-home,.inner-page{background:var(--paper)}

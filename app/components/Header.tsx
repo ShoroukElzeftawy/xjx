@@ -34,7 +34,7 @@ export function Header({
           ))}
         </nav>
         <div className="tools">
-          <button type="button" aria-label="Search">⌕</button>
+          <button type="button" aria-label="Search">SEARCH</button>
           <button type="button" onClick={onBag}>BAG [{bag}]</button>
           <button className="menu" aria-expanded={open} aria-controls="mobile-nav" onClick={() => setOpen(!open)}>MENU</button>
         </div>
