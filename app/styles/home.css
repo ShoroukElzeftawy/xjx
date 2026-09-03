@@ -1,0 +1,135 @@
+.ref-hero{
+  height:740px;position:relative;isolation:isolate;background:var(--void);color:var(--paper)
+}
+.ref-hero:before{
+  content:"";position:absolute;inset:0;z-index:0;
+  background:url('/landing-hero.png') center 42%/cover no-repeat;
+  filter:grayscale(1) contrast(1.06);
+}
+.ref-hero:after{
+  content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(90deg,rgba(0,0,0,.38),rgba(0,0,0,.03) 58%,rgba(0,0,0,.18)),linear-gradient(180deg,rgba(0,0,0,.04),transparent 55%,rgba(0,0,0,.28));
+}
+.hero-editorial-copy{
+  position:absolute;z-index:4;left:8.5vw;top:190px;width:min(490px,37vw);
+  color:var(--paper);text-shadow:0 2px 14px rgba(0,0,0,.55);
+}
+.hero-editorial-copy h1{
+  margin:0;font-family:"Gotham XJX","DM Sans XJX",sans-serif;
+  font-size:clamp(30px,2.3vw,43px);font-weight:900;line-height:1.01;letter-spacing:-.045em;
+}
+.hero-editorial-copy p{
+  margin:18px 0 22px;max-width:390px;font-size:14px;line-height:1.55;color:rgba(242,242,242,.86)
+}
+.hero-editorial-copy button{
+  width:290px;padding:15px 22px;border:2px solid var(--paper);border-radius:999px;
+  background:rgba(11,13,13,.12);color:var(--paper);display:flex;justify-content:center;gap:18px;
+  font:12px "Gotham XJX",sans-serif;letter-spacing:.05em;
+}
+.hero-editorial-copy button:hover,.hero-editorial-copy button:focus-visible{background:var(--paper);color:var(--ink);outline:none}
+.ref-hero-logo{
+  position:absolute;z-index:2;left:5vw;right:5vw;bottom:28px;height:112px;
+  background:url('/brand-assets/logos/xjx-white-long.png') center/contain no-repeat;
+}
+.hero-ref{
+  position:absolute;z-index:3;right:7.1vw;bottom:146px;width:44%;padding-top:8px;
+  border-top:1px solid rgba(242,242,240,.82);text-align:right;font-size:12px;letter-spacing:.16em;
+}
+
+.ref-shop,.ref-materials,.ref-manifesto{position:relative;isolation:isolate}
+.ref-shop>*,.ref-materials>*,.ref-manifesto>*{position:relative;z-index:1}
+.ref-shop:before,.ref-materials:before,.ref-manifesto:before{
+  content:"";position:absolute;z-index:0;pointer-events:none;
+  background:var(--blue);opacity:.12;
+  mask:url('/brand-assets/shapes/xjx-shapes.png') center/contain no-repeat;
+  -webkit-mask:url('/brand-assets/shapes/xjx-shapes.png') center/contain no-repeat;
+}
+.ref-shop:before{right:5vw;top:25px;width:330px;height:78px}
+.ref-manifesto:before{
+  right:5vw;top:50%;width:240px;height:240px;transform:translateY(-50%) rotate(9deg);
+  background:var(--gold);opacity:.1;
+  mask:url('/brand-assets/shapes/xjx-logo-mark.png') center/contain no-repeat;
+  -webkit-mask:url('/brand-assets/shapes/xjx-logo-mark.png') center/contain no-repeat;
+}
+.ref-materials:before{left:2vw;bottom:-12px;width:430px;height:102px;opacity:.09}
+
+.ref-shop{padding:34px 42px 54px}
+.ref-section-head{display:flex;justify-content:space-between;align-items:center}
+.ref-section-head h2{font-size:22px;font-weight:400;letter-spacing:0}
+.ref-section-head button{border:0;background:none;font:12px "IBM Plex XJX",monospace}
+.ref-shop .products{padding:12px 0 0}
+.ref-shop .product-grid{grid-template-columns:repeat(3,1fr);gap:18px;background:transparent}
+.ref-shop .product-info{padding:13px 0}
+.ref-shop .product-info b{font:14px "IBM Plex XJX",monospace}
+.ref-shop .product-info span{font-size:11px}
+
+.ref-manifesto{
+  min-height:0;aspect-ratio:3.18/1;padding:3.2vw 7.1vw 4.8vw;background:var(--void);color:white;
+  display:grid;grid-template-columns:39% 25% 1fr;gap:5%;align-items:start;position:relative;
+}
+.ref-manifesto h2{font-family:"Gotham XJX",sans-serif;font-size:clamp(64px,6.5vw,126px);font-weight:900;line-height:.76;margin:0}
+.manifesto-image{width:100%;aspect-ratio:.94/1;background-size:cover;background-position:center 54%}
+.blue-note{font:400 clamp(15px,1.45vw,27px)/1.48 "IBM Plex XJX",monospace;padding-top:2.8vw;color:var(--blue)}
+.blue-note span{display:inline-block;margin:1vw 2vw}
+.gold-line{position:absolute;left:7.1vw;right:7.1vw;bottom:2.3vw;border-top:2px solid var(--gold);color:var(--gold);text-align:right;padding-top:.7vw}
+.gold-line b{font-family:"Gotham XJX",sans-serif;letter-spacing:.12em}
+
+.ref-materials{padding:36px 42px;display:grid;grid-template-columns:32% 68%}
+.material-intro{padding-right:34px;border-right:1px solid #b7b7b7}
+.material-intro h2{font-size:38px;line-height:1.18;font-weight:400;margin:0;letter-spacing:-.04em}
+.material-intro p{font:14px/1.7 "IBM Plex XJX",monospace;margin:34px 0 70px;max-width:340px}
+.material-intro button{border:0;background:none;color:var(--blue);font:12px "IBM Plex XJX",monospace}
+.material-table{padding-left:34px}
+.material-spec{min-height:112px;border-bottom:1px solid #bbb;display:grid;grid-template-columns:28% 38% 34%;align-items:center}
+.material-spec span small,.material-spec span b{display:block}
+.material-spec span small{font-size:13px;margin-bottom:8px}
+.material-spec span b{font-size:16px;font-weight:400;letter-spacing:0}
+.material-spec em{white-space:pre-line;color:var(--blue);font:12px/1.6 "IBM Plex XJX",monospace;font-style:normal}
+.texture{height:72px;display:block}
+.texture-0{background:linear-gradient(135deg,#999,#eee 30%,#777 55%,#bbb)}
+.texture-1{background:repeating-linear-gradient(0deg,#aaa,#aaa 1px,#ddd 2px,#999 3px)}
+.texture-2{background:radial-gradient(circle at 65% 50%,var(--blue) 0 9%,transparent 10%),#141719}
+.texture-3{background:linear-gradient(135deg,#151515,#888,#222)}
+
+.products{padding:95px 3vw}
+.product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line)}
+.product-card{background:var(--paper)}
+.product-visual{border:0;width:100%;aspect-ratio:1/.98;position:relative;display:grid;place-items:center;overflow:hidden;background:#d9d9d6}
+.product-visual.has-image{background-size:cover;background-position:center}
+.product-visual.has-image:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 70%,#0004)}
+.product-visual small{position:absolute;top:16px;left:16px;z-index:1;text-align:left;font:8px/1.6 "IBM Plex XJX",monospace;color:white}
+.product-info{display:flex;justify-content:space-between;padding:19px 15px 26px}
+.product-info>button{border:0;background:none;text-align:left}
+.product-info b{display:block;font-size:13px}
+.product-info span{display:block;margin-top:7px;font:8px "IBM Plex XJX",monospace}
+.product-info>div{display:flex;gap:12px;align-items:start}
+.plus{border:1px solid;padding:2px 7px;background:none}
+
+@media(max-width:850px){
+  .ref-hero{height:620px}
+  .hero-editorial-copy{left:32px;top:175px;width:min(430px,60vw)}
+  .ref-hero-logo{left:22px;right:22px;height:82px}
+  .hero-ref{right:22px;bottom:116px;width:55%}
+  .ref-shop{padding:28px 18px}
+  .ref-manifesto{aspect-ratio:auto;min-height:500px;padding:44px 22px 70px;grid-template-columns:1fr 1fr}
+  .ref-manifesto h2{font-size:54px}
+  .blue-note{display:none}
+  .gold-line{left:22px;right:22px;bottom:30px}
+  .ref-materials{grid-template-columns:1fr;padding:34px 22px}
+  .material-intro{border:0;border-bottom:1px solid #bbb;padding:0 0 30px}
+  .material-table{padding:0}
+  .product-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:520px){
+  .ref-hero{height:520px}
+  .hero-editorial-copy{left:20px;right:20px;top:68px;width:auto}
+  .hero-editorial-copy h1{font-size:24px}
+  .hero-editorial-copy button{width:245px}
+  .ref-hero-logo{height:48px;bottom:20px}
+  .hero-ref{bottom:72px;width:62%}
+  .ref-shop .product-grid,.product-grid{grid-template-columns:1fr}
+  .ref-manifesto{grid-template-columns:1fr}
+  .material-spec{grid-template-columns:1fr 1fr;gap:15px;padding:18px 0}
+  .material-spec .texture{grid-column:1/-1}
+}
+@media(max-width:700px){.ref-hero:before{background-position:58% center}}

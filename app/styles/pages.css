@@ -1,0 +1,133 @@
+.page-head{min-height:500px;padding:95px 48px 48px;position:relative;isolation:isolate;background:var(--void);color:white}
+.page-head:before{content:"COLLECTION / LIVE CATALOG";color:var(--blue);font:10px "IBM Plex XJX",monospace;position:absolute;right:48px;top:55px}
+.page-head:after{
+  content:"";position:absolute;right:6vw;bottom:30px;width:300px;height:300px;background:var(--blue);opacity:.14;
+  mask:url('/brand-assets/shapes/xjx-logo-mark.png') center/contain no-repeat;
+  -webkit-mask:url('/brand-assets/shapes/xjx-logo-mark.png') center/contain no-repeat;
+}
+.page-head>*{position:relative;z-index:1}
+.page-head h1{font-size:clamp(72px,11vw,150px);margin:52px 0 70px;line-height:.8}
+.page-head h1 i{color:var(--blue);font-style:normal}
+.page-head>p:last-child{text-align:right;font:10px "IBM Plex XJX",monospace}
+.filters{padding:20px 42px;display:flex;gap:27px;border-bottom:1px solid var(--line);overflow:auto}
+.filters button{border:0;background:none;font:10px "IBM Plex XJX",monospace;padding:7px 0;white-space:nowrap}
+.filters .active{border-bottom:2px solid}
+.inner-page .products{padding:52px 42px}
+.inner-page .product-grid{gap:18px;background:none}
+.shop-note{background:var(--void);color:white;padding:90px 48px;border-top:2px solid var(--gold);display:grid;grid-template-columns:15% 45% 35%;gap:3%}
+.shop-note span{font:10px "IBM Plex XJX",monospace;color:var(--blue)}
+.shop-note h2{font-size:72px;line-height:.9;margin:0}
+.shop-note p{line-height:1.6}
+
+.product-page{display:grid;grid-template-columns:60% 40%;min-height:760px;background:var(--void);color:white}
+.product-gallery.carousel{display:block;position:relative;outline:none}
+.product-gallery.carousel:focus-visible{box-shadow:inset 0 0 0 2px var(--blue)}
+.gallery-main{width:100%;min-height:760px;background:#181a1a center/cover no-repeat;position:relative}
+.gallery-main.imported:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 75%,#0005);pointer-events:none}
+.gallery-main small{position:absolute;left:20px;bottom:20px;z-index:1;font:9px "IBM Plex XJX",monospace}
+.gallery-controls{position:absolute;left:24px;right:24px;top:50%;transform:translateY(-50%);display:flex;justify-content:space-between;z-index:3;pointer-events:none}
+.gallery-controls button{pointer-events:auto;width:54px;height:54px;border:1px solid #ffffff88;border-radius:50%;background:rgba(24,26,26,.72);color:white;font-size:24px}
+.buy-panel{padding:85px 5vw;background:var(--paper);color:var(--ink);border-left:1px solid #aaa}
+.buy-panel h1{font-size:58px;line-height:.9;margin:35px 0 12px}
+.price{font:21px "IBM Plex XJX",monospace}
+.price span{font-size:10px;margin-left:10px;color:var(--blue)}
+.description{font-size:18px;line-height:1.7;max-width:520px;margin:35px 0}
+.buy-panel fieldset{border:0;padding:0;margin:30px 0;display:flex;flex-wrap:wrap;gap:8px}
+.buy-panel legend{width:100%;font:11px "IBM Plex XJX",monospace;margin-bottom:13px;letter-spacing:.06em}
+.buy-panel fieldset button{border:1px solid var(--line);background:none;padding:12px 15px}
+.buy-panel fieldset .selected{background:var(--ink);color:white}
+.add{width:100%;border:0;background:var(--ink);color:white;padding:19px;display:flex;justify-content:space-between;font:11px "IBM Plex XJX",monospace}
+.store-link{display:inline-block;margin-top:14px;color:var(--blue);font:11px "IBM Plex XJX",monospace}
+.specs{display:grid;grid-template-columns:repeat(3,1fr);margin-top:30px;padding-top:25px;border-top:1px solid var(--line);font:11px/1.65 "IBM Plex XJX",monospace}
+.detail-story{padding:130px 5vw;background:var(--void);color:var(--paper);display:grid;grid-template-columns:15% 52% 27%;gap:3%;border-top:2px solid var(--blue)}
+.detail-story h2{font-size:clamp(38px,5vw,74px);line-height:.9;margin:0}
+.detail-story h2 i{font-style:normal;color:var(--blue)}
+.detail-story>p{font:11px "IBM Plex XJX",monospace}
+.detail-story>p:last-child{font:18px/1.75 "DM Sans XJX",sans-serif}
+.next-object{padding:75px 5vw;background:var(--paper)}
+.next-object>p{font:9px "IBM Plex XJX",monospace}
+.next-object button{border:0;background:none;width:100%;display:flex;justify-content:space-between;font-size:clamp(50px,8vw,110px);font-weight:900}
+
+.custom-hero,.materials-hero,.about-hero{min-height:690px;display:grid;grid-template-columns:55% 45%;background:var(--void);color:var(--paper)}
+.custom-hero>div:first-child,.materials-hero>div:first-child,.about-hero>div:first-child{padding:110px 5vw}
+.custom-hero h1,.materials-hero h1,.about-hero h1{font-size:clamp(60px,8vw,126px);line-height:.8;margin:60px 0 40px}
+.custom-hero h1 i,.materials-hero h1 i,.about-hero h1 i{font-style:normal;color:var(--blue)}
+.custom-hero>div>p:last-child,.materials-hero>div>p:last-child{font:16px/1.6 "DM Sans XJX",sans-serif;max-width:440px}
+.blueprint{background:#111419;color:var(--blue);position:relative;display:grid;place-items:center;background-image:linear-gradient(#ffffff20 1px,transparent 1px),linear-gradient(90deg,#ffffff20 1px,transparent 1px);background-size:32px 32px}
+.draft-ring{width:270px;height:270px;border:2px solid white;border-radius:50%;position:relative}
+.draft-ring:before,.draft-ring:after{content:"";position:absolute;background:white}
+.draft-ring:before{height:1px;width:390px;top:50%;left:-60px}
+.draft-ring:after{width:1px;height:390px;left:50%;top:-60px}
+.blueprint small{position:absolute;bottom:25px;right:25px;text-align:right;font:9px "IBM Plex XJX",monospace}
+.process{padding:120px 5vw}
+.section-title{display:flex;align-items:flex-end;justify-content:space-between;margin:0 0 70px}
+.section-title p{font:10px "IBM Plex XJX",monospace}
+.section-title h2{font-size:clamp(38px,5vw,74px);line-height:.9;margin:0}
+.process-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid;border-left:1px solid}
+.process-grid article{padding:25px;border-right:1px solid;border-bottom:1px solid;min-height:250px;background:white}
+.process-grid span{font:10px "IBM Plex XJX",monospace}
+.process-grid h3{margin-top:75px;font-size:22px;letter-spacing:0}
+.process-grid p{font-size:13px;line-height:1.5}
+.commission{padding:120px 5vw;display:grid;grid-template-columns:45% 50%;gap:5%;background:var(--void);color:white;border-top:2px solid var(--gold)}
+.commission h2{margin:65px 0 30px;font-size:clamp(38px,5vw,74px)}
+.commission form{display:grid;grid-template-columns:1fr 1fr;gap:25px}
+.commission label{font:9px "IBM Plex XJX",monospace}
+.commission input,.commission select,.commission textarea{display:block;width:100%;border:0;border-bottom:1px solid #ffffff55;background:transparent;padding:14px 0;outline:none;color:white}
+.commission textarea{height:100px}
+.commission label:nth-child(4),.commission .add{grid-column:1/-1}
+.commission .add{background:var(--blue);color:var(--void)}
+
+.materials-hero{background:var(--paper);color:var(--ink);grid-template-columns:55% 45%}
+.metal-disc{background:var(--void);color:var(--blue);display:grid;place-items:center;position:relative}
+.metal-disc>span{width:260px;height:260px;border-radius:50%;background:radial-gradient(circle at 33% 27%,#fff,#bfc3c4 40%,#515758);display:grid;place-items:center;font:70px "IBM Plex XJX",monospace}
+.metal-disc small{position:absolute;right:30px;bottom:30px;font:14px "IBM Plex XJX",monospace;text-align:right}
+.material-row{padding:110px 5vw;display:grid;grid-template-columns:15% 44% 35%;gap:3%;border-bottom:1px solid var(--line);background:var(--paper)}
+.material-row h2{font-size:clamp(52px,7vw,95px);margin:0}
+.material-row>span{font:10px "IBM Plex XJX",monospace;color:var(--blue)}
+.material-row>div>p{line-height:1.7}
+.material-row dl{margin-top:45px}
+.material-row dt,.material-row dd{display:inline-block;width:50%;margin:0;padding:12px 0;border-top:1px solid;font:10px "IBM Plex XJX",monospace}
+.material-row dd{text-align:right}
+.material-row.pale{background:#e6e6e3}
+.care{padding:140px 5vw;background:var(--void);color:var(--paper);border-top:2px solid var(--gold)}
+.care h2{margin:70px 0 35px;font-size:clamp(60px,9vw,130px)}
+.care>p{font:10px "IBM Plex XJX",monospace}
+.care>p:last-child{max-width:560px;font:16px/1.7 "DM Sans XJX",sans-serif}
+
+.about-hero{grid-template-columns:58% 42%}
+.about-hero h1{margin-top:120px}
+.about-crop,.founder-image{background:url('/editorial-about.png') center/cover no-repeat;filter:grayscale(1) contrast(1.1)}
+.manifesto{padding:130px 5vw;display:grid;grid-template-columns:16% 50% 28%;gap:3%;background:var(--paper)}
+.manifesto>p,.founder p{font:10px "IBM Plex XJX",monospace}
+.manifesto h2,.founder h2{font-size:clamp(38px,5vw,74px);line-height:.9;margin:0}
+.manifesto h2 span{color:var(--blue)}
+.manifesto>div p{line-height:1.7}
+.values{display:grid;grid-template-columns:repeat(3,1fr);background:var(--void);color:white;border-top:2px solid var(--blue)}
+.values article{min-height:320px;padding:35px;border-right:1px solid #ffffff33}
+.values span{font:10px "IBM Plex XJX",monospace;color:var(--blue)}
+.values h3{font-size:26px;margin-top:100px;letter-spacing:0}
+.founder{display:grid;grid-template-columns:48% 52%;min-height:700px;background:var(--paper)}
+.founder>div:last-child{padding:110px 7vw}
+.founder h2{margin:80px 0 30px}
+.outline{border:1px solid;padding:16px 20px;background:transparent;font:10px "IBM Plex XJX",monospace;margin-top:25px}
+
+@media(max-width:850px){
+  .page-head{min-height:420px;padding:75px 22px 35px}
+  .filters,.inner-page .products{padding-left:18px;padding-right:18px}
+  .shop-note,.detail-story,.material-row,.manifesto{grid-template-columns:1fr;padding:70px 22px;gap:35px}
+  .product-page,.founder,.custom-hero,.materials-hero,.about-hero{grid-template-columns:1fr}
+  .buy-panel{border-left:0;padding:70px 6vw}
+  .gallery-main{min-height:620px}
+  .blueprint,.metal-disc,.about-crop,.founder-image{min-height:420px}
+  .process-grid{grid-template-columns:1fr 1fr}
+  .commission{grid-template-columns:1fr;padding:80px 6vw}
+  .values{grid-template-columns:1fr}
+}
+@media(max-width:520px){
+  .page-head h1,.custom-hero h1,.materials-hero h1,.about-hero h1{font-size:50px}
+  .product-grid{grid-template-columns:1fr}
+  .gallery-main{min-height:480px}
+  .buy-panel h1{font-size:45px}
+  .process-grid,.commission form,.specs{grid-template-columns:1fr}
+  .next-object button{font-size:44px}
+}

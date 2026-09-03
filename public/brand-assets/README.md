@@ -1,14 +1,15 @@
 # XJEWELRYX brand assets
 
 ## Logos
-- `logos/xjx-black-long.png` — original black horizontal logo for light backgrounds
-- `logos/xjx-white-long.png` — original white horizontal logo for dark backgrounds
-- `logos/xjx-black-mark.png` — original black compact mark
-- `logos/xjx-white-mark.png` — original white compact mark
+- `logos/xjx-white-long.png` — horizontal XJEWELRYX wordmark for dark grounds
+- `logos/xjx-white-mark.png` — compact XJX mark for navigation
+- `logos/xjx-black-long.png` / `logos/xjx-black-mark.png` — reverse marks for light grounds
 
-## Fonts
-- `fonts/DMSans-Regular.ttf` — primary brand typeface for headlines and paragraphs
-- `fonts/Gotham-Book.ttf` and `fonts/Gotham-Bold.ttf` — supporting/subheading typeface
-- `fonts/IBMPlexSans.ttf` and related weights — technical labels and annotations
+## Shapes
+- `shapes/xjx-shapes.png` — molten metal brand shapes
+- `shapes/xjx-logo-mark.png` — structural X motif
 
-These assets were recovered from the supplied brand files and are used directly by the React preview.
+## Type
+- DM Sans — headlines and paragraphs
+- Gotham — subheadings
+- IBM Plex — technical labels and coordinates
