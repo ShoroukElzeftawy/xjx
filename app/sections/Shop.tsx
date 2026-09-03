@@ -2,7 +2,8 @@
 
 import { useMemo } from "react";
 import { ProductGrid } from "../components/ProductGrid";
-import { PRODUCT_COLORS, PRODUCT_TYPES } from "../lib/taxonomy";
+import { shopProducts } from "../lib/catalog";
+import { COMING_TYPES, PRODUCT_COLORS, SHOP_TYPES } from "../lib/taxonomy";
 import type { Go, ProductItem, ShopQuery } from "../lib/types";
 
 export function Shop({
@@ -22,11 +23,14 @@ export function Shop({
   const color = query.color || "ALL";
   const filtered = useMemo(
     () =>
-      catalog.filter((item) => (type === "ALL" || item.type === type) && (color === "ALL" || item.color === color)),
+      shopProducts(catalog).filter(
+        (item) => (type === "ALL" || item.type === type) && (color === "ALL" || item.color === color),
+      ),
     [catalog, type, color],
   );
 
   const setQuery = (next: ShopQuery) => go("shop", undefined, next);
+  const coming = (COMING_TYPES as readonly string[]).includes(type);
 
   return (
     <>
@@ -38,7 +42,7 @@ export function Shop({
       <div className="filters-stack">
         <div className="filters" role="tablist" aria-label="Shop by type">
           <span>TYPE</span>
-          {["ALL", ...PRODUCT_TYPES].map((item) => (
+          {["ALL", ...SHOP_TYPES].map((item) => (
             <button className={type === item ? "active" : ""} onClick={() => setQuery({ type: item, color })} key={`type-${item}`}>
               {item}
             </button>
@@ -56,7 +60,14 @@ export function Shop({
       {filtered.length ? (
         <ProductGrid items={filtered} add={add} openProduct={openProduct} />
       ) : (
-        <p className="shop-empty">Nothing in this category yet. Try another type or color.</p>
+        <div className="shop-empty">
+          <p>{coming ? "Coming from the bench." : "Nothing in this category yet."}</p>
+          <span>
+            {coming
+              ? `${type} are being built now. Earrings are live. Try another type, or check back when this family leaves the bench.`
+              : "Try another type or color. Bracelets, rings, and necklaces are coming from the bench."}
+          </span>
+        </div>
       )}
       <section className="shop-note">
         <span>NO. 01</span>

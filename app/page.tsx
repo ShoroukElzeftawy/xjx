@@ -113,7 +113,7 @@ export default function XjxSite() {
       {route === "product" && <Product item={selected} add={add} go={go} />}
       {route === "custom" && <Custom />}
       {route === "materials" && <Materials />}
-      {route === "about" && <About go={go} />}
+      {route === "about" && <About go={go} catalog={catalog} />}
       {route === "refer" && <Refer />}
       <Footer go={go} />
       {notice && <Toast message={notice} onView={checkout} />}

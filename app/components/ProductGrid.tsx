@@ -20,7 +20,7 @@ export function ProductGrid({
               onClick={() => openProduct(item)}
               aria-label={`View ${item.name}`}
             >
-              <small>{item.code} / SHOPIFY / ACTIVE</small>
+              <small>{item.sku || item.code} / {item.type} / {item.color}</small>
               {item.variants && item.variants.every((variant) => !variant.available) && (
                 <em className="sold-out">Sold out</em>
               )}

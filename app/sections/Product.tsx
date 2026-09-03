@@ -17,6 +17,7 @@ export function Product({
   const [variantId, setVariantId] = useState(item.variantId ?? item.variants?.[0]?.id);
   const gallery = item.images?.length ? item.images : item.image ? [item.image] : [];
   const active = item.variants?.find((variant) => variant.id === variantId);
+  const sku = item.sku || item.code;
 
   useEffect(() => {
     setImageIndex(0);
@@ -40,7 +41,7 @@ export function Product({
           aria-label={`${item.name} image gallery`}
         >
           <div className="gallery-main imported" style={{ backgroundImage: `url(${gallery[imageIndex]})` }}>
-            <small>{item.code} / IMAGE {String(imageIndex + 1).padStart(2, "0")} OF {String(gallery.length).padStart(2, "0")}</small>
+            <small>{sku} / IMAGE {String(imageIndex + 1).padStart(2, "0")} OF {String(gallery.length).padStart(2, "0")}</small>
             {gallery.length > 1 && (
               <div className="gallery-controls">
                 <button onClick={() => moveImage(-1)} aria-label="Previous product image">←</button>
@@ -50,12 +51,16 @@ export function Product({
           </div>
         </div>
         <div className="buy-panel">
-          <p className="eyebrow">{item.code} / {item.type.replace(/S$/, "")}</p>
+          <p className="eyebrow">{sku} / {item.type.replace(/S$/, "")}</p>
           <h1>{item.name}</h1>
           <p className="price">{active?.price ?? item.price} <span>LIVE PRICE</span></p>
           <p className="description">
-            {item.description || "An original XJEWELRYX object from the live catalog. Weight, karat, and options are listed. No markup theater."}
+            {item.description || "An original XJEWELRYX object. Weight, karat, and options are listed. Size is given by comparison, not only millimeters."}
           </p>
+          <div className="size-compare">
+            <p>SIZE, COMPARED</p>
+            <p>{item.sizeCompare || "We size against something you already wear — a coin, a hoop, a chain on the neck — not a tape measure alone."}</p>
+          </div>
           <fieldset>
             <legend>AVAILABLE OPTIONS</legend>
             {(item.variants?.length ? item.variants : [{ id: item.variantId ?? item.code, title: item.options || "STANDARD", price: item.price, available: true }]).map((variant) => (
@@ -75,16 +80,17 @@ export function Product({
             OPEN IN SHOPIFY
           </a>
           <div className="specs">
-            <span>ORIGIN<br /><b>47TH STREET</b></span>
+            <span>SKU<br /><b>{sku}</b></span>
             <span>TYPE<br /><b>{item.type}</b></span>
             <span>COLOR<br /><b>{item.color} GOLD</b></span>
+            <span>KARAT<br /><b>{item.karat || "SEE OPTIONS"}</b></span>
           </div>
         </div>
       </section>
       <section className="detail-story">
         <p>01 / CONSTRUCTION</p>
         <h2>STRUCTURAL GOLD.<br /><i>NO ROMANCE.</i></h2>
-        <p>We sell engineered gold, ethically sourced diamonds, and forms made for people who buy for themselves.</p>
+        <p>Folder codes mark the family: XJ4 earrings, XJ3 bracelets, XJ2 rings, XJ5 necklaces, XJ1 chains. The number is the object. Karat is in the name, not hidden in a spec sheet.</p>
       </section>
       <section className="next-object">
         <p>RETURN TO COLLECTION</p>

@@ -1,5 +1,7 @@
 export const PRODUCT_TYPES = ["EARRINGS", "BRACELETS", "RINGS", "NECKLACES", "CHAINS"] as const;
+export const SHOP_TYPES = ["EARRINGS", "BRACELETS", "RINGS", "NECKLACES"] as const;
 export const PRODUCT_COLORS = ["YELLOW", "WHITE", "PINK"] as const;
+export const COMING_TYPES = ["BRACELETS", "RINGS", "NECKLACES", "CHAINS"] as const;
 
 export type ProductType = (typeof PRODUCT_TYPES)[number];
 export type ProductColor = (typeof PRODUCT_COLORS)[number];

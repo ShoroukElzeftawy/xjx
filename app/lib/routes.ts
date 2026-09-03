@@ -1,3 +1,4 @@
+import { isShopListed } from "./catalog";
 import type { ProductItem, Route, ShopQuery } from "./types";
 
 const routes: Route[] = ["shop", "product", "custom", "materials", "about", "refer"];
@@ -34,6 +35,7 @@ export function routeFromPath(pathname = typeof window === "undefined" ? "/" : w
 }
 
 export function productFromHandle(catalog: ProductItem[], handle?: string) {
-  if (!handle) return catalog[0];
-  return catalog.find((item) => item.handle === handle) ?? catalog[0];
+  const listed = catalog.filter(isShopListed);
+  if (!handle) return listed[0] ?? catalog[0];
+  return catalog.find((item) => item.handle === handle) ?? listed[0] ?? catalog[0];
 }

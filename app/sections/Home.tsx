@@ -1,4 +1,6 @@
 import { ProductGrid } from "../components/ProductGrid";
+import { shopProducts } from "../lib/catalog";
+import { SLOGAN } from "../lib/copy";
 import type { Go, ProductItem } from "../lib/types";
 
 export function Home({
@@ -12,12 +14,14 @@ export function Home({
   catalog: ProductItem[];
   openProduct: (item: ProductItem) => void;
 }) {
+  const listed = shopProducts(catalog);
+
   return (
     <>
       <section className="ref-hero">
         <div className="hero-editorial-copy">
-          <h1>HIGH-QUALITY AND<br />CUSTOMIZABLE JEWELRY<br />WITH TRANSPARENCY<br />AND CRAFTSMANSHIP.</h1>
-          <p>We deliver fine craft directly from our master bench straight to the consumer&apos;s hands. No mystery, no artificial inflation.</p>
+          <h1>{SLOGAN}.</h1>
+          <p>High-quality, customizable jewelry with transparency and craftsmanship. Direct from the bench to your hands.</p>
           <button onClick={() => go("shop")}>DISCOVER NOW <span>→</span></button>
         </div>
         <div className="ref-hero-logo" role="img" aria-label="XJEWELRYX" />
@@ -28,11 +32,11 @@ export function Home({
           <h2>SHOP NEW</h2>
           <button onClick={() => go("shop")}>VIEW ALL →</button>
         </div>
-        <ProductGrid items={catalog.slice(0, 3)} add={add} openProduct={openProduct} />
+        <ProductGrid items={listed.slice(0, 3)} add={add} openProduct={openProduct} />
       </section>
       <section className="ref-manifesto">
-        <h2>BUILT<br />WITHOUT<br />THE<br />MARKUP.</h2>
-        <div className="manifesto-image" style={{ backgroundImage: `url(${catalog[0]?.image})` }} />
+        <h2>WE<br />CUT<br />THE<br />FLUFF.</h2>
+        <div className="manifesto-image" style={{ backgroundImage: `url(${listed[0]?.image || catalog[0]?.image})` }} />
         <div className="blue-note">
           ⌜<span>YOUNG.<br />EXPERIENCED.<br />BOLD.<br />TRANSPARENT.</span>⌟
         </div>
@@ -63,10 +67,10 @@ export function Home({
       <section className="ref-campaign">
         <img className="campaign-photo" src="/campaign-hero.jpg?v=2" alt="" />
         <div className="campaign-ticker" aria-hidden="true">
-          <span>WE CUT THE FLUFF ::: WE CUT THE FLUFF ::: WE CUT THE FLUFF ::: WE CUT THE FLUFF ::: </span>
-          <span>WE CUT THE FLUFF ::: WE CUT THE FLUFF ::: WE CUT THE FLUFF ::: WE CUT THE FLUFF ::: </span>
+          <span>{SLOGAN} ::: {SLOGAN} ::: {SLOGAN} ::: {SLOGAN} ::: </span>
+          <span>{SLOGAN} ::: {SLOGAN} ::: {SLOGAN} ::: {SLOGAN} ::: </span>
         </div>
-        <button className="campaign-cta" type="button" onClick={() => go("shop")}>SIMPLE GOLD CHAINS</button>
+        <button className="campaign-cta" type="button" onClick={() => go("shop", undefined, { type: "EARRINGS" })}>SHOP EARRINGS</button>
       </section>
     </>
   );

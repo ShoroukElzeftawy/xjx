@@ -1,3 +1,4 @@
+import { skuFor } from "./copy";
 import { inferColor, inferType, toneForColor } from "./taxonomy";
 import type { ProductItem } from "./types";
 
@@ -37,11 +38,16 @@ function money(value: Money) {
 }
 
 async function shopifyFetch<T>(query: string, variables?: Record<string, unknown>) {
+  if (!shopifyToken) {
+    throw new Error(
+      "Missing SHOPIFY_STOREFRONT_TOKEN. Log into Shopify Admin, create a custom app with Storefront API access, then put the token in .env.local. Do not put the Admin email or password in this project.",
+    );
+  }
   const response = await fetch(endpoint, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      ...(shopifyToken ? { "X-Shopify-Storefront-Access-Token": shopifyToken } : {}),
+      "X-Shopify-Storefront-Access-Token": shopifyToken,
     },
     body: JSON.stringify({ query, variables }),
   });
@@ -81,13 +87,18 @@ export function mapProduct(item: ShopifyProduct, index: number): ProductItem {
   const type = inferType(source, inferType(item.productType || "", "NECKLACES"));
   const color = inferColor(source);
   const price = variants[0]?.price ?? item.priceRange?.minVariantPrice ?? { amount: "0", currencyCode: "USD" };
+  const sku = skuFor(type, index + 1);
+  const karat = item.title.match(/\b(\d{1,2}\s?KT)\b/i)?.[1]?.replace(/\s+/g, "").toUpperCase();
   return {
     name: item.title,
     price: money(price),
     type,
     color,
     tone: toneForColor(color),
-    code: `XJX-${String(index + 1).padStart(3, "0")}`,
+    listed: type !== "CHAINS",
+    code: sku,
+    sku,
+    karat,
     image: item.featuredImage?.url ?? images[0],
     images: images.length ? images : item.featuredImage?.url ? [item.featuredImage.url] : [],
     handle: item.handle,
@@ -109,9 +120,15 @@ export async function fetchCatalog() {
     products: { nodes: ShopifyProduct[] };
     collections: { nodes: { title: string }[] };
   }>(catalogQuery);
+  const counts: Record<string, number> = {};
   return {
     connected: true,
-    products: data.products.nodes.map(mapProduct),
+    products: data.products.nodes.map((item, index) => {
+      const mapped = mapProduct(item, index);
+      counts[mapped.type] = (counts[mapped.type] ?? 0) + 1;
+      const sku = skuFor(mapped.type, counts[mapped.type]);
+      return { ...mapped, code: sku, sku };
+    }),
     collections: data.collections.nodes.map((item) => item.title.toUpperCase()),
   };
 }

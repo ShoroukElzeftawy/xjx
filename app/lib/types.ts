@@ -19,6 +19,9 @@ export type ProductItem = {
   color: string;
   tone: string;
   code: string;
+  sku?: string;
+  karat?: string;
+  listed?: boolean;
   image?: string;
   images?: string[];
   handle?: string;
@@ -27,6 +30,7 @@ export type ProductItem = {
   variantId?: string;
   variants?: ProductVariant[];
   description?: string;
+  sizeCompare?: string;
 };
 
 export type BagLine = {

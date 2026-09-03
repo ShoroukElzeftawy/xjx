@@ -1,3 +1,4 @@
+import { SLOGAN } from "../lib/copy";
 import type { Go } from "../lib/types";
 
 export function Footer({ go }: { go: Go }) {
@@ -6,7 +7,7 @@ export function Footer({ go }: { go: Go }) {
       <div className="footer-main">
         <div className="footer-brand">
           <div className="footer-logo" role="img" aria-label="XJEWELRYX" />
-          <p>ENGINEERED IN NEW YORK.<br />BUILT WITHOUT THE MARKUP.</p>
+          <p>ENGINEERED IN NEW YORK.<br />{SLOGAN}.</p>
           <div className="socials">
             <a href="https://www.instagram.com" aria-label="Instagram">◎</a>
             <a href="https://www.tiktok.com" aria-label="TikTok">♪</a>
@@ -19,7 +20,7 @@ export function Footer({ go }: { go: Go }) {
           <button onClick={() => go("shop", undefined, { type: "RINGS" })}>RINGS</button>
           <button onClick={() => go("shop", undefined, { type: "EARRINGS" })}>EARRINGS</button>
           <button onClick={() => go("shop", undefined, { type: "BRACELETS" })}>BRACELETS</button>
-          <button onClick={() => go("shop", undefined, { type: "CHAINS" })}>CHAINS</button>
+          <button onClick={() => go("shop", undefined, { type: "NECKLACES" })}>NECKLACES</button>
         </div>
         <div className="footer-links">
           <span>CUSTOM</span>
