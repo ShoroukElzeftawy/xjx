@@ -93,22 +93,56 @@
 .commission label:nth-child(4),.commission .add{grid-column:1/-1}
 .commission .add{background:var(--blue);color:var(--void)}
 
-.materials-hero{background:var(--paper);color:var(--ink);grid-template-columns:55% 45%}
-.metal-disc{background:var(--void);color:var(--blue);display:grid;place-items:center;position:relative}
-.metal-disc>span{width:260px;height:260px;border-radius:50%;background:radial-gradient(circle at 33% 27%,#fff,#bfc3c4 40%,#515758);display:grid;place-items:center;font:70px var(--font-body)}
-.metal-disc small{position:absolute;right:30px;bottom:30px;font:14px var(--font-body);text-align:right}
+.materials-hero{background:var(--void);color:var(--paper);grid-template-columns:48% 52%;min-height:min(86dvh,820px)}
+.materials-hero-shot{min-height:520px;background:#111 center 40%/cover no-repeat}
+.mat-board{padding:72px 7.1vw 80px;background:var(--paper)}
+.mat-board-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.mat-board-grid article{padding:22px 0;border-top:2px solid var(--gold)}
+.mat-board-grid small{font:10px var(--font-body);letter-spacing:.12em;color:var(--blue)}
+.mat-board-grid h3{margin:16px 0 12px;font-size:clamp(22px,2vw,32px);line-height:.95}
+.mat-board-grid p{margin:0;font:14px/1.6 var(--font-body)}
+.mat-alloys{padding:80px 7.1vw;background:#e6e6e3}
+.mat-alloys-copy{max-width:560px;margin-bottom:42px}
+.mat-alloys-copy h2{margin:18px 0 16px;font-size:clamp(42px,6vw,88px);line-height:.86}
+.mat-alloys-copy p{font:16px/1.7 var(--font-body);max-width:440px}
+.alloy-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.alloy-grid h3{margin:16px 0 10px;font-size:clamp(22px,2vw,30px)}
+.alloy-grid p{margin:0 0 14px;font:14px/1.6 var(--font-body)}
+.alloy-grid span{font:10px var(--font-body);letter-spacing:.1em;color:var(--blue)}
+.alloy-swatch{height:10px;margin-bottom:14px}
+.alloy-swatch.yellow{background:linear-gradient(90deg,#7a5a18,#e8c56a,#b79740)}
+.alloy-swatch.white{background:linear-gradient(90deg,#8a8e92,#f4f4f2,#c5c8cb)}
+.alloy-swatch.pink{background:linear-gradient(90deg,#7a4450,#e7b7b0,#c4847a)}
+.mat-build{display:grid;grid-template-columns:38% 1fr;gap:6%;padding:90px 7.1vw;background:var(--void);color:var(--paper)}
+.mat-build h2{margin:18px 0 20px;font-size:clamp(42px,6vw,92px);line-height:.86}
+.mat-build>div>p{max-width:380px;font:16px/1.7 var(--font-body);color:rgba(242,242,242,.82)}
+.eyebrow.inverse{color:var(--gold)}
+.mat-build dl{margin:36px 0 0;max-width:360px}
+.mat-build dt,.mat-build dd,.mat-origin dt,.mat-origin dd,.material-row dt,.material-row dd{display:inline-block;width:50%;margin:0;padding:12px 0;border-top:1px solid #ffffff33;font:10px var(--font-body)}
+.mat-build dd,.mat-origin dd,.material-row dd{text-align:right}
+.mat-build-shots{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.mat-build-shots .wide{grid-column:1/-1;aspect-ratio:2.2}
 .material-row{padding:110px 5vw;display:grid;grid-template-columns:15% 44% 35%;gap:3%;border-bottom:1px solid var(--line);background:var(--paper)}
 .material-row h2{font-size:clamp(52px,7vw,95px);margin:0}
 .material-row>span{font:10px var(--font-body);color:var(--blue)}
 .material-row>div>p{line-height:1.7}
 .material-row dl{margin-top:45px}
-.material-row dt,.material-row dd{display:inline-block;width:50%;margin:0;padding:12px 0;border-top:1px solid;font:10px var(--font-body)}
-.material-row dd{text-align:right}
+.material-row dt,.material-row dd{border-top:1px solid var(--line)}
 .material-row.pale{background:#e6e6e3}
-.care{padding:140px 5vw;background:var(--void);color:var(--paper);border-top:2px solid var(--gold)}
-.care h2{margin:70px 0 35px;font-size:clamp(60px,9vw,130px)}
-.care>p{font:10px var(--font-body)}
-.care>p:last-child{max-width:560px;font:16px/1.7 var(--font-body)}
+.mat-origin{display:grid;grid-template-columns:1fr 1fr;min-height:640px;background:var(--paper)}
+.mat-origin .about-shot{min-height:100%;aspect-ratio:auto;filter:grayscale(1) contrast(1.08)}
+.mat-origin>div:last-child{padding:90px 7vw}
+.mat-origin h2{margin:18px 0 22px;font-size:clamp(42px,6vw,86px);line-height:.86}
+.mat-origin p{max-width:440px;font:16px/1.7 var(--font-body)}
+.mat-origin dl{margin-top:40px;max-width:400px}
+.mat-origin dt,.mat-origin dd{border-top:1px solid var(--line)}
+.care{padding:110px 7.1vw 120px;background:var(--void);color:var(--paper);border-top:2px solid var(--gold)}
+.care h2{margin:22px 0 48px;font-size:clamp(48px,8vw,110px);line-height:.86}
+.care>p:first-child{margin:0;font:10px var(--font-body);letter-spacing:.12em;color:var(--gold)}
+.care-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-bottom:42px}
+.care-grid h3{margin:0 0 12px;font-size:clamp(22px,2vw,30px)}
+.care-grid p{margin:0;font:15px/1.65 var(--font-body);color:rgba(242,242,242,.8)}
+.care .outline{color:var(--paper);border-color:var(--paper)}
 
 .origin-block{background:var(--void);color:var(--paper);padding:72px 7.1vw 90px}
 .frame-label{margin:0 0 28px;font:11px var(--font-body);letter-spacing:.16em}
@@ -153,14 +187,19 @@
   .page-head{min-height:380px;padding:75px 28px 35px}
   .page-head:before{right:28px}
   .filters,.inner-page .products{padding-left:22px;padding-right:22px}
+  .mat-board-grid{grid-template-columns:1fr 1fr}
 }
 @media(max-width:850px){
   .page-head{min-height:auto;padding:48px 22px 32px}
   .page-head h1{font-size:clamp(48px,12vw,90px);margin:36px 0 40px}
   .filters,.filters-stack .filters,.inner-page .products,.shop-empty{padding-left:18px;padding-right:18px}
   .refer-close{padding:70px 22px}
-  .shop-note,.detail-story,.material-row,.manifesto,.cut-middle{grid-template-columns:1fr;padding:70px 22px;gap:35px}
-  .origin-grid,.cut-grid,.craft-grid{grid-template-columns:1fr;gap:28px}
+  .shop-note,.detail-story,.material-row,.manifesto,.cut-middle,.mat-build,.mat-origin{grid-template-columns:1fr;padding:70px 22px;gap:35px}
+  .origin-grid,.cut-grid,.craft-grid,.mat-board-grid,.alloy-grid,.care-grid,.mat-build-shots{grid-template-columns:1fr;gap:28px}
+  .mat-board,.mat-alloys{padding:56px 22px}
+  .mat-origin>div:last-child{padding:48px 22px 70px}
+  .mat-origin .about-shot{min-height:380px}
+  .materials-hero-shot{min-height:420px}
   .origin-block,.craft-block{padding:56px 22px 72px}
   .origin-track{margin-bottom:32px}
   .cut-middle{padding:64px 22px}
@@ -170,7 +209,7 @@
   .buy-panel{border-left:0;padding:48px 6vw 70px}
   .buy-panel h1{font-size:clamp(36px,8vw,52px)}
   .gallery-main{min-height:min(70dvh,620px)}
-  .blueprint,.metal-disc,.about-crop,.founder-image{min-height:380px}
+  .blueprint,.metal-disc,.about-crop,.founder-image,.materials-hero-shot{min-height:380px}
   .process-grid{grid-template-columns:1fr 1fr}
   .commission{grid-template-columns:1fr;padding:80px 6vw}
   .values{grid-template-columns:1fr}

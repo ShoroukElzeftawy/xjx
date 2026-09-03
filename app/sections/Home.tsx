@@ -51,9 +51,9 @@ export function Home({
         </div>
         <div className="material-table">
           {[
-            ["METAL", "925 SILVER", "92.5% PURE SILVER\nALLOY: AG 925"],
-            ["CARAT", "N/A", "SOLID 925 SILVER\nNICKEL FREE"],
-            ["ORIGIN", "USA / ITALY", "SOURCED GLOBALLY\nMADE IN USA & ITALY"],
+            ["METAL", "10KT GOLD", "SOLID GOLD\nYELLOW / WHITE"],
+            ["CARAT", "10KT", "KARAT IN THE NAME\nWEIGHT IN GRAMS"],
+            ["ORIGIN", "47TH STREET", "SUITE 802 NYC\nUSA & ITALY"],
             ["CRAFTSMANSHIP", "HAND FINISHED", "HAND POLISHED\nQUALITY INSPECTED"],
           ].map((row, index) => (
             <div className="material-spec" key={row[0]}>
