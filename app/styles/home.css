@@ -138,13 +138,15 @@
 
 @media(max-width:850px){
   .ref-hero{min-height:0}
-  .hero-editorial-copy{left:22px;top:28px;right:22px;width:auto;max-width:520px}
-  .hero-editorial-copy h1{font-size:clamp(28px,7vw,40px);line-height:1.05}
-  .hero-editorial-copy p{font-size:13px;max-width:34em}
+  .hero-editorial-copy{
+    left:22px;right:22px;top:auto;bottom:110px;width:auto;max-width:none;
+  }
+  .hero-editorial-copy h1{font-size:clamp(26px,6.6vw,36px);line-height:1.05}
+  .hero-editorial-copy p{font-size:13px;max-width:34em;margin:12px 0 16px}
   .hero-editorial-copy button{width:min(280px,100%);min-height:48px;padding:14px 20px}
-  .ref-hero-logo{left:16px;right:16px;height:88px;bottom:10px}
-  .hero-ref{right:22px;bottom:108px;width:min(70%,280px);font-size:11px}
-  .ref-hero:after{background:linear-gradient(180deg,rgba(0,0,0,.42),transparent 32%),linear-gradient(180deg,transparent 48%,rgba(0,0,0,.62))}
+  .ref-hero-logo{left:16px;right:16px;height:88px;bottom:8px}
+  .hero-ref{display:none}
+  .ref-hero:after{background:linear-gradient(180deg,rgba(0,0,0,.28),transparent 26%),linear-gradient(180deg,transparent 38%,rgba(0,0,0,.72))}
   .ref-shop{padding:28px 18px 40px}
   .ref-shop .product-grid{grid-template-columns:repeat(2,1fr);gap:12px}
   .ref-manifesto{aspect-ratio:auto;min-height:0;padding:40px 22px 48px;grid-template-columns:1fr 1fr;gap:22px}
@@ -161,15 +163,14 @@
 }
 @media(max-width:700px){
   .ref-hero:before{background-position:62% 38%}
-  .hero-editorial-copy{top:22px;left:18px;right:18px}
-  .hero-editorial-copy h1{font-size:clamp(26px,8.2vw,34px)}
-  .hero-editorial-copy p{margin:14px 0 18px;font-size:13px;line-height:1.5}
-  .hero-ref{display:block;right:18px;bottom:102px;width:58%}
+  .hero-editorial-copy{left:18px;right:18px;bottom:98px}
+  .hero-editorial-copy h1{font-size:clamp(24px,7.6vw,32px)}
+  .hero-editorial-copy p{margin:12px 0 16px;font-size:13px;line-height:1.5}
   .ref-hero-logo{height:84px;bottom:6px}
 }
 @media(max-width:520px){
+  .hero-editorial-copy{bottom:90px}
   .ref-hero-logo{height:78px}
-  .hero-ref{display:none}
   .ref-shop{padding:24px 16px 36px}
   .ref-shop .product-grid,.product-grid{gap:10px}
   .product-visual small{top:10px;left:10px;font-size:7px}
