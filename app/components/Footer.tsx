@@ -21,6 +21,7 @@ export function Footer({ go }: { go: Go }) {
           <button onClick={() => go("shop", undefined, { type: "EARRINGS" })}>EARRINGS</button>
           <button onClick={() => go("shop", undefined, { type: "BRACELETS" })}>BRACELETS</button>
           <button onClick={() => go("shop", undefined, { type: "NECKLACES" })}>NECKLACES</button>
+          <button onClick={() => go("shop", undefined, { type: "CHAINS" })}>CHAINS</button>
         </div>
         <div className="footer-links">
           <span>CUSTOM</span>

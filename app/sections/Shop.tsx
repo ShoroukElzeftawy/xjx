@@ -12,12 +12,14 @@ export function Shop({
   catalog,
   query,
   openProduct,
+  live,
 }: {
   go: Go;
   add: (item: ProductItem) => void;
   catalog: ProductItem[];
   query: ShopQuery;
   openProduct: (item: ProductItem) => void;
+  live?: boolean;
 }) {
   const type = query.type || "ALL";
   const color = query.color || "ALL";
@@ -72,7 +74,7 @@ export function Shop({
       <section className="shop-note">
         <span>NO. 01</span>
         <h2>SMALL RUN.<br />LONG LIFE.</h2>
-        <p>Limited quantities or made to order. That keeps quality high, waste low, and the process human.</p>
+        <p>Limited quantities or made to order. That keeps quality high, waste low, and the process human. {live ? "Prices and stock are live from Shopify." : "Showing the preview catalog until Shopify is connected."}</p>
       </section>
     </>
   );

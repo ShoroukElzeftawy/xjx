@@ -103,7 +103,7 @@ export const fallbackProducts: ProductItem[] = [
 export const shopifyStoreUrl = "https://xjewelryx-2.myshopify.com";
 
 export function isShopListed(item: ProductItem) {
-  return item.listed !== false && item.type !== "CHAINS";
+  return item.listed !== false;
 }
 
 export function shopProducts(catalog: ProductItem[]) {

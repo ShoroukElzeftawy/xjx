@@ -3,8 +3,8 @@ import { inferColor, inferType, toneForColor } from "./taxonomy";
 import type { ProductItem } from "./types";
 
 export const shopifyDomain = process.env.SHOPIFY_STORE_DOMAIN || "xjewelryx-2.myshopify.com";
-export const shopifyToken = process.env.SHOPIFY_STOREFRONT_TOKEN;
-const endpoint = `https://${shopifyDomain}/api/2026-07/graphql.json`;
+export const shopifyToken = process.env.SHOPIFY_STOREFRONT_TOKEN?.trim();
+const apiVersions = ["2025-01", "2025-10", "2024-10", "2026-07"];
 
 type Money = { amount: string; currencyCode: string };
 type ShopifyProduct = {
@@ -13,6 +13,8 @@ type ShopifyProduct = {
   handle: string;
   description?: string;
   productType?: string;
+  vendor?: string;
+  tags?: string[];
   featuredImage?: { url: string } | null;
   images?: { nodes: { url: string }[] };
   options?: { name: string; values: string[] }[];
@@ -20,6 +22,7 @@ type ShopifyProduct = {
     nodes: {
       id: string;
       title: string;
+      sku?: string;
       availableForSale: boolean;
       price: Money;
       selectedOptions?: { name: string; value: string }[];
@@ -37,37 +40,65 @@ function money(value: Money) {
   }).format(Number(value.amount));
 }
 
-async function shopifyFetch<T>(query: string, variables?: Record<string, unknown>) {
+async function shopifyFetch<T>(
+  query: string,
+  variables?: Record<string, unknown>,
+  buyerIp?: string,
+) {
   if (!shopifyToken) {
     throw new Error(
       "Missing SHOPIFY_STOREFRONT_TOKEN. Log into Shopify Admin, create a custom app with Storefront API access, then put the token in .env.local. Do not put the Admin email or password in this project.",
     );
   }
-  const response = await fetch(endpoint, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "X-Shopify-Storefront-Access-Token": shopifyToken,
-    },
-    body: JSON.stringify({ query, variables }),
-  });
-  const payload = await response.json() as { data?: T; errors?: { message: string }[] };
-  if (!response.ok || payload.errors) {
-    throw new Error(payload.errors?.[0]?.message || "Shopify unavailable");
+
+  let lastError = "Shopify unavailable";
+  const headerSets: Record<string, string>[] = [
+    { "X-Shopify-Storefront-Access-Token": shopifyToken },
+  ];
+  if (shopifyToken.startsWith("shpss_")) {
+    headerSets.push({
+      "Shopify-Storefront-Private-Token": shopifyToken,
+      "Shopify-Storefront-Buyer-IP": buyerIp || "127.0.0.1",
+    });
   }
-  return payload.data as T;
+
+  for (const version of apiVersions) {
+    for (const auth of headerSets) {
+      const response = await fetch(`https://${shopifyDomain}/api/${version}/graphql.json`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", ...auth },
+        body: JSON.stringify({ query, variables }),
+        cache: "no-store",
+      });
+      const text = await response.text();
+      let payload: { data?: T; errors?: { message: string }[] } = {};
+      try {
+        payload = JSON.parse(text) as { data?: T; errors?: { message: string }[] };
+      } catch {
+        lastError = `Shopify ${response.status}`;
+        continue;
+      }
+      if (response.ok && payload.data && !payload.errors) {
+        return payload.data;
+      }
+      lastError = payload.errors?.[0]?.message || `Shopify ${response.status}`;
+      if (response.status === 404) break;
+    }
+  }
+
+  throw new Error(lastError);
 }
 
 const catalogQuery = `query XJXCatalog {
   products(first: 100) {
     nodes {
-      id title handle description productType
+      id title handle description productType vendor tags
       featuredImage { url }
       images(first: 8) { nodes { url } }
       options { name values }
       variants(first: 50) {
         nodes {
-          id title availableForSale
+          id title sku availableForSale
           price { amount currencyCode }
           selectedOptions { name value }
         }
@@ -87,7 +118,7 @@ export function mapProduct(item: ShopifyProduct, index: number): ProductItem {
   const type = inferType(source, inferType(item.productType || "", "NECKLACES"));
   const color = inferColor(source);
   const price = variants[0]?.price ?? item.priceRange?.minVariantPrice ?? { amount: "0", currencyCode: "USD" };
-  const sku = skuFor(type, index + 1);
+  const sku = variants[0]?.sku || skuFor(type, index + 1);
   const karat = item.title.match(/\b(\d{1,2}\s?KT)\b/i)?.[1]?.replace(/\s+/g, "").toUpperCase();
   return {
     name: item.title,
@@ -95,7 +126,7 @@ export function mapProduct(item: ShopifyProduct, index: number): ProductItem {
     type,
     color,
     tone: toneForColor(color),
-    listed: type !== "CHAINS",
+    listed: true,
     code: sku,
     sku,
     karat,
@@ -110,30 +141,37 @@ export function mapProduct(item: ShopifyProduct, index: number): ProductItem {
       title: variant.title,
       price: money(variant.price),
       available: variant.availableForSale,
+      sku: variant.sku,
     })),
     description: item.description || undefined,
+    vendor: item.vendor,
+    tags: item.tags,
   };
 }
 
-export async function fetchCatalog() {
+export async function fetchCatalog(buyerIp?: string) {
   const data = await shopifyFetch<{
     products: { nodes: ShopifyProduct[] };
     collections: { nodes: { title: string }[] };
-  }>(catalogQuery);
+  }>(catalogQuery, undefined, buyerIp);
   const counts: Record<string, number> = {};
   return {
     connected: true,
     products: data.products.nodes.map((item, index) => {
       const mapped = mapProduct(item, index);
       counts[mapped.type] = (counts[mapped.type] ?? 0) + 1;
-      const sku = skuFor(mapped.type, counts[mapped.type]);
+      const generated = skuFor(mapped.type, counts[mapped.type]);
+      const sku = mapped.sku || generated;
       return { ...mapped, code: sku, sku };
     }),
     collections: data.collections.nodes.map((item) => item.title.toUpperCase()),
   };
 }
 
-export async function createCheckout(lines: { merchandiseId: string; quantity: number }[]) {
+export async function createCheckout(
+  lines: { merchandiseId: string; quantity: number }[],
+  buyerIp?: string,
+) {
   const data = await shopifyFetch<{
     cartCreate: { cart?: { checkoutUrl: string; totalQuantity: number }; userErrors: { message: string }[] };
   }>(`mutation CartCreate($lines: [CartLineInput!]!) {
@@ -141,7 +179,7 @@ export async function createCheckout(lines: { merchandiseId: string; quantity: n
       cart { checkoutUrl totalQuantity }
       userErrors { message }
     }
-  }`, { lines });
+  }`, { lines }, buyerIp);
 
   const error = data.cartCreate.userErrors[0]?.message;
   if (error || !data.cartCreate.cart?.checkoutUrl) {

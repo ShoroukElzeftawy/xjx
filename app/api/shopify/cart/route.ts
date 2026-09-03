@@ -1,6 +1,12 @@
 import { NextResponse } from "next/server";
 import { createCheckout, variantPermalink } from "../../../lib/shopify";
 
+function buyerIp(request: Request) {
+  return request.headers.get("x-forwarded-for")?.split(",")[0]?.trim()
+    || request.headers.get("x-real-ip")
+    || undefined;
+}
+
 export async function POST(request: Request) {
   const body = await request.json() as { lines?: { merchandiseId: string; quantity?: number }[] };
   const lines = (body.lines ?? [])
@@ -12,7 +18,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    const cart = await createCheckout(lines);
+    const cart = await createCheckout(lines, buyerIp(request));
     return NextResponse.json({ checkoutUrl: cart.checkoutUrl, quantity: cart.totalQuantity });
   } catch (error) {
     return NextResponse.json({

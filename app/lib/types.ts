@@ -10,6 +10,7 @@ export type ProductVariant = {
   title: string;
   price: string;
   available: boolean;
+  sku?: string;
 };
 
 export type ProductItem = {
@@ -31,6 +32,8 @@ export type ProductItem = {
   variants?: ProductVariant[];
   description?: string;
   sizeCompare?: string;
+  vendor?: string;
+  tags?: string[];
 };
 
 export type BagLine = {
@@ -38,6 +41,10 @@ export type BagLine = {
   handle?: string;
   variantId?: string;
   quantity: number;
+  image?: string;
+  price?: string;
+  variantTitle?: string;
+  sku?: string;
 };
 
 export type Go = (route: Route, handle?: string, query?: ShopQuery) => void;
