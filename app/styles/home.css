@@ -7,14 +7,13 @@
 
 .ref-shop > *,
 .ref-materials > *,
-.ref-manifesto > * {
+.ref-manifesto > *:not(.manifesto-shape) {
   position: relative;
   z-index: 1;
 }
 
 .ref-shop:before,
-.ref-materials:before,
-.ref-manifesto:before {
+.ref-materials:before {
   content: "";
   position: absolute;
   z-index: 0;
@@ -26,22 +25,45 @@
 }
 
 .ref-shop:before {
-  right: 5vw;
-  top: 25px;
-  width: 330px;
-  height: 78px;
+  left: -8vw;
+  top: -48px;
+  width: min(720px, 62vw);
+  height: 280px;
+  opacity: 0.32;
+  mask-size: 140% auto;
+  -webkit-mask-size: 140% auto;
 }
 
-.ref-manifesto:before {
-  right: 5vw;
-  top: 50%;
-  width: 240px;
-  height: 240px;
-  transform: translateY(-50%) rotate(9deg);
+.ref-shop:after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  right: 4vw;
+  top: -36px;
+  width: min(420px, 38vw);
+  height: 260px;
+  background: var(--blue);
+  opacity: 0.26;
+  mask: url("/brand-assets/shapes/xjx-shapes.png") 60% 40% / 180% auto no-repeat;
+  -webkit-mask: url("/brand-assets/shapes/xjx-shapes.png") 60% 40% / 180% auto no-repeat;
+  transform: rotate(16deg);
+}
+
+.manifesto-shape {
+  position: absolute;
+  z-index: 0;
+  left: -26%;
+  top: -42%;
+  width: 54%;
+  height: min(78vw, 640px);
+  opacity: 0.48;
+  transform: rotate(-22deg);
+  transform-origin: 18% 40%;
   background: var(--gold);
-  opacity: 0.1;
-  mask: url("/brand-assets/shapes/xjx-logo-mark.png") center/contain no-repeat;
-  -webkit-mask: url("/brand-assets/shapes/xjx-logo-mark.png") center/contain no-repeat;
+  pointer-events: none;
+  -webkit-mask: url("/brand-assets/shapes/xjx-hourglass.png") center / contain no-repeat;
+  mask: url("/brand-assets/shapes/xjx-hourglass.png") center / contain no-repeat;
 }
 
 .ref-materials:before {
@@ -74,28 +96,159 @@
   border: 0;
   background: none;
   font: 12px var(--font-body);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.15s ease;
 }
 
-.ref-shop .products {
-  padding: 12px 0 0;
+.ref-section-head button:hover,
+.ref-section-head button:focus-visible {
+  color: var(--gold);
 }
 
-.ref-shop .product-grid {
-  grid-template-columns: repeat(3, 1fr);
+.shop-categories-wrap {
+  position: relative;
+  padding-top: 22px;
+}
+
+.shop-categories {
+  display: flex;
   gap: 18px;
-  background: transparent;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
 }
 
-.ref-shop .product-info {
-  padding: 13px 0;
+.shop-categories::-webkit-scrollbar {
+  display: none;
 }
 
-.ref-shop .product-info b {
-  font: 14px var(--font-body);
+.shop-category {
+  position: relative;
+  flex: 0 0 calc((100% - 36px) / 3);
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: #d8d6d2;
+  color: var(--paper);
+  scroll-snap-align: start;
 }
 
-.ref-shop .product-info span {
-  font-size: 11px;
+.shop-categories-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 3;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--paper);
+  border-radius: 50%;
+  background: rgba(24, 26, 26, 0.55);
+  color: var(--paper);
+  transform: translateY(-50%);
+}
+
+.shop-categories-arrow.prev {
+  left: 10px;
+}
+
+.shop-categories-arrow.next {
+  right: 10px;
+}
+
+.shop-category-hit {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border: 0;
+  padding: 0;
+  background: #d8d6d2 center / cover no-repeat;
+}
+
+.shop-category-hit:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(11, 13, 13, 0.42), transparent 38%, rgba(11, 13, 13, 0.5));
+}
+
+.shop-category small {
+  position: absolute;
+  z-index: 2;
+  top: 16px;
+  left: 16px;
+  margin: 0;
+  font: 11px / 1.5 var(--font-body);
+  letter-spacing: 0.04em;
+  pointer-events: none;
+  text-align: left;
+  color: white;
+}
+
+.shop-category-foot {
+  position: absolute;
+  z-index: 2;
+  left: 14px;
+  right: 14px;
+  bottom: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 10px;
+  pointer-events: none;
+  font: 11px var(--font-body);
+  letter-spacing: 0.08em;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.45);
+}
+
+.shop-category-vars {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  min-width: 0;
+}
+
+.shop-category-vars em {
+  font-style: normal;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  max-width: 16em;
+}
+
+.shop-category-colors {
+  display: flex;
+  gap: 6px;
+  pointer-events: auto;
+}
+
+.shop-swatch {
+  width: 12px;
+  height: 12px;
+  border: 1px solid rgba(242, 242, 242, 0.7);
+  border-radius: 50%;
+  padding: 0;
+}
+
+.shop-swatch-yellow {
+  background: #c9a227;
+}
+
+.shop-swatch-white {
+  background: #ececea;
+}
+
+.shop-swatch-pink {
+  background: #d4a090;
+}
+
+.shop-category-cta {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.15s ease;
+}
+
+.shop-category:hover .shop-category-cta,
+.shop-category:focus-within .shop-category-cta {
+  color: var(--gold);
 }
 
 .ref-manifesto {
@@ -109,6 +262,7 @@
   gap: 5%;
   align-items: start;
   position: relative;
+  overflow: hidden;
   border-bottom: 2px solid var(--gold);
 }
 
@@ -260,9 +414,12 @@
     padding: 28px 18px 40px;
   }
 
-  .ref-shop .product-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .shop-categories {
     gap: 12px;
+  }
+
+  .shop-category {
+    flex-basis: calc((100% - 12px) / 2);
   }
 
   .ref-manifesto {
@@ -271,6 +428,16 @@
     padding: 40px 22px 48px;
     grid-template-columns: 1fr 1fr;
     gap: 22px;
+  }
+
+  .manifesto-shape {
+    left: -32%;
+    top: -24%;
+    width: 72%;
+    height: 320px;
+    opacity: 0.44;
+    transform: rotate(-20deg);
+    transform-origin: 18% 40%;
   }
 
   .ref-manifesto h2 {
@@ -307,9 +474,23 @@
     padding: 24px 16px 36px;
   }
 
+  .shop-category {
+    flex-basis: 82%;
+  }
+
   .ref-manifesto {
     grid-template-columns: 1fr;
     padding: 32px 18px 40px;
+  }
+
+  .manifesto-shape {
+    left: -36%;
+    top: -18%;
+    width: 88%;
+    height: 210px;
+    opacity: 0.42;
+    transform: rotate(-18deg);
+    transform-origin: 18% 40%;
   }
 
   .manifesto-image {

@@ -99,9 +99,13 @@ export default function XjxSite() {
   }, []);
 
   const go = (next: Route, handle?: string, query?: ShopQuery) => {
-    window.history.pushState({}, "", pathFor(next, handle, query));
+    const shopQuery = {
+      type: query?.type || "ALL",
+      color: query?.color || "ALL",
+    };
+    window.history.pushState({}, "", pathFor(next, handle, shopQuery));
     setRoute(next);
-    setShopQuery(query ?? { type: "ALL", color: "ALL" });
+    setShopQuery(shopQuery);
     setMenuOpen(false);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -168,7 +172,7 @@ export default function XjxSite() {
     <>
       <Header route={route} go={go} bag={count} open={menuOpen} setOpen={setMenuOpen} onBag={() => setCartOpen(true)} solid={headerSolid} />
       <main className={`site-shell page-${route}${route === "home" ? "" : " inner-page"}`}>
-      {route === "home" && <Home go={go} add={add} catalog={catalog} openProduct={openProduct} />}
+      {route === "home" && <Home go={go} catalog={catalog} />}
       {route === "shop" && <Shop go={go} add={add} catalog={catalog} query={shopQuery} openProduct={openProduct} live={shopLive} />}
       {route === "product" && <Product item={selected} add={add} go={go} />}
       {route === "custom" && <Custom />}

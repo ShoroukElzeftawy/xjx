@@ -102,6 +102,14 @@ export const fallbackProducts: ProductItem[] = [
 
 export const shopifyStoreUrl = "https://xjewelryx-2.myshopify.com";
 
+export const categoryPlaceholders: Record<string, string> = {
+  EARRINGS: "/landing-hero.jpg",
+  BRACELETS: "/editorial-custom.jpg",
+  RINGS: "/editorial-product.jpg",
+  NECKLACES: "/editorial-about.jpg",
+  CHAINS: "/campaign-hero.jpg",
+};
+
 export function isShopListed(item: ProductItem) {
   return item.listed !== false;
 }
