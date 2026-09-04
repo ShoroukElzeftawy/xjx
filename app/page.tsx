@@ -44,11 +44,21 @@ export default function XjxSite() {
   const [bag, setBag] = useState<BagLine[]>([]);
   const [bagReady, setBagReady] = useState(false);
   const [checkingOut, setCheckingOut] = useState(false);
+  const [headerSolid, setHeaderSolid] = useState(false);
 
   useEffect(() => {
     document.body.classList.toggle("menu-open", menuOpen);
     return () => document.body.classList.remove("menu-open");
   }, [menuOpen]);
+
+  useEffect(() => {
+    const update = () => {
+      setHeaderSolid(route !== "home" || window.scrollY > 36 || menuOpen);
+    };
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    return () => window.removeEventListener("scroll", update);
+  }, [route, menuOpen]);
 
   useEffect(() => {
     try {
@@ -155,8 +165,9 @@ export default function XjxSite() {
   const count = bag.reduce((sum, line) => sum + line.quantity, 0);
 
   return (
-    <main className={`site-shell page-${route}${route === "home" ? "" : " inner-page"}`}>
-      <Header route={route} go={go} bag={count} open={menuOpen} setOpen={setMenuOpen} onBag={() => setCartOpen(true)} />
+    <>
+      <Header route={route} go={go} bag={count} open={menuOpen} setOpen={setMenuOpen} onBag={() => setCartOpen(true)} solid={headerSolid} />
+      <main className={`site-shell page-${route}${route === "home" ? "" : " inner-page"}`}>
       {route === "home" && <Home go={go} add={add} catalog={catalog} openProduct={openProduct} />}
       {route === "shop" && <Shop go={go} add={add} catalog={catalog} query={shopQuery} openProduct={openProduct} live={shopLive} />}
       {route === "product" && <Product item={selected} add={add} go={go} />}
@@ -176,5 +187,6 @@ export default function XjxSite() {
       />
       {notice && <Toast message={notice} onView={() => { setCartOpen(true); setNotice(""); }} />}
     </main>
+    </>
   );
 }

@@ -1,6 +1,5 @@
 .ref-hero {
-  --hero-gutter: 3.5vw;
-  height: calc(100dvh - var(--header-h));
+  height: 100dvh;
   min-height: 640px;
   position: relative;
   isolation: isolate;
@@ -38,7 +37,7 @@
 .hero-editorial-copy {
   position: absolute;
   z-index: 4;
-  left: calc(var(--hero-gutter) + (100% - 2 * var(--hero-gutter)) * 0.032);
+  left: var(--hero-edge);
   top: auto;
   bottom: 196px;
   width: min(620px, 48vw);
@@ -95,12 +94,11 @@
 
 @media (max-width: 1100px) {
   .ref-hero {
-    --hero-gutter: 16px;
     min-height: 0;
   }
 
   .hero-editorial-copy {
-    left: calc(var(--hero-gutter) + (100% - 2 * var(--hero-gutter)) * 0.032);
+    left: var(--hero-edge);
     right: var(--hero-gutter);
     top: auto;
     bottom: 110px;

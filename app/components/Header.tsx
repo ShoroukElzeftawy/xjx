@@ -15,6 +15,7 @@ export function Header({
   open,
   setOpen,
   onBag,
+  solid,
 }: {
   route: Route;
   go: Go;
@@ -22,11 +23,12 @@ export function Header({
   open: boolean;
   setOpen: (value: boolean) => void;
   onBag: () => void;
+  solid: boolean;
 }) {
   return (
     <>
-      <header>
-        <button className="wordmark" onClick={() => go("home")} aria-label="XJEWELRYX home" />
+      <header className={solid ? "is-solid" : "is-overlay"}>
+        <button className="wordmark" onClick={() => go("home")} aria-label="XJEWELRYX home" tabIndex={solid ? 0 : -1} />
         <nav>
           {nav.map(([key, label]) => (
             <button key={key} className={route === key ? "active" : ""} onClick={() => go(key)}>
@@ -36,8 +38,8 @@ export function Header({
         </nav>
         <div className="tools">
           <button type="button" aria-label="Search">SEARCH</button>
-          <button type="button" onClick={onBag}>BAG [{bag}]</button>
           <button className="menu" aria-expanded={open} aria-controls="mobile-nav" onClick={() => setOpen(!open)}>MENU</button>
+          <button type="button" onClick={onBag}>BAG [{bag}]</button>
         </div>
       </header>
       {open && (

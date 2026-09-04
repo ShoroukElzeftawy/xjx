@@ -23,6 +23,8 @@
   --font-heading: "Bayon XJX", "DM Sans XJX", sans-serif;
   --font-accent: "Bayon XJX", "DM Sans XJX", sans-serif;
   --header-h: calc(76px + env(safe-area-inset-top, 0px));
+  --hero-gutter: 3.5vw;
+  --hero-edge: calc(var(--hero-gutter) + (100vw - 2 * var(--hero-gutter)) * 0.032);
 }
 
 * {
@@ -93,8 +95,12 @@ nav button,
 
 .site-shell {
   width: 100%;
-  overflow: hidden;
+  overflow-x: clip;
   background: var(--paper);
+}
+
+.inner-page {
+  padding-top: var(--header-h);
 }
 
 body.menu-open {

@@ -1,22 +1,31 @@
 header {
   height: var(--header-h);
-  padding: env(safe-area-inset-top, 0px) 7.1vw 0;
+  width: 100%;
+  padding: env(safe-area-inset-top, 0px) var(--hero-edge) 0;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  background: #0c0e0ef7;
+  background: transparent;
   color: #f4f4f2;
-  border-bottom: 1px solid #ffffff20;
-  position: sticky;
+  border-bottom: 1px solid transparent;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 30;
+  transition: background 0.22s ease, border-color 0.22s ease;
+}
+
+header.is-solid {
+  background: #0c0e0ef7;
+  border-bottom-color: #ffffff20;
 }
 
 header nav {
   grid-column: 1;
   display: flex;
   align-items: center;
-  gap: 22px;
+  gap: 42px;
   height: 76px;
 }
 
@@ -57,6 +66,14 @@ header nav button.active:after {
   background-size: 210px auto;
   background-position: center;
   background-repeat: no-repeat;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.22s ease;
+}
+
+header.is-solid .wordmark {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .tools {
@@ -86,10 +103,11 @@ header nav button.active:after {
 @media (max-width: 1100px) {
   :root {
     --header-h: calc(64px + env(safe-area-inset-top, 0px));
+    --hero-gutter: 16px;
   }
 
   header {
-    padding: env(safe-area-inset-top, 0px) 18px 0;
+    padding: env(safe-area-inset-top, 0px) var(--hero-edge) 0;
   }
 
   header nav {
