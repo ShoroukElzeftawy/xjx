@@ -85,7 +85,7 @@ export function Materials({ go, catalog }: { go: Go; catalog: ProductItem[] }) {
             <dt>FINISH</dt><dd>HAND POLISHED</dd>
             <dt>CORE</dt><dd>SOLID GOLD</dd>
             <dt>INSPECT</dt><dd>EVERY PIECE</dd>
-            <dt>ORIGIN</dt><dd>47TH STREET</dd>
+            <dt>ORIGIN</dt><dd>CANADA</dd>
           </dl>
         </div>
         <div className="mat-build-shots">
@@ -112,11 +112,10 @@ export function Materials({ go, catalog }: { go: Go; catalog: ProductItem[] }) {
         <div className="about-shot" style={{ backgroundImage: "url(/landing-hero.jpg)" }} />
         <div>
           <p className="eyebrow">05 / ORIGIN</p>
-          <h2>15 WEST 47TH<br />STREET.</h2>
-          <p>Suite 802, New York, NY 10036. Designed and finished in the district. USA and Italy in the supply line. No extra storefront between the bench and you.</p>
+          <h2>BASED IN<br />CANADA.</h2>
+          <p>Designed, finished, and shipped from Canada. No extra storefront between the bench and you.</p>
           <dl>
-            <dt>STUDIO</dt><dd>SUITE 802</dd>
-            <dt>COORDINATES</dt><dd>40.7580° N</dd>
+            <dt>STUDIO</dt><dd>CANADA</dd>
             <dt>MAIL</dt><dd>HELLO@XJEWELRYX.COM</dd>
           </dl>
         </div>

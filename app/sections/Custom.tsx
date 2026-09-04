@@ -28,7 +28,7 @@ export function Custom() {
             ["01", "BRIEF", "Story, function, weight, budget."],
             ["02", "DESIGN", "Form and material, drawn as structure."],
             ["03", "REFINE", "You review scale, finish, and data."],
-            ["04", "MAKE", "Cast, set, and finished by hand in NYC."],
+            ["04", "MAKE", "Cast, set, and finished by hand in Canada."],
           ].map((item) => (
             <article key={item[0]}>
               <span>{item[0]}</span>

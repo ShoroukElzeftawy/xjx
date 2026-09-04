@@ -7,7 +7,7 @@ export function Footer({ go }: { go: Go }) {
       <div className="footer-main">
         <div className="footer-brand">
           <div className="footer-logo" role="img" aria-label="XJEWELRYX" />
-          <p>ENGINEERED IN NEW YORK.<br />{SLOGAN}.</p>
+          <p>ENGINEERED IN CANADA.<br />{SLOGAN}.</p>
           <div className="socials">
             <a href="https://www.instagram.com" aria-label="Instagram">◎</a>
             <a href="https://www.tiktok.com" aria-label="TikTok">♪</a>
@@ -49,7 +49,7 @@ export function Footer({ go }: { go: Go }) {
       </div>
       <div className="legal">
         <span>© XJEWELRYX 2024</span>
-        <span>MADE IN NEW YORK</span>
+        <span>MADE IN CANADA</span>
         <span>TERMS　 PRIVACY　 SHIPPING & RETURNS</span>
       </div>
     </footer>

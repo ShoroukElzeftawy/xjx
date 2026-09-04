@@ -9,8 +9,8 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://xjewelryx-objects.elzeftawyshorouk.chatgpt.site"),
-  title: "XJEWELRYX — Engineered in New York",
-  description: "Direct-to-consumer fine jewelry from 47th Street. We cut the fluff.",
+  title: "XJEWELRYX — Engineered in Canada",
+  description: "Direct-to-consumer fine jewelry from Canada. We cut the fluff.",
   icons: { icon: "/brand-assets/logos/xjx-white-mark.png", shortcut: "/brand-assets/logos/xjx-white-mark.png" },
   openGraph: {
     title: "XJEWELRYX",

@@ -6,14 +6,13 @@
 }
 
 .ref-shop > *,
-.ref-materials > *,
+.ref-materials > *:not(.materials-shape):not(.material-mark),
 .ref-manifesto > *:not(.manifesto-shape) {
   position: relative;
   z-index: 1;
 }
 
-.ref-shop:before,
-.ref-materials:before {
+.ref-shop:before {
   content: "";
   position: absolute;
   z-index: 0;
@@ -66,12 +65,20 @@
   mask: url("/brand-assets/shapes/xjx-hourglass.png") center / contain no-repeat;
 }
 
-.ref-materials:before {
-  left: 2vw;
-  bottom: -12px;
-  width: 430px;
-  height: 102px;
-  opacity: 0.09;
+.materials-shape {
+  position: absolute;
+  z-index: 0;
+  right: -8%;
+  top: 12%;
+  width: 48%;
+  height: min(64vw, 480px);
+  opacity: 0.32;
+  transform: rotate(16deg);
+  transform-origin: 70% 40%;
+  background: var(--blue);
+  pointer-events: none;
+  -webkit-mask: url("/brand-assets/shapes/xjx-blob.png") center / contain no-repeat;
+  mask: url("/brand-assets/shapes/xjx-blob.png") center / contain no-repeat;
 }
 
 .ref-shop {
@@ -292,42 +299,36 @@
   margin: 1vw 2vw;
 }
 
-.gold-line {
-  grid-column: 1/-1;
-  position: static;
-  border: 0;
-  color: var(--gold);
-  text-align: right;
-  padding: 8px 0 18px;
-}
-
-.gold-line b {
-  font-family: var(--font-accent);
-  letter-spacing: 0.12em;
+.material-mark {
+  position: absolute;
+  top: 28px;
+  right: 42px;
+  z-index: 2;
+  display: block;
+  width: 72px;
+  height: 72px;
+  margin: 0;
+  background: var(--ink);
+  -webkit-mask: url("/brand-assets/shapes/xjx-logo-mark.png") center / contain no-repeat;
+  mask: url("/brand-assets/shapes/xjx-logo-mark.png") center / contain no-repeat;
 }
 
 .ref-materials {
-  padding: 36px 42px;
+  padding: 28px 42px 36px;
   display: grid;
   grid-template-columns: 32% 68%;
-}
-
-.material-kicker {
-  grid-column: 1/-1;
-  margin: 0 0 28px;
-  font: 10px var(--font-accent);
-  letter-spacing: 0.08em;
-  color: #8a8a8a;
+  overflow: hidden;
 }
 
 .material-intro {
-  padding-right: 34px;
+  padding: 88px 34px 0 0;
   border-right: 1px solid #b7b7b7;
 }
 
 .material-intro h2 {
-  font-size: 38px;
-  line-height: 1.18;
+  font-family: var(--font-heading);
+  font-size: clamp(64px, 6.5vw, 126px);
+  line-height: 0.76;
   font-weight: 400;
   margin: 0;
   letter-spacing: 0.02em;
@@ -347,7 +348,7 @@
 }
 
 .material-table {
-  padding-left: 34px;
+  padding: 88px 0 0 34px;
 }
 
 .material-spec {
@@ -383,30 +384,58 @@
 
 .texture {
   height: 72px;
-  display: block;
+  display: grid;
+  place-items: center;
+  position: relative;
+  overflow: hidden;
+  font: 11px/1 var(--font-accent);
+  letter-spacing: 0.14em;
+  color: #f4f4f2;
+}
+
+.texture:after {
+  position: relative;
+  z-index: 1;
 }
 
 .texture-0 {
-  background: linear-gradient(135deg, #999, #eee 30%, #777 55%, #bbb);
-}
-
-.texture-1 {
-  background: repeating-linear-gradient(
-    0deg,
-    #aaa,
-    #aaa 1px,
-    #ddd 2px,
-    #999 3px
+  background: linear-gradient(
+    90deg,
+    #7a5a18 0%,
+    #e8c56a 12%,
+    #b79740 31%,
+    #8a8e92 33.34%,
+    #f4f4f2 50%,
+    #c5c8cb 64%,
+    #7a4450 66.67%,
+    #e7b7b0 84%,
+    #c4847a 100%
   );
 }
 
+.texture-1 {
+  background: linear-gradient(180deg, #d4b45a 0%, #b79740 42%, #7a5a18 100%);
+}
+
+.texture-1:after {
+  content: "10KT";
+}
+
 .texture-2 {
-  background: radial-gradient(circle at 65% 50%, var(--blue) 0 9%, transparent 10%),
-    #141719;
+  background: #141719 url("/campaign-hero.jpg") 50% 42% / cover no-repeat;
+}
+
+.texture-2:after {
+  content: "CANADA";
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  background: rgba(11, 13, 13, 0.42);
 }
 
 .texture-3 {
-  background: linear-gradient(135deg, #151515, #888, #222);
+  background: #141719 url("/landing-hero.jpg") 50% 48% / cover no-repeat;
 }
 
 @media (max-width: 1100px) {
@@ -444,6 +473,10 @@
     font-size: clamp(42px, 10vw, 64px);
   }
 
+  .material-intro h2 {
+    font-size: clamp(42px, 10vw, 64px);
+  }
+
   .blue-note {
     padding-top: 0;
     font-size: clamp(13px, 3.4vw, 18px);
@@ -454,10 +487,28 @@
     padding: 34px 22px;
   }
 
+  .materials-shape {
+    right: -6%;
+    top: 14%;
+    width: 64%;
+    height: 300px;
+    opacity: 0.28;
+    transform: rotate(14deg);
+  }
+
+  .material-mark {
+    top: 18px;
+    right: 22px;
+  }
+
+  .material-table {
+    padding-top: 80px;
+  }
+
   .material-intro {
     border: 0;
     border-bottom: 1px solid #bbb;
-    padding: 0 0 30px;
+    padding: 80px 0 30px;
   }
 
   .material-intro p {
@@ -483,6 +534,11 @@
     padding: 32px 18px 40px;
   }
 
+  .material-mark {
+    top: 18px;
+    right: 18px;
+  }
+
   .manifesto-shape {
     left: -36%;
     top: -18%;
@@ -498,6 +554,10 @@
   }
 
   .ref-manifesto h2 {
+    font-size: clamp(40px, 12vw, 52px);
+  }
+
+  .material-intro h2 {
     font-size: clamp(40px, 12vw, 52px);
   }
 

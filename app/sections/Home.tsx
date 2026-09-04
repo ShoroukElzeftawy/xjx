@@ -166,18 +166,18 @@ export function Home({
         </div>
       </section>
       <section className="ref-materials">
-        <div className="gold-line"><b>XJX</b></div>
-        <p className="material-kicker">01 / MATERIAL SYSTEM</p>
+        <span className="materials-shape" aria-hidden="true" />
+        <span className="material-mark" aria-hidden="true" />
         <div className="material-intro">
-          <h2>MATERIAL /<br />WEIGHT /<br />ORIGIN</h2>
+          <h2>MATERIAL<br />WEIGHT<br />ORIGIN</h2>
           <p>WE BELIEVE IN TOTAL TRANSPARENCY. EVERY PIECE IS CRAFTED WITH PRECISION, USING PREMIUM MATERIALS AND RESPONSIBLE SOURCING.</p>
           <button onClick={() => go("materials")}>LEARN MORE →</button>
         </div>
         <div className="material-table">
           {[
-            ["METAL", "10KT GOLD", "SOLID GOLD\nYELLOW / WHITE"],
+            ["METAL", "10KT GOLD", "SOLID GOLD\nYELLOW / WHITE / PINK"],
             ["CARAT", "10KT", "KARAT IN THE NAME\nWEIGHT IN GRAMS"],
-            ["ORIGIN", "47TH STREET", "SUITE 802 NYC\nUSA & ITALY"],
+            ["ORIGIN", "CANADA", "BASED IN CANADA\nSOLD DIRECT"],
             ["CRAFTSMANSHIP", "HAND FINISHED", "HAND POLISHED\nQUALITY INSPECTED"],
           ].map((row, index) => (
             <div className="material-spec" key={row[0]}>
