@@ -7,7 +7,7 @@
 }
 
 .materials-hero > div:first-child {
-  padding: 110px 5vw;
+  padding: 110px var(--page-gutter);
 }
 
 .materials-hero h1 {
@@ -32,7 +32,7 @@
 }
 
 .mat-board {
-  padding: 72px 7.1vw 80px;
+  padding: 72px var(--page-gutter) 80px;
   background: var(--paper);
 }
 
@@ -65,7 +65,7 @@
 }
 
 .mat-alloys {
-  padding: 80px 7.1vw;
+  padding: 80px var(--page-gutter);
   background: #e6e6e3;
 }
 
@@ -128,7 +128,7 @@
   display: grid;
   grid-template-columns: 38% 1fr;
   gap: 6%;
-  padding: 90px 7.1vw;
+  padding: 90px var(--page-gutter);
   background: var(--void);
   color: var(--paper);
 }
@@ -186,7 +186,7 @@
 }
 
 .material-row {
-  padding: 110px 5vw;
+  padding: 110px var(--page-gutter);
   display: grid;
   grid-template-columns: 15% 44% 35%;
   gap: 3%;
@@ -235,7 +235,7 @@
 }
 
 .mat-origin > div:last-child {
-  padding: 90px 7vw;
+  padding: 90px var(--page-gutter);
 }
 
 .mat-origin h2 {
@@ -260,7 +260,7 @@
 }
 
 .care {
-  padding: 110px 7.1vw 120px;
+  padding: 110px var(--page-gutter) 120px;
   background: var(--void);
   color: var(--paper);
   border-top: 2px solid var(--gold);
@@ -312,7 +312,7 @@
   }
 
   .materials-hero > div:first-child {
-    padding: 72px 6vw 40px;
+    padding: 72px var(--page-gutter) 40px;
   }
 
   .materials-hero-shot {
@@ -323,17 +323,17 @@
   .mat-build,
   .mat-origin {
     grid-template-columns: 1fr;
-    padding: 70px 22px;
+    padding: 70px var(--page-gutter);
     gap: 35px;
   }
 
   .mat-board,
   .mat-alloys {
-    padding: 56px 22px;
+    padding: 56px var(--page-gutter);
   }
 
   .mat-origin > div:last-child {
-    padding: 48px 22px 70px;
+    padding: 48px var(--page-gutter) 70px;
   }
 
   .mat-origin .about-shot {

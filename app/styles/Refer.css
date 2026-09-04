@@ -7,7 +7,7 @@
 }
 
 .about-hero > div:first-child {
-  padding: 110px 5vw;
+  padding: 110px var(--page-gutter);
 }
 
 .about-hero h1 {
@@ -58,7 +58,7 @@
 }
 
 .refer-close {
-  padding: 110px 7vw 130px;
+  padding: 110px var(--page-gutter) 130px;
   background: var(--paper);
 }
 
@@ -90,7 +90,7 @@
   }
 
   .about-hero > div:first-child {
-    padding: 72px 6vw 40px;
+    padding: 72px var(--page-gutter) 40px;
   }
 
   .values {
@@ -98,7 +98,7 @@
   }
 
   .refer-close {
-    padding: 70px 22px;
+    padding: 70px var(--page-gutter);
   }
 }
 

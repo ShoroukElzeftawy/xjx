@@ -28,6 +28,7 @@
   --header-h: calc(76px + env(safe-area-inset-top, 0px));
   --hero-gutter: 3.5vw;
   --hero-edge: calc(var(--hero-gutter) + (100vw - 2 * var(--hero-gutter)) * 0.032);
+  --page-gutter: var(--hero-edge);
 }
 
 * {
@@ -45,6 +46,7 @@ body {
   color: var(--ink);
   font-family: var(--font-body);
   font-size: var(--type-body);
+  text-align: left;
   overflow-x: clip;
 }
 

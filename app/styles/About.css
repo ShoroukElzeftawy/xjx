@@ -1,7 +1,7 @@
 .origin-block {
   background: var(--void);
   color: var(--paper);
-  padding: 72px 7.1vw 90px;
+  padding: 72px var(--page-gutter) 90px;
 }
 
 .origin-track {
@@ -42,7 +42,7 @@
   display: grid;
   grid-template-columns: 34% 1fr;
   gap: 6%;
-  padding: 90px 7.1vw;
+  padding: 90px var(--page-gutter);
   background: var(--paper);
 }
 
@@ -91,7 +91,7 @@
 .craft-block {
   background: var(--void);
   color: var(--paper);
-  padding: 72px 7.1vw 110px;
+  padding: 72px var(--page-gutter) 110px;
 }
 
 .craft-grid {
@@ -120,7 +120,7 @@
 @media (max-width: 1100px) {
   .cut-middle {
     grid-template-columns: 1fr;
-    padding: 64px 22px;
+    padding: 64px var(--page-gutter);
     gap: 35px;
   }
 
@@ -133,7 +133,7 @@
 
   .origin-block,
   .craft-block {
-    padding: 56px 22px 72px;
+    padding: 56px var(--page-gutter) 72px;
   }
 
   .origin-track {

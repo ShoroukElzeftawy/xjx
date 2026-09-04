@@ -1,6 +1,6 @@
 .page-head {
   min-height: 500px;
-  padding: 95px 48px 48px;
+  padding: 95px var(--page-gutter) 48px;
   position: relative;
   isolation: isolate;
   background: var(--void);
@@ -12,7 +12,7 @@
   color: var(--blue);
   font: var(--type-small) var(--font-body);
   position: absolute;
-  right: 48px;
+  right: var(--page-gutter);
   top: 55px;
 }
 
@@ -23,7 +23,7 @@
 .page-head:after {
   content: "";
   position: absolute;
-  right: 6vw;
+  right: var(--page-gutter);
   bottom: 30px;
   width: 300px;
   height: 300px;
@@ -72,7 +72,7 @@
 }
 
 .filters {
-  padding: 20px 42px;
+  padding: 20px var(--page-gutter);
   display: flex;
   gap: 27px;
   border-bottom: 1px solid var(--line);
@@ -92,7 +92,7 @@
 }
 
 .shop-empty {
-  padding: 80px 42px 60px;
+  padding: 80px var(--page-gutter) 60px;
   margin: 0;
   max-width: 640px;
 }
@@ -108,7 +108,7 @@
 }
 
 .inner-page .products {
-  padding: 52px 42px;
+  padding: 52px var(--page-gutter);
 }
 
 .inner-page .product-grid {
@@ -119,7 +119,7 @@
 .shop-note {
   background: var(--void);
   color: white;
-  padding: 90px 48px;
+  padding: 90px var(--page-gutter);
   border-top: 2px solid var(--gold);
   display: grid;
   grid-template-columns: 15% 45% 35%;
@@ -142,7 +142,7 @@
 }
 
 .products {
-  padding: 95px 3vw;
+  padding: 95px var(--page-gutter);
 }
 
 .product-grid {
@@ -239,11 +239,11 @@
 @media (max-width: 1100px) {
   .page-head {
     min-height: auto;
-    padding: 48px 22px 32px;
+    padding: 48px var(--page-gutter) 32px;
   }
 
   .page-head:before {
-    right: 22px;
+    right: var(--page-gutter);
   }
 
   .page-head h1 {
@@ -255,17 +255,17 @@
   .filters-stack .filters,
   .inner-page .products,
   .shop-empty {
-    padding-left: 18px;
-    padding-right: 18px;
+    padding-left: var(--page-gutter);
+    padding-right: var(--page-gutter);
   }
 
   .shop-empty {
-    padding: 56px 18px;
+    padding: 56px var(--page-gutter);
   }
 
   .shop-note {
     grid-template-columns: 1fr;
-    padding: 70px 22px;
+    padding: 70px var(--page-gutter);
     gap: 35px;
   }
 

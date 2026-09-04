@@ -63,7 +63,7 @@
 }
 
 .buy-panel {
-  padding: 85px 5vw;
+  padding: 85px var(--page-gutter);
   background: var(--paper);
   color: var(--ink);
   border-left: 1px solid #aaa;
@@ -166,7 +166,7 @@
 }
 
 .detail-story {
-  padding: 130px 5vw;
+  padding: 130px var(--page-gutter);
   background: var(--void);
   color: var(--paper);
   display: grid;
@@ -195,7 +195,7 @@
 }
 
 .next-object {
-  padding: 75px 5vw;
+  padding: 75px var(--page-gutter);
   background: var(--paper);
 }
 
@@ -216,7 +216,7 @@
 @media (max-width: 1100px) {
   .detail-story {
     grid-template-columns: 1fr;
-    padding: 70px 22px;
+    padding: 70px var(--page-gutter);
     gap: 35px;
   }
 
@@ -226,7 +226,7 @@
 
   .buy-panel {
     border-left: 0;
-    padding: 48px 6vw 70px;
+    padding: 48px var(--page-gutter) 70px;
   }
 
   .buy-panel h1 {

@@ -7,7 +7,7 @@
 }
 
 .custom-hero > div:first-child {
-  padding: 110px 5vw;
+  padding: 110px var(--page-gutter);
 }
 
 .custom-hero h1 {
@@ -75,7 +75,7 @@
 }
 
 .process {
-  padding: 120px 5vw;
+  padding: 120px var(--page-gutter);
 }
 
 .section-title {
@@ -126,7 +126,7 @@
 }
 
 .commission {
-  padding: 120px 5vw;
+  padding: 120px var(--page-gutter);
   display: grid;
   grid-template-columns: 45% 50%;
   gap: 5%;
@@ -183,7 +183,7 @@
   }
 
   .custom-hero > div:first-child {
-    padding: 72px 6vw 40px;
+    padding: 72px var(--page-gutter) 40px;
   }
 
   .blueprint {
@@ -196,7 +196,7 @@
 
   .commission {
     grid-template-columns: 1fr;
-    padding: 80px 6vw;
+    padding: 80px var(--page-gutter);
   }
 }
 

@@ -82,7 +82,7 @@
 }
 
 .ref-shop {
-  padding: 34px 42px 54px;
+  padding: 34px var(--page-gutter) 54px;
 }
 
 .ref-section-head {
@@ -261,7 +261,7 @@
 .ref-manifesto {
   min-height: 0;
   aspect-ratio: 3.18/1;
-  padding: 3.2vw 7.1vw 4.8vw;
+  padding: 3.2vw var(--page-gutter) 4.8vw;
   background: var(--void);
   color: white;
   display: grid;
@@ -302,7 +302,7 @@
 .material-mark {
   position: absolute;
   top: 28px;
-  right: 42px;
+  right: var(--page-gutter);
   z-index: 2;
   display: block;
   width: 72px;
@@ -314,7 +314,7 @@
 }
 
 .ref-materials {
-  padding: 28px 42px 36px;
+  padding: 28px var(--page-gutter) 36px;
   display: grid;
   grid-template-columns: 32% 68%;
   overflow: hidden;
@@ -447,7 +447,7 @@
 
 @media (max-width: 1100px) {
   .ref-shop {
-    padding: 28px 18px 40px;
+    padding: 28px var(--page-gutter) 40px;
   }
 
   .shop-categories {
@@ -461,7 +461,7 @@
   .ref-manifesto {
     aspect-ratio: auto;
     min-height: 0;
-    padding: 40px 22px 48px;
+    padding: 40px var(--page-gutter) 48px;
     grid-template-columns: 1fr 1fr;
     gap: 22px;
   }
@@ -491,7 +491,7 @@
 
   .ref-materials {
     grid-template-columns: 1fr;
-    padding: 34px 22px;
+    padding: 34px var(--page-gutter);
   }
 
   .materials-shape {
@@ -505,7 +505,7 @@
 
   .material-mark {
     top: 18px;
-    right: 22px;
+    right: var(--page-gutter);
   }
 
   .material-table {
@@ -529,7 +529,7 @@
 
 @media (max-width: 600px) {
   .ref-shop {
-    padding: 24px 16px 36px;
+    padding: 24px var(--page-gutter) 36px;
   }
 
   .shop-category {
@@ -538,12 +538,12 @@
 
   .ref-manifesto {
     grid-template-columns: 1fr;
-    padding: 32px 18px 40px;
+    padding: 32px var(--page-gutter) 40px;
   }
 
   .material-mark {
     top: 18px;
-    right: 18px;
+    right: var(--page-gutter);
   }
 
   .manifesto-shape {
