@@ -22,7 +22,7 @@ export function Home({
         <div className="hero-editorial-copy">
           <h1>HIGH-QUALITY AND<br />CUSTOMIZABLE JEWELRY</h1>
           <p>
-            WITH TRANSPARENCY AND CRAFTSMANSHIP.
+            With transparency and craftsmanship.
             <br />
             We deliver fine craft directly from our master bench straight to the consumer's hands.
             <br />

@@ -14,7 +14,6 @@
   inset: 0;
   z-index: 0;
   background: url("/landing-hero.jpg") center 42% / cover no-repeat;
-  filter: grayscale(1) contrast(1.06);
 }
 
 .ref-hero:after {
@@ -40,7 +39,8 @@
   position: absolute;
   z-index: 4;
   left: calc(var(--hero-gutter) + (100% - 2 * var(--hero-gutter)) * 0.032);
-  top: 150px;
+  top: auto;
+  bottom: 196px;
   width: min(620px, 48vw);
   color: var(--paper);
   text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55);
