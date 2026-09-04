@@ -93,7 +93,7 @@
 
 .ref-section-head h2 {
   font-family: var(--font-body);
-  font-size: 22px;
+  font-size: var(--type-body);
   font-weight: 400;
   letter-spacing: 0;
   text-transform: uppercase;
@@ -102,7 +102,7 @@
 .ref-section-head button {
   border: 0;
   background: none;
-  font: 12px var(--font-body);
+  font: var(--type-small) var(--font-body);
   text-decoration: underline;
   text-underline-offset: 3px;
   transition: color 0.15s ease;
@@ -183,7 +183,7 @@
   top: 16px;
   left: 16px;
   margin: 0;
-  font: 11px / 1.5 var(--font-body);
+  font: var(--type-small) / 1.5 var(--font-body);
   letter-spacing: 0.04em;
   pointer-events: none;
   text-align: left;
@@ -201,7 +201,7 @@
   align-items: flex-end;
   gap: 10px;
   pointer-events: none;
-  font: 11px var(--font-body);
+  font: var(--type-small) var(--font-body);
   letter-spacing: 0.08em;
   text-shadow: 0 1px 8px rgba(0, 0, 0, 0.45);
 }
@@ -216,7 +216,7 @@
 
 .shop-category-vars em {
   font-style: normal;
-  font-size: 10px;
+  font-size: var(--type-small);
   letter-spacing: 0.06em;
   max-width: 16em;
 }
@@ -275,7 +275,7 @@
 
 .ref-manifesto h2 {
   font-family: var(--font-heading);
-  font-size: clamp(64px, 6.5vw, 126px);
+  font-size: var(--type-display);
   font-weight: 400;
   line-height: 0.76;
   margin: 0;
@@ -289,7 +289,7 @@
 }
 
 .blue-note {
-  font: 400 clamp(15px, 1.45vw, 27px)/1.48 var(--font-accent);
+  font: 400 var(--type-body)/1.48 var(--font-accent);
   padding-top: 2.8vw;
   color: var(--blue);
 }
@@ -327,7 +327,7 @@
 
 .material-intro h2 {
   font-family: var(--font-heading);
-  font-size: clamp(64px, 6.5vw, 126px);
+  font-size: var(--type-display);
   line-height: 0.76;
   font-weight: 400;
   margin: 0;
@@ -335,16 +335,23 @@
 }
 
 .material-intro p {
-  font: 14px/1.7 var(--font-body);
+  font: var(--type-body)/1.7 var(--font-body);
   margin: 34px 0 70px;
   max-width: 340px;
 }
 
 .material-intro button {
-  border: 0;
+  width: 290px;
+  max-width: 100%;
+  padding: 15px 22px;
+  border: 2px solid var(--blue);
+  border-radius: 999px;
   background: none;
   color: var(--blue);
-  font: 12px var(--font-body);
+  display: flex;
+  justify-content: center;
+  font: var(--type-body) var(--font-body);
+  letter-spacing: 0.05em;
 }
 
 .material-table {
@@ -365,12 +372,12 @@
 }
 
 .material-spec span small {
-  font-size: 13px;
+  font-size: var(--type-body);
   margin-bottom: 8px;
 }
 
 .material-spec span b {
-  font-size: 16px;
+  font-size: var(--type-body);
   font-weight: 400;
   letter-spacing: 0;
 }
@@ -378,7 +385,7 @@
 .material-spec em {
   white-space: pre-line;
   color: var(--blue);
-  font: 12px/1.6 var(--font-body);
+  font: var(--type-small)/1.6 var(--font-body);
   font-style: normal;
 }
 
@@ -388,7 +395,7 @@
   place-items: center;
   position: relative;
   overflow: hidden;
-  font: 11px/1 var(--font-accent);
+  font: var(--type-small)/1 var(--font-accent);
   letter-spacing: 0.14em;
   color: #f4f4f2;
 }
@@ -470,16 +477,16 @@
   }
 
   .ref-manifesto h2 {
-    font-size: clamp(42px, 10vw, 64px);
+    font-size: var(--type-display);
   }
 
   .material-intro h2 {
-    font-size: clamp(42px, 10vw, 64px);
+    font-size: var(--type-display);
   }
 
   .blue-note {
     padding-top: 0;
-    font-size: clamp(13px, 3.4vw, 18px);
+    font-size: var(--type-body);
   }
 
   .ref-materials {
@@ -554,11 +561,11 @@
   }
 
   .ref-manifesto h2 {
-    font-size: clamp(40px, 12vw, 52px);
+    font-size: var(--type-display);
   }
 
   .material-intro h2 {
-    font-size: clamp(40px, 12vw, 52px);
+    font-size: var(--type-display);
   }
 
   .blue-note {

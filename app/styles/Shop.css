@@ -10,7 +10,7 @@
 .page-head:before {
   content: "CATALOG / LIVE";
   color: var(--blue);
-  font: 10px var(--font-body);
+  font: var(--type-small) var(--font-body);
   position: absolute;
   right: 48px;
   top: 55px;
@@ -39,7 +39,7 @@
 }
 
 .page-head h1 {
-  font-size: clamp(72px, 11vw, 150px);
+  font-size: var(--type-display);
   margin: 52px 0 70px;
   line-height: 0.8;
 }
@@ -51,7 +51,7 @@
 
 .page-head > p:last-child {
   text-align: right;
-  font: 10px var(--font-body);
+  font: var(--type-small) var(--font-body);
 }
 
 .filters-stack .filters {
@@ -60,7 +60,7 @@
 }
 
 .filters-stack .filters span {
-  font: 10px var(--font-body);
+  font: var(--type-small) var(--font-body);
   letter-spacing: 0.12em;
   color: var(--blue);
   flex: none;
@@ -82,7 +82,7 @@
 .filters button {
   border: 0;
   background: none;
-  font: 10px var(--font-body);
+  font: var(--type-small) var(--font-body);
   padding: 7px 0;
   white-space: nowrap;
 }
@@ -99,12 +99,12 @@
 
 .shop-empty p {
   margin: 0 0 12px;
-  font: 400 clamp(32px, 5vw, 48px)/1 var(--font-heading);
+  font: 400 var(--type-display)/1 var(--font-heading);
 }
 
 .shop-empty span {
   display: block;
-  font: 16px/1.6 var(--font-body);
+  font: var(--type-body)/1.6 var(--font-body);
 }
 
 .inner-page .products {
@@ -127,12 +127,12 @@
 }
 
 .shop-note span {
-  font: 10px var(--font-body);
+  font: var(--type-small) var(--font-body);
   color: var(--blue);
 }
 
 .shop-note h2 {
-  font-size: 72px;
+  font-size: var(--type-display);
   line-height: 0.9;
   margin: 0;
 }
@@ -185,7 +185,7 @@
   left: 16px;
   z-index: 1;
   text-align: left;
-  font: 8px/1.6 var(--font-body);
+  font: var(--type-small)/1.6 var(--font-body);
   color: white;
 }
 
@@ -203,13 +203,13 @@
 
 .product-info b {
   display: block;
-  font-size: 13px;
+  font-size: var(--type-body);
 }
 
 .product-info span {
   display: block;
   margin-top: 7px;
-  font: 8px var(--font-body);
+  font: var(--type-small) var(--font-body);
 }
 
 .product-info > div {
@@ -232,7 +232,7 @@
   background: var(--blue);
   color: white;
   padding: 4px 8px;
-  font: 8px var(--font-accent);
+  font: var(--type-small) var(--font-accent);
   font-style: normal;
 }
 
@@ -247,7 +247,7 @@
   }
 
   .page-head h1 {
-    font-size: clamp(48px, 12vw, 90px);
+    font-size: var(--type-display);
     margin: 36px 0 40px;
   }
 
@@ -270,7 +270,7 @@
   }
 
   .shop-note h2 {
-    font-size: clamp(40px, 10vw, 64px);
+    font-size: var(--type-display);
   }
 
   .product-grid,
@@ -281,7 +281,7 @@
 
 @media (max-width: 600px) {
   .page-head h1 {
-    font-size: 50px;
+    font-size: var(--type-display);
   }
 
   .product-grid {
@@ -291,7 +291,7 @@
   .product-visual small {
     top: 10px;
     left: 10px;
-    font-size: 7px;
+    font-size: var(--type-small);
   }
 
   .product-info {

@@ -9,7 +9,7 @@
   justify-content: space-between;
   gap: 18px;
   margin: 0 0 54px;
-  font: 400 clamp(42px, 8vw, 120px) / 0.9 var(--font-heading);
+  font: 400 var(--type-display) / 0.9 var(--font-heading);
   color: rgba(242, 242, 242, 0.22);
 }
 
@@ -21,20 +21,20 @@
 
 .origin-grid small {
   display: block;
-  font: 10px var(--font-body);
+  font: var(--type-small) var(--font-body);
   letter-spacing: 0.14em;
   color: var(--gold);
 }
 
 .origin-grid h3 {
   margin: 12px 0 14px;
-  font-size: clamp(28px, 3vw, 42px);
+  font-size: var(--type-body);
   line-height: 0.95;
 }
 
 .origin-grid p {
   margin: 0 0 22px;
-  font: 15px / 1.65 var(--font-body);
+  font: var(--type-body) / 1.65 var(--font-body);
   color: rgba(242, 242, 242, 0.82);
 }
 
@@ -48,19 +48,19 @@
 
 .cut-middle h2 {
   margin: 0 0 22px;
-  font-size: clamp(48px, 7vw, 110px);
+  font-size: var(--type-display);
   line-height: 0.82;
   color: var(--gold);
 }
 
 .cut-middle > div > p {
   max-width: 340px;
-  font: 16px / 1.7 var(--font-body);
+  font: var(--type-body) / 1.7 var(--font-body);
 }
 
 .cut-flow {
   margin: 0 0 28px;
-  font: 12px var(--font-body);
+  font: var(--type-small) var(--font-body);
   letter-spacing: 0.14em;
   color: var(--gold);
 }
@@ -79,12 +79,12 @@
 }
 
 .cut-grid figcaption b {
-  font: 12px var(--font-body);
+  font: var(--type-small) var(--font-body);
   letter-spacing: 0.06em;
 }
 
 .cut-grid figcaption span {
-  font: 11px var(--font-body);
+  font: var(--type-small) var(--font-body);
   color: #666;
 }
 
@@ -103,12 +103,12 @@
 
 .craft-grid h3 {
   margin: 18px 0 10px;
-  font-size: clamp(22px, 2.2vw, 32px);
+  font-size: var(--type-body);
 }
 
 .craft-grid p {
   margin: 0;
-  font: 15px / 1.6 var(--font-body);
+  font: var(--type-body) / 1.6 var(--font-body);
   color: rgba(242, 242, 242, 0.8);
 }
 

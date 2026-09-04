@@ -11,7 +11,7 @@
 }
 
 .about-hero h1 {
-  font-size: clamp(60px, 8vw, 126px);
+  font-size: var(--type-display);
   line-height: 0.8;
   margin: 120px 0 40px;
 }
@@ -22,7 +22,7 @@
 }
 
 .refer-hero > div > p:last-child {
-  font: 16px / 1.6 var(--font-body);
+  font: var(--type-body) / 1.6 var(--font-body);
   max-width: 440px;
 }
 
@@ -47,12 +47,12 @@
 }
 
 .values span {
-  font: 10px var(--font-body);
+  font: var(--type-small) var(--font-body);
   color: var(--blue);
 }
 
 .values h3 {
-  font-size: 26px;
+  font-size: var(--type-body);
   margin-top: 100px;
   letter-spacing: 0;
 }
@@ -63,12 +63,12 @@
 }
 
 .refer-close > p:first-child {
-  font: 10px var(--font-body);
+  font: var(--type-small) var(--font-body);
   letter-spacing: 0.08em;
 }
 
 .refer-close h2 {
-  font-size: clamp(38px, 5vw, 74px);
+  font-size: var(--type-display);
   line-height: 0.9;
   margin: 18px 0 28px;
 }
@@ -104,6 +104,6 @@
 
 @media (max-width: 600px) {
   .about-hero h1 {
-    font-size: 50px;
+    font-size: var(--type-display);
   }
 }

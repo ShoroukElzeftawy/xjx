@@ -22,6 +22,9 @@
   --font-body: "DM Sans XJX", Arial, sans-serif;
   --font-heading: "Bayon XJX", "DM Sans XJX", sans-serif;
   --font-accent: "Bayon XJX", "DM Sans XJX", sans-serif;
+  --type-display: clamp(40px, 6vw, 80px);
+  --type-body: 16px;
+  --type-small: 12px;
   --header-h: calc(76px + env(safe-area-inset-top, 0px));
   --hero-gutter: 3.5vw;
   --hero-edge: calc(var(--hero-gutter) + (100vw - 2 * var(--hero-gutter)) * 0.032);
@@ -41,6 +44,7 @@ body {
   background: #151515;
   color: var(--ink);
   font-family: var(--font-body);
+  font-size: var(--type-body);
   overflow-x: clip;
 }
 
@@ -62,15 +66,23 @@ a {
 input,
 select,
 textarea {
-  font-size: 16px;
+  font-size: var(--type-body);
   border-radius: 0;
 }
 
 h1,
-h2,
+h2 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: var(--type-display);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
 h3 {
   font-family: var(--font-heading);
   font-weight: 400;
+  font-size: var(--type-body);
   letter-spacing: 0.02em;
   text-transform: uppercase;
 }
@@ -108,7 +120,7 @@ body.menu-open {
 
 .frame-label {
   margin: 0 0 28px;
-  font: 11px var(--font-body);
+  font: var(--type-small) var(--font-body);
   letter-spacing: 0.16em;
 }
 
@@ -126,7 +138,7 @@ body.menu-open {
   border: 1px solid;
   padding: 16px 20px;
   background: transparent;
-  font: 10px var(--font-body);
+  font: var(--type-small) var(--font-body);
   margin-top: 25px;
 }
 

@@ -34,7 +34,7 @@
 .campaign-ticker span {
   flex: none;
   padding: 0;
-  font: 400 clamp(36px, 6.2vw, 96px)/1 var(--font-accent);
+  font: 400 var(--type-display)/1 var(--font-accent);
   letter-spacing: 0.04em;
   color: var(--blue);
   animation: ticker 22s linear infinite;
@@ -46,16 +46,18 @@
   left: 50%;
   top: 68%;
   transform: translate(-50%, -50%);
+  width: 290px;
+  padding: 15px 22px;
   border: 0;
   border-radius: 999px;
   background: #8797c5;
   color: #fff;
   cursor: pointer;
-  height: 34px;
-  padding: 0 18px;
-  min-width: 128px;
-  font: 10px/1 var(--font-body);
-  letter-spacing: 0.12em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font: var(--type-body) var(--font-body);
+  letter-spacing: 0.05em;
   white-space: nowrap;
 }
 
@@ -88,13 +90,10 @@
   }
 
   .campaign-ticker span {
-    font-size: clamp(28px, 8vw, 48px);
+    font-size: var(--type-display);
   }
 
   .campaign-cta {
-    height: 44px;
-    padding: 0 20px;
-    font-size: 11px;
     top: 70%;
   }
 }
@@ -111,6 +110,6 @@
 
   .campaign-cta {
     top: 68%;
-    min-width: 160px;
+    width: min(290px, calc(100% - 40px));
   }
 }

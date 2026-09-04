@@ -37,7 +37,7 @@
   margin: 0;
   border: 0;
   background: none;
-  font: 12px var(--font-body);
+  font: var(--type-small) var(--font-body);
   letter-spacing: 0.08em;
 }
 
@@ -64,13 +64,13 @@
 
 .cart-lines b {
   display: block;
-  font: 14px var(--font-body);
+  font: var(--type-body) var(--font-body);
 }
 
 .cart-lines span {
   display: block;
   margin-top: 6px;
-  font: 11px var(--font-body);
+  font: var(--type-small) var(--font-body);
   color: #555;
 }
 
@@ -89,21 +89,21 @@
 }
 
 .cart-qty em {
-  font: 12px var(--font-body);
+  font: var(--type-small) var(--font-body);
   font-style: normal;
 }
 
 .cart-remove {
   margin-left: auto;
   border: 0 !important;
-  font: 10px var(--font-body) !important;
+  font: var(--type-small) var(--font-body) !important;
   letter-spacing: 0.08em;
 }
 
 .cart-empty {
   flex: 1;
   margin: 0;
-  font: 15px / 1.6 var(--font-body);
+  font: var(--type-body) / 1.6 var(--font-body);
 }
 
 .cart-checkout {

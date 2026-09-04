@@ -8,7 +8,7 @@
   color: var(--paper);
   border: 1px solid var(--gold);
   padding: 18px 20px;
-  font: 11px var(--font-body);
+  font: var(--type-small) var(--font-body);
 }
 
 .toast button {

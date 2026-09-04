@@ -34,7 +34,7 @@ header nav button {
   background: none;
   height: 76px;
   padding: 0;
-  font-size: 11px;
+  font-size: var(--type-small);
   letter-spacing: 0.04em;
   color: #f4f4f2;
   position: relative;
@@ -51,7 +51,7 @@ header nav button.active:after {
 }
 
 .wordmark {
-  width: 210px;
+  width: 168px;
   height: 76px;
   border: 0;
   padding: 0;
@@ -63,7 +63,7 @@ header nav button.active:after {
   top: 50%;
   transform: translate(-50%, -50%);
   background-image: url("/brand-assets/logos/xjx-white-mark.png");
-  background-size: 210px auto;
+  background-size: 168px auto;
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0;
@@ -87,7 +87,7 @@ header.is-solid .wordmark {
 .tools button {
   border: 0;
   background: none;
-  font-size: 11px;
+  font-size: var(--type-small);
   letter-spacing: 0.04em;
   color: #f4f4f2;
 }
@@ -115,9 +115,9 @@ header.is-solid .wordmark {
   }
 
   .wordmark {
-    width: 132px;
+    width: 112px;
     height: 64px;
-    background-size: 132px auto;
+    background-size: 112px auto;
   }
 
   .tools {
@@ -159,22 +159,22 @@ header.is-solid .wordmark {
     background: none;
     color: white;
     text-align: left;
-    font: 400 clamp(28px, 8vw, 40px)/1.1 var(--font-heading);
+    font: 400 var(--type-display)/1.1 var(--font-heading);
     padding: 18px 0;
     min-height: 56px;
   }
 
   .mobile-nav span {
-    font: 9px var(--font-body);
+    font: var(--type-small) var(--font-body);
     margin-right: 20px;
   }
 }
 
 @media (max-width: 600px) {
   .wordmark {
-    width: 118px;
+    width: 100px;
     height: 56px;
-    background-size: 118px auto;
+    background-size: 100px auto;
   }
 
   .tools {
@@ -182,7 +182,7 @@ header.is-solid .wordmark {
   }
 
   .tools button {
-    font-size: 10px;
+    font-size: var(--type-small);
     letter-spacing: 0.08em;
   }
 }
