@@ -20,12 +20,17 @@ export function Home({
     <>
       <section className="ref-hero">
         <div className="hero-editorial-copy">
-          <h1>{SLOGAN}.</h1>
-          <p>High-quality, customizable jewelry with transparency and craftsmanship. Direct from the bench to your hands.</p>
+          <h1>HIGH-QUALITY AND<br />CUSTOMIZABLE JEWELRY</h1>
+          <p>
+            WITH TRANSPARENCY AND CRAFTSMANSHIP.
+            <br />
+            We deliver fine craft directly from our master bench straight to the consumer's hands.
+            <br />
+            No mystery, no artificial inflation.
+          </p>
           <button onClick={() => go("shop")}>DISCOVER NOW <span>→</span></button>
         </div>
         <div className="ref-hero-logo" role="img" aria-label="XJEWELRYX" />
-        <div className="hero-ref">XJX–001</div>
       </section>
       <section className="ref-shop">
         <div className="ref-section-head">
