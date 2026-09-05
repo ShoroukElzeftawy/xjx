@@ -1,35 +1,20 @@
 .page-head {
-  min-height: 500px;
-  padding: 95px var(--page-gutter) 48px;
+  padding: 28px var(--page-gutter) 22px;
   position: relative;
   isolation: isolate;
   background: var(--void);
   color: white;
 }
 
-.page-head:before {
-  content: "CATALOG / LIVE";
-  color: var(--blue);
-  font: var(--type-small)/var(--leading-sub) var(--font-sub);
-  letter-spacing: var(--track-sub);
-  position: absolute;
-  right: var(--page-gutter);
-  top: 55px;
-}
-
-.page-shop .page-head:before {
-  content: "SHOP / TYPE & COLOR";
-}
-
 .page-head:after {
   content: "";
   position: absolute;
   right: var(--page-gutter);
-  bottom: 30px;
-  width: 300px;
-  height: 300px;
+  bottom: 12px;
+  width: 88px;
+  height: 88px;
   background: var(--blue);
-  opacity: 0.14;
+  opacity: 0.12;
   mask: url("/brand-assets/shapes/xjx-logo-mark.png") center/contain no-repeat;
   -webkit-mask: url("/brand-assets/shapes/xjx-logo-mark.png") center/contain no-repeat;
 }
@@ -41,7 +26,7 @@
 
 .page-head h1 {
   font-size: var(--type-display);
-  margin: 52px 0 70px;
+  margin: 10px 0 12px;
   line-height: var(--leading-headline);
 }
 
@@ -51,7 +36,7 @@
 }
 
 .page-head > p:last-child {
-  text-align: right;
+  margin: 0;
   font: var(--type-small) var(--font-body);
 }
 
@@ -241,17 +226,12 @@
 
 @media (max-width: 1100px) {
   .page-head {
-    min-height: auto;
-    padding: 48px var(--page-gutter) 32px;
-  }
-
-  .page-head:before {
-    right: var(--page-gutter);
+    padding: 22px var(--page-gutter) 18px;
   }
 
   .page-head h1 {
     font-size: var(--type-display);
-    margin: 36px 0 40px;
+    margin: 8px 0 10px;
   }
 
   .filters,
