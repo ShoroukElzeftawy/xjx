@@ -38,7 +38,6 @@ export default function XjxSite() {
   const parsed = useMemo(() => routeFromPath(pathname), [pathname]);
   const route = parsed.route;
   const shopQuery = parsed.query ?? { type: "ALL", color: "ALL" };
-  const [menuOpen, setMenuOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
   const [notice, setNotice] = useState("");
   const [catalog, setCatalog] = useState<ProductItem[]>(fallbackProducts);
@@ -50,14 +49,9 @@ export default function XjxSite() {
   const [headerSolid, setHeaderSolid] = useState(false);
 
   useEffect(() => {
-    document.body.classList.toggle("menu-open", menuOpen);
-    return () => document.body.classList.remove("menu-open");
-  }, [menuOpen]);
-
-  useEffect(() => {
     const update = () => {
       const y = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop;
-      setHeaderSolid(route !== "home" || y > 36 || menuOpen);
+      setHeaderSolid(route !== "home" || y > 36);
     };
     update();
     window.addEventListener("scroll", update, { passive: true });
@@ -66,7 +60,7 @@ export default function XjxSite() {
       window.removeEventListener("scroll", update);
       document.removeEventListener("scroll", update, { capture: true });
     };
-  }, [route, menuOpen]);
+  }, [route]);
 
   useEffect(() => {
     try {
@@ -107,7 +101,6 @@ export default function XjxSite() {
       type: query?.type || "ALL",
       color: query?.color || "ALL",
     };
-    setMenuOpen(false);
     window.location.assign(pathFor(next, handle, nextQuery));
   };
 
@@ -171,7 +164,7 @@ export default function XjxSite() {
 
   return (
     <>
-      <Header route={route} go={go} bag={count} open={menuOpen} setOpen={setMenuOpen} onBag={() => setCartOpen(true)} solid={headerSolid} />
+      <Header route={route} bag={count} onBag={() => setCartOpen(true)} solid={headerSolid} />
       <main className={`site-shell page-${route}${route === "home" ? "" : " inner-page"}`}>
       {route === "home" && <Home go={go} catalog={catalog} />}
       {route === "shop" && <Shop go={go} add={add} catalog={catalog} query={shopQuery} openProduct={openProduct} live={shopLive} />}

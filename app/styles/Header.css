@@ -130,12 +130,33 @@ body:has(main.inner-page) .wordmark {
   align-items: center;
 }
 
-.tools button {
+.site-chrome {
+  position: relative;
+  z-index: 50;
+}
+
+.tools button,
+.tools .menu {
   border: 0;
   background: none;
+  padding: 0;
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
   font-size: var(--type-small);
+  line-height: 1;
   letter-spacing: var(--track-sub);
   color: #f4f4f2;
+}
+
+.mobile-nav-toggle {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
 }
 
 .menu {
@@ -144,6 +165,21 @@ body:has(main.inner-page) .wordmark {
 
 .mobile-nav {
   display: none;
+}
+
+body:has(.mobile-nav-toggle:checked) {
+  overflow: hidden;
+  touch-action: none;
+}
+
+.mobile-nav-toggle:checked ~ header {
+  background: #0c0e0ef7;
+  border-bottom-color: #ffffff20;
+}
+
+.mobile-nav-toggle:checked ~ header .wordmark {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 @media (max-width: 1100px) {
@@ -175,16 +211,19 @@ body:has(main.inner-page) .wordmark {
   }
 
   .menu {
-    display: block;
+    display: inline-flex;
     min-height: 44px;
-    min-width: 44px;
+    min-width: 0;
+    cursor: pointer;
   }
 
-  .tools button {
+  .tools button,
+  .tools .menu {
+    height: 44px;
     min-height: 44px;
   }
 
-  .mobile-nav {
+  .mobile-nav-toggle:checked ~ .mobile-nav {
     display: flex;
     position: fixed;
     z-index: 40;
@@ -228,7 +267,8 @@ body:has(main.inner-page) .wordmark {
     gap: 10px;
   }
 
-  .tools button {
+  .tools button,
+  .tools .menu {
     font-size: var(--type-small);
     letter-spacing: var(--track-sub);
   }

@@ -28,12 +28,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body>
-        {children}
-        {process.env.NODE_ENV !== "production" ? (
-          <script type="module" src="/@id/__x00__virtual:vite-rsc/entry-browser" />
-        ) : null}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { pathFor } from "../lib/routes";
-import type { Go, Route } from "../lib/types";
+import type { Route } from "../lib/types";
 
 const nav: [Route, string][] = [
   ["shop", "SHOP"],
@@ -14,23 +14,17 @@ const nav: [Route, string][] = [
 
 export function Header({
   route,
-  go,
   bag,
-  open,
-  setOpen,
   onBag,
   solid,
 }: {
   route: Route;
-  go: Go;
   bag: number;
-  open: boolean;
-  setOpen: (value: boolean) => void;
   onBag: () => void;
   solid: boolean;
 }) {
   const [scrolled, setScrolled] = useState(false);
-  const stuck = solid || open || scrolled;
+  const stuck = solid || scrolled;
 
   useEffect(() => {
     const readY = () => Math.max(window.scrollY, document.documentElement.scrollTop, document.body.scrollTop);
@@ -53,57 +47,31 @@ export function Header({
   }, [route]);
 
   return (
-    <>
+    <div className="site-chrome">
+      <input id="mobile-nav-toggle" className="mobile-nav-toggle" type="checkbox" aria-hidden="true" tabIndex={-1} />
       <header className={stuck ? "is-solid" : "is-overlay"}>
-        <a
-          className="wordmark"
-          href={pathFor("home")}
-          aria-label="XJEWELRYX home"
-          tabIndex={stuck ? 0 : -1}
-          onClick={(event) => {
-            event.preventDefault();
-            go("home");
-          }}
-        />
+        <a className="wordmark" href={pathFor("home")} aria-label="XJEWELRYX home" tabIndex={stuck ? 0 : -1} />
         <nav>
           {nav.map(([key, label]) => (
-            <a
-              key={key}
-              href={pathFor(key)}
-              className={route === key ? "active" : ""}
-              onClick={(event) => {
-                event.preventDefault();
-                go(key);
-              }}
-            >
+            <a key={key} href={pathFor(key)} className={route === key ? "active" : ""}>
               {label}
             </a>
           ))}
         </nav>
         <div className="tools">
           <button type="button" aria-label="Search">SEARCH</button>
-          <button type="button" className="menu" aria-expanded={open} aria-controls="mobile-nav" onClick={() => setOpen(!open)}>MENU</button>
+          <label className="menu" htmlFor="mobile-nav-toggle">MENU</label>
           <button type="button" onClick={onBag}>BAG [{bag}]</button>
         </div>
       </header>
-      {open && (
-        <div className="mobile-nav" id="mobile-nav">
-          {nav.map(([key, label], index) => (
-            <a
-              key={key}
-              href={pathFor(key)}
-              onClick={(event) => {
-                event.preventDefault();
-                setOpen(false);
-                go(key);
-              }}
-            >
-              <span>0{index + 1}</span>
-              {label}
-            </a>
-          ))}
-        </div>
-      )}
-    </>
+      <nav className="mobile-nav" id="mobile-nav" aria-label="Mobile">
+        {nav.map(([key, label], index) => (
+          <a key={key} href={pathFor(key)}>
+            <span>0{index + 1}</span>
+            {label}
+          </a>
+        ))}
+      </nav>
+    </div>
   );
 }
