@@ -92,10 +92,11 @@
 }
 
 .ref-section-head h2 {
-  font-family: var(--font-body);
+  font-family: var(--font-sub);
   font-size: var(--type-body);
   font-weight: 400;
-  letter-spacing: 0;
+  letter-spacing: var(--track-sub);
+  line-height: var(--leading-sub);
   text-transform: uppercase;
 }
 
@@ -276,8 +277,9 @@
 .ref-manifesto h2 {
   font-family: var(--font-heading);
   font-size: var(--type-display);
-  font-weight: 400;
-  line-height: 0.76;
+  font-weight: 700;
+  line-height: var(--leading-headline);
+  letter-spacing: var(--track-gotham);
   margin: 0;
 }
 
@@ -289,7 +291,8 @@
 }
 
 .blue-note {
-  font: 400 var(--type-body)/1.48 var(--font-accent);
+  font: 400 var(--type-body)/var(--leading-sub) var(--font-sub);
+  letter-spacing: var(--track-sub);
   padding-top: 2.8vw;
   color: var(--blue);
 }
@@ -328,10 +331,10 @@
 .material-intro h2 {
   font-family: var(--font-heading);
   font-size: var(--type-display);
-  line-height: 0.76;
-  font-weight: 400;
+  line-height: var(--leading-headline);
+  font-weight: 700;
   margin: 0;
-  letter-spacing: 0.02em;
+  letter-spacing: var(--track-gotham);
 }
 
 .material-intro p {
@@ -351,7 +354,7 @@
   display: flex;
   justify-content: center;
   font: var(--type-body) var(--font-body);
-  letter-spacing: 0.05em;
+  letter-spacing: var(--track-gotham);
 }
 
 .material-table {
@@ -395,8 +398,8 @@
   place-items: center;
   position: relative;
   overflow: hidden;
-  font: var(--type-small)/1 var(--font-accent);
-  letter-spacing: 0.14em;
+  font: var(--type-small)/var(--leading-sub) var(--font-sub);
+  letter-spacing: var(--track-sub);
   color: #f4f4f2;
 }
 

@@ -35,7 +35,7 @@ header nav button {
   height: 76px;
   padding: 0;
   font-size: var(--type-small);
-  letter-spacing: 0.04em;
+  letter-spacing: var(--track-sub);
   color: #f4f4f2;
   position: relative;
 }
@@ -88,7 +88,7 @@ header.is-solid .wordmark {
   border: 0;
   background: none;
   font-size: var(--type-small);
-  letter-spacing: 0.04em;
+  letter-spacing: var(--track-sub);
   color: #f4f4f2;
 }
 
@@ -159,7 +159,7 @@ header.is-solid .wordmark {
     background: none;
     color: white;
     text-align: left;
-    font: 400 var(--type-display)/1.1 var(--font-heading);
+    font: 700 var(--type-display)/var(--leading-headline) var(--font-heading);
     padding: 18px 0;
     min-height: 56px;
   }
@@ -183,6 +183,6 @@ header.is-solid .wordmark {
 
   .tools button {
     font-size: var(--type-small);
-    letter-spacing: 0.08em;
+    letter-spacing: var(--track-sub);
   }
 }

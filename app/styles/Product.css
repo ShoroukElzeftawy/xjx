@@ -71,7 +71,7 @@
 
 .buy-panel h1 {
   font-size: var(--type-display);
-  line-height: 0.9;
+  line-height: var(--leading-headline);
   margin: 35px 0 12px;
 }
 
@@ -177,7 +177,7 @@
 
 .detail-story h2 {
   font-size: var(--type-display);
-  line-height: 0.9;
+  line-height: var(--leading-headline);
   margin: 0;
 }
 

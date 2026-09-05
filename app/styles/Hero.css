@@ -47,8 +47,9 @@
 .hero-editorial-copy h1 {
   margin: 0;
   font-size: var(--type-display);
-  line-height: 0.98;
-  letter-spacing: 0.02em;
+  font-weight: 700;
+  line-height: var(--leading-headline);
+  letter-spacing: var(--track-gotham);
 }
 
 .hero-editorial-copy p {
@@ -70,7 +71,7 @@
   justify-content: center;
   gap: 18px;
   font: var(--type-body) var(--font-body);
-  letter-spacing: 0.05em;
+  letter-spacing: var(--track-gotham);
 }
 
 .hero-editorial-copy button:hover,
@@ -107,7 +108,7 @@
 
   .hero-editorial-copy h1 {
     font-size: var(--type-display);
-    line-height: 1.02;
+    line-height: var(--leading-headline);
   }
 
   .hero-editorial-copy p {

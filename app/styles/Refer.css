@@ -12,7 +12,7 @@
 
 .about-hero h1 {
   font-size: var(--type-display);
-  line-height: 0.8;
+  line-height: var(--leading-headline);
   margin: 120px 0 40px;
 }
 
@@ -69,7 +69,7 @@
 
 .refer-close h2 {
   font-size: var(--type-display);
-  line-height: 0.9;
+  line-height: var(--leading-headline);
   margin: 18px 0 28px;
 }
 

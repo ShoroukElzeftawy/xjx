@@ -10,7 +10,8 @@
 .page-head:before {
   content: "CATALOG / LIVE";
   color: var(--blue);
-  font: var(--type-small) var(--font-body);
+  font: var(--type-small)/var(--leading-sub) var(--font-sub);
+  letter-spacing: var(--track-sub);
   position: absolute;
   right: var(--page-gutter);
   top: 55px;
@@ -41,7 +42,7 @@
 .page-head h1 {
   font-size: var(--type-display);
   margin: 52px 0 70px;
-  line-height: 0.8;
+  line-height: var(--leading-headline);
 }
 
 .page-head h1 i {
@@ -60,8 +61,8 @@
 }
 
 .filters-stack .filters span {
-  font: var(--type-small) var(--font-body);
-  letter-spacing: 0.12em;
+  font: var(--type-small)/var(--leading-sub) var(--font-sub);
+  letter-spacing: var(--track-sub);
   color: var(--blue);
   flex: none;
 }
@@ -82,7 +83,8 @@
 .filters button {
   border: 0;
   background: none;
-  font: var(--type-small) var(--font-body);
+  font: var(--type-small)/var(--leading-sub) var(--font-sub);
+  letter-spacing: var(--track-sub);
   padding: 7px 0;
   white-space: nowrap;
 }
@@ -99,7 +101,7 @@
 
 .shop-empty p {
   margin: 0 0 12px;
-  font: 400 var(--type-display)/1 var(--font-heading);
+  font: 700 var(--type-display)/var(--leading-headline) var(--font-heading);
 }
 
 .shop-empty span {
@@ -133,7 +135,7 @@
 
 .shop-note h2 {
   font-size: var(--type-display);
-  line-height: 0.9;
+  line-height: var(--leading-headline);
   margin: 0;
 }
 
@@ -232,7 +234,8 @@
   background: var(--blue);
   color: white;
   padding: 4px 8px;
-  font: var(--type-small) var(--font-accent);
+  font: var(--type-small)/var(--leading-sub) var(--font-sub);
+  letter-spacing: var(--track-sub);
   font-style: normal;
 }
 

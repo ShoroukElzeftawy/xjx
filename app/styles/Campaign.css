@@ -34,8 +34,8 @@
 .campaign-ticker span {
   flex: none;
   padding: 0;
-  font: 400 var(--type-display)/1 var(--font-accent);
-  letter-spacing: 0.04em;
+  font: 700 var(--type-display)/var(--leading-headline) var(--font-heading);
+  letter-spacing: var(--track-gotham);
   color: var(--blue);
   animation: ticker 22s linear infinite;
 }
@@ -57,7 +57,7 @@
   justify-content: center;
   align-items: center;
   font: var(--type-body) var(--font-body);
-  letter-spacing: 0.05em;
+  letter-spacing: var(--track-gotham);
   white-space: nowrap;
 }
 
