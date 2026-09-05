@@ -21,6 +21,38 @@ header.is-solid {
   border-bottom-color: #ffffff20;
 }
 
+body:has(main.inner-page) header {
+  background: #0c0e0ef7;
+  border-bottom-color: #ffffff20;
+}
+
+@supports (animation-timeline: scroll()) {
+  header.is-overlay {
+    animation: header-fill linear both;
+    animation-timeline: scroll();
+    animation-range: 0 40px;
+  }
+
+  header.is-overlay .wordmark {
+    animation: logo-fill linear both;
+    animation-timeline: scroll();
+    animation-range: 0 40px;
+  }
+}
+
+@keyframes header-fill {
+  to {
+    background: #0c0e0ef7;
+    border-bottom-color: #ffffff20;
+  }
+}
+
+@keyframes logo-fill {
+  to {
+    opacity: 1;
+  }
+}
+
 header nav {
   grid-column: 1;
   display: flex;
@@ -71,7 +103,8 @@ header nav button.active:after {
   transition: opacity 0.22s ease;
 }
 
-header.is-solid .wordmark {
+header.is-solid .wordmark,
+body:has(main.inner-page) .wordmark {
   opacity: 1;
   pointer-events: auto;
 }

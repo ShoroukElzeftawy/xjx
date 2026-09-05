@@ -53,11 +53,16 @@ export default function XjxSite() {
 
   useEffect(() => {
     const update = () => {
-      setHeaderSolid(route !== "home" || window.scrollY > 36 || menuOpen);
+      const y = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop;
+      setHeaderSolid(route !== "home" || y > 36 || menuOpen);
     };
     update();
     window.addEventListener("scroll", update, { passive: true });
-    return () => window.removeEventListener("scroll", update);
+    document.addEventListener("scroll", update, { passive: true, capture: true });
+    return () => {
+      window.removeEventListener("scroll", update);
+      document.removeEventListener("scroll", update, { capture: true });
+    };
   }, [route, menuOpen]);
 
   useEffect(() => {

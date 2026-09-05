@@ -37,7 +37,7 @@
   --track-sub: 0em;
   --leading-headline: 0.92;
   --leading-sub: 1.2;
-  --type-display: clamp(40px, 6vw, 80px);
+  --type-display: clamp(32px, 4.6vw, 56px);
   --type-body: 16px;
   --type-small: 12px;
   --header-h: calc(76px + env(safe-area-inset-top, 0px));
@@ -53,6 +53,7 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  overflow-x: clip;
 }
 
 body {
@@ -65,7 +66,6 @@ body {
   letter-spacing: normal;
   line-height: 1.5;
   text-align: left;
-  overflow-x: clip;
 }
 
 button,

@@ -40,7 +40,7 @@
   left: var(--hero-edge);
   top: auto;
   bottom: 196px;
-  width: min(620px, 48vw);
+  width: min(1040px, 74vw);
   color: var(--paper);
 }
 
@@ -106,11 +106,6 @@
     max-width: none;
   }
 
-  .hero-editorial-copy h1 {
-    font-size: var(--type-display);
-    line-height: var(--leading-headline);
-  }
-
   .hero-editorial-copy p {
     font-size: var(--type-body);
     max-width: 34em;
@@ -141,10 +136,6 @@
 
   .hero-editorial-copy {
     bottom: 90px;
-  }
-
-  .hero-editorial-copy h1 {
-    font-size: var(--type-display);
   }
 
   .ref-hero-logo {

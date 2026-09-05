@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import type { Go, Route } from "../lib/types";
 
 const nav: [Route, string][] = [
@@ -25,10 +28,33 @@ export function Header({
   onBag: () => void;
   solid: boolean;
 }) {
+  const [scrolled, setScrolled] = useState(false);
+  const stuck = solid || open || scrolled;
+
+  useEffect(() => {
+    const readY = () => Math.max(window.scrollY, document.documentElement.scrollTop, document.body.scrollTop);
+    const update = () => setScrolled(readY() > 24);
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    document.addEventListener("scroll", update, { passive: true, capture: true });
+    const hero = document.querySelector(".ref-hero");
+    const io = hero
+      ? new IntersectionObserver(([entry]) => {
+          setScrolled(readY() > 24 || entry.boundingClientRect.bottom < 88);
+        }, { threshold: [0, 0.15, 1] })
+      : null;
+    if (hero && io) io.observe(hero);
+    return () => {
+      window.removeEventListener("scroll", update);
+      document.removeEventListener("scroll", update, { capture: true });
+      io?.disconnect();
+    };
+  }, [route]);
+
   return (
     <>
-      <header className={solid ? "is-solid" : "is-overlay"}>
-        <button className="wordmark" onClick={() => go("home")} aria-label="XJEWELRYX home" tabIndex={solid ? 0 : -1} />
+      <header className={stuck ? "is-solid" : "is-overlay"}>
+        <button className="wordmark" onClick={() => go("home")} aria-label="XJEWELRYX home" tabIndex={stuck ? 0 : -1} />
         <nav>
           {nav.map(([key, label]) => (
             <button key={key} className={route === key ? "active" : ""} onClick={() => go(key)}>
