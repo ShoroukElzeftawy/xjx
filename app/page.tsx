@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Cart } from "./components/Cart";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
@@ -33,8 +33,10 @@ function lineFromProduct(item: ProductItem, variantId?: string): BagLine {
 }
 
 export default function XjxSite() {
-  const [route, setRoute] = useState<Route>("home");
-  const [shopQuery, setShopQuery] = useState<ShopQuery>({ type: "ALL", color: "ALL" });
+  const [pathname, setPathname] = useState("/");
+  const parsed = useMemo(() => routeFromPath(pathname), [pathname]);
+  const route = parsed.route;
+  const shopQuery = parsed.query ?? { type: "ALL", color: "ALL" };
   const [menuOpen, setMenuOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
   const [notice, setNotice] = useState("");
@@ -45,6 +47,13 @@ export default function XjxSite() {
   const [bagReady, setBagReady] = useState(false);
   const [checkingOut, setCheckingOut] = useState(false);
   const [headerSolid, setHeaderSolid] = useState(false);
+
+  useEffect(() => {
+    const sync = () => setPathname(window.location.pathname);
+    sync();
+    window.addEventListener("popstate", sync);
+    return () => window.removeEventListener("popstate", sync);
+  }, []);
 
   useEffect(() => {
     document.body.classList.toggle("menu-open", menuOpen);
@@ -81,38 +90,31 @@ export default function XjxSite() {
   }, [bag, bagReady]);
 
   useEffect(() => {
-    const apply = () => {
-      const next = routeFromPath();
-      setRoute(next.route);
-      setShopQuery(next.query ?? { type: "ALL", color: "ALL" });
-      if (next.handle) setSelected((current) => productFromHandle(catalog, next.handle) ?? current);
-    };
-    apply();
-    window.addEventListener("popstate", apply);
+    if (parsed.handle) {
+      setSelected((current) => productFromHandle(catalog, parsed.handle) ?? current);
+    }
+  }, [catalog, parsed.handle]);
+
+  useEffect(() => {
     fetch("/api/shopify")
       .then((response) => response.json())
       .then((data) => {
         if (data?.products?.length) {
           setCatalog(data.products);
           setShopLive(Boolean(data.connected));
-          const { handle } = routeFromPath();
-          setSelected(productFromHandle(data.products, handle));
+          setSelected(productFromHandle(data.products, parsed.handle));
         }
       })
       .catch(() => undefined);
-    return () => window.removeEventListener("popstate", apply);
-  }, []);
+  }, [parsed.handle]);
 
   const go = (next: Route, handle?: string, query?: ShopQuery) => {
-    const shopQuery = {
+    const nextQuery = {
       type: query?.type || "ALL",
       color: query?.color || "ALL",
     };
-    window.history.pushState({}, "", pathFor(next, handle, shopQuery));
-    setRoute(next);
-    setShopQuery(shopQuery);
     setMenuOpen(false);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.location.assign(pathFor(next, handle, nextQuery));
   };
 
   const openProduct = (item: ProductItem) => {

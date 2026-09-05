@@ -35,7 +35,7 @@ export function shopQueryFromSearch(search = typeof window === "undefined" ? "" 
   };
 }
 
-export function routeFromPath(pathname = typeof window === "undefined" ? "/" : window.location.pathname): { route: Route; handle?: string; query?: ShopQuery } {
+export function routeFromPath(pathname: string): { route: Route; handle?: string; query?: ShopQuery } {
   const parts = pathname.split("/").filter(Boolean);
   const key = parts[0] as Route;
   if (key === "product") return { route: "product", handle: parts[1] };

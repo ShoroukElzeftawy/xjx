@@ -53,6 +53,12 @@ body:has(main.inner-page) header {
   }
 }
 
+header nav,
+.tools {
+  position: relative;
+  z-index: 2;
+}
+
 header nav {
   grid-column: 1;
   display: flex;
@@ -61,6 +67,7 @@ header nav {
   height: 76px;
 }
 
+header nav a,
 header nav button {
   border: 0;
   background: none;
@@ -70,8 +77,12 @@ header nav button {
   letter-spacing: var(--track-sub);
   color: #f4f4f2;
   position: relative;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
 }
 
+header nav a.active:after,
 header nav button.active:after {
   content: "";
   position: absolute;
@@ -101,6 +112,8 @@ header nav button.active:after {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.22s ease;
+  z-index: 1;
+  text-decoration: none;
 }
 
 header.is-solid .wordmark,
@@ -186,6 +199,7 @@ body:has(main.inner-page) .wordmark {
     overflow: auto;
   }
 
+  .mobile-nav a,
   .mobile-nav button {
     border: 0;
     border-bottom: 1px solid #ffffff44;

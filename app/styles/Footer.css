@@ -82,12 +82,14 @@
   text-underline-offset: 4px;
 }
 
+.footer-links a,
 .footer-links button {
   border: 0;
   background: none;
   color: #d8d8d6;
   padding: 3px 0;
   font: var(--type-small) var(--font-body);
+  text-decoration: none;
 }
 
 .footer-signup label {
@@ -183,6 +185,7 @@
     min-width: 0;
   }
 
+  .footer-links a,
   .footer-links button {
     min-height: 36px;
     padding: 6px 0;

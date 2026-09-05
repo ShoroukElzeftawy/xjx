@@ -1,7 +1,8 @@
 import { SLOGAN } from "../lib/copy";
+import { pathFor } from "../lib/routes";
 import type { Go } from "../lib/types";
 
-export function Footer({ go }: { go: Go }) {
+export function Footer(_props: { go: Go }) {
   return (
     <footer className="ref-footer">
       <div className="footer-main">
@@ -16,25 +17,25 @@ export function Footer({ go }: { go: Go }) {
         </div>
         <div className="footer-links">
           <span>SHOP</span>
-          <button onClick={() => go("shop")}>ALL</button>
-          <button onClick={() => go("shop", undefined, { type: "RINGS" })}>RINGS</button>
-          <button onClick={() => go("shop", undefined, { type: "EARRINGS" })}>EARRINGS</button>
-          <button onClick={() => go("shop", undefined, { type: "BRACELETS" })}>BRACELETS</button>
-          <button onClick={() => go("shop", undefined, { type: "NECKLACES" })}>NECKLACES</button>
-          <button onClick={() => go("shop", undefined, { type: "CHAINS" })}>CHAINS</button>
+          <a href={pathFor("shop")}>ALL</a>
+          <a href={pathFor("shop", undefined, { type: "RINGS" })}>RINGS</a>
+          <a href={pathFor("shop", undefined, { type: "EARRINGS" })}>EARRINGS</a>
+          <a href={pathFor("shop", undefined, { type: "BRACELETS" })}>BRACELETS</a>
+          <a href={pathFor("shop", undefined, { type: "NECKLACES" })}>NECKLACES</a>
+          <a href={pathFor("shop", undefined, { type: "CHAINS" })}>CHAINS</a>
         </div>
         <div className="footer-links">
           <span>CUSTOM</span>
-          <button onClick={() => go("custom")}>BESPOKE</button>
-          <button onClick={() => go("custom")}>ENGRAVING</button>
-          <button onClick={() => go("custom")}>GALLERY</button>
+          <a href={pathFor("custom")}>BESPOKE</a>
+          <a href={pathFor("custom")}>ENGRAVING</a>
+          <a href={pathFor("custom")}>GALLERY</a>
         </div>
         <div className="footer-links">
           <span>ABOUT</span>
-          <button onClick={() => go("about")}>OUR STORY</button>
-          <button onClick={() => go("materials")}>MATERIALS</button>
-          <button onClick={() => go("refer")}>REFER A FRIEND</button>
-          <button onClick={() => go("about")}>FAQ</button>
+          <a href={pathFor("about")}>OUR STORY</a>
+          <a href={pathFor("materials")}>MATERIALS</a>
+          <a href={pathFor("refer")}>REFER A FRIEND</a>
+          <a href={pathFor("about")}>FAQ</a>
         </div>
         <div className="footer-signup">
           <span>STAY CONNECTED</span>
