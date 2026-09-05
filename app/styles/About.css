@@ -1,24 +1,56 @@
-.about-simple {
+.about-page {
   min-height: calc(100dvh - var(--header-h));
-  padding: 72px var(--page-gutter) 110px;
-  background: var(--paper);
-  color: var(--ink);
+  display: grid;
+  grid-template-columns: 58% 42%;
+  background: var(--void);
+  color: var(--paper);
+  border-bottom: 2px solid var(--gold);
 }
 
-.about-simple h1 {
-  margin: 18px 0 28px;
+.about-page > div:first-child {
+  padding: 110px var(--page-gutter) 80px;
 }
 
-.about-simple > p:last-child {
+.about-page h1 {
+  font-size: var(--type-display);
+  line-height: var(--leading-headline);
+  margin: 60px 0 40px;
+}
+
+.about-page h1 i {
+  font-style: normal;
+  color: var(--blue);
+}
+
+.about-page > div > p:last-child {
   margin: 0;
-  max-width: 42em;
+  max-width: 440px;
   font: var(--type-body) / 1.7 var(--font-body);
   text-transform: none;
   letter-spacing: normal;
+  color: rgba(242, 242, 242, 0.86);
 }
 
-@media (max-width: 600px) {
-  .about-simple {
-    padding: 48px var(--page-gutter) 80px;
+.about-page-shot {
+  min-height: 420px;
+  background: url("/editorial-about.jpg") center 40% / cover no-repeat;
+  filter: grayscale(0.12) contrast(1.06);
+}
+
+@media (max-width: 1100px) {
+  .about-page {
+    grid-template-columns: 1fr;
+  }
+
+  .about-page > div:first-child {
+    padding: 72px var(--page-gutter) 40px;
+  }
+
+  .about-page h1 {
+    margin: 28px 0 24px;
+  }
+
+  .about-page-shot {
+    min-height: 280px;
   }
 }
