@@ -41,3 +41,13 @@ next-env.d.ts
 /.wrangler/
 /outputs/
 /work/
+
+# nested Shopify app
+xjx/node_modules/
+xjx/.shopify/
+xjx/.cursor/
+xjx/.gemini/
+xjx/.react-router/
+xjx/prisma/*.sqlite
+xjx/prisma/*.sqlite-journal
+

@@ -4,6 +4,7 @@
 
 [build.environment]
   NODE_VERSION = "22"
+  SHOPIFY_STORE_DOMAIN = "xjewelryx-2.myshopify.com"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
