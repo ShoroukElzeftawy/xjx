@@ -184,7 +184,7 @@ export default function XjxSite() {
       {route === "product" && <Product item={selected} add={add} go={go} />}
       {route === "custom" && <Custom />}
       {route === "materials" && <Materials go={go} catalog={catalog} />}
-      {route === "about" && <About go={go} catalog={catalog} />}
+      {route === "about" && <About />}
       {route === "refer" && <Refer />}
       <Footer go={go} />
       <Cart
