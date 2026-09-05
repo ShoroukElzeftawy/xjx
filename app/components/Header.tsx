@@ -14,6 +14,7 @@ const nav: [Route, string][] = [
 
 export function Header({
   route,
+  go,
   bag,
   open,
   setOpen,
@@ -54,10 +55,27 @@ export function Header({
   return (
     <>
       <header className={stuck ? "is-solid" : "is-overlay"}>
-        <a className="wordmark" href={pathFor("home")} aria-label="XJEWELRYX home" tabIndex={stuck ? 0 : -1} />
+        <a
+          className="wordmark"
+          href={pathFor("home")}
+          aria-label="XJEWELRYX home"
+          tabIndex={stuck ? 0 : -1}
+          onClick={(event) => {
+            event.preventDefault();
+            go("home");
+          }}
+        />
         <nav>
           {nav.map(([key, label]) => (
-            <a key={key} href={pathFor(key)} className={route === key ? "active" : ""}>
+            <a
+              key={key}
+              href={pathFor(key)}
+              className={route === key ? "active" : ""}
+              onClick={(event) => {
+                event.preventDefault();
+                go(key);
+              }}
+            >
               {label}
             </a>
           ))}
@@ -71,7 +89,15 @@ export function Header({
       {open && (
         <div className="mobile-nav" id="mobile-nav">
           {nav.map(([key, label], index) => (
-            <a key={key} href={pathFor(key)} onClick={() => setOpen(false)}>
+            <a
+              key={key}
+              href={pathFor(key)}
+              onClick={(event) => {
+                event.preventDefault();
+                setOpen(false);
+                go(key);
+              }}
+            >
               <span>0{index + 1}</span>
               {label}
             </a>

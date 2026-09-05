@@ -2,7 +2,7 @@ import { SLOGAN } from "../lib/copy";
 import { pathFor } from "../lib/routes";
 import type { Go } from "../lib/types";
 
-export function Footer(_props: { go: Go }) {
+export function Footer({ go }: { go: Go }) {
   return (
     <footer className="ref-footer">
       <div className="footer-main">
@@ -17,25 +17,25 @@ export function Footer(_props: { go: Go }) {
         </div>
         <div className="footer-links">
           <span>SHOP</span>
-          <a href={pathFor("shop")}>ALL</a>
-          <a href={pathFor("shop", undefined, { type: "RINGS" })}>RINGS</a>
-          <a href={pathFor("shop", undefined, { type: "EARRINGS" })}>EARRINGS</a>
-          <a href={pathFor("shop", undefined, { type: "BRACELETS" })}>BRACELETS</a>
-          <a href={pathFor("shop", undefined, { type: "NECKLACES" })}>NECKLACES</a>
-          <a href={pathFor("shop", undefined, { type: "CHAINS" })}>CHAINS</a>
+          <a href={pathFor("shop")} onClick={(event) => { event.preventDefault(); go("shop"); }}>ALL</a>
+          <a href={pathFor("shop", undefined, { type: "RINGS" })} onClick={(event) => { event.preventDefault(); go("shop", undefined, { type: "RINGS" }); }}>RINGS</a>
+          <a href={pathFor("shop", undefined, { type: "EARRINGS" })} onClick={(event) => { event.preventDefault(); go("shop", undefined, { type: "EARRINGS" }); }}>EARRINGS</a>
+          <a href={pathFor("shop", undefined, { type: "BRACELETS" })} onClick={(event) => { event.preventDefault(); go("shop", undefined, { type: "BRACELETS" }); }}>BRACELETS</a>
+          <a href={pathFor("shop", undefined, { type: "NECKLACES" })} onClick={(event) => { event.preventDefault(); go("shop", undefined, { type: "NECKLACES" }); }}>NECKLACES</a>
+          <a href={pathFor("shop", undefined, { type: "CHAINS" })} onClick={(event) => { event.preventDefault(); go("shop", undefined, { type: "CHAINS" }); }}>CHAINS</a>
         </div>
         <div className="footer-links">
           <span>CUSTOM</span>
-          <a href={pathFor("custom")}>BESPOKE</a>
-          <a href={pathFor("custom")}>ENGRAVING</a>
-          <a href={pathFor("custom")}>GALLERY</a>
+          <a href={pathFor("custom")} onClick={(event) => { event.preventDefault(); go("custom"); }}>BESPOKE</a>
+          <a href={pathFor("custom")} onClick={(event) => { event.preventDefault(); go("custom"); }}>ENGRAVING</a>
+          <a href={pathFor("custom")} onClick={(event) => { event.preventDefault(); go("custom"); }}>GALLERY</a>
         </div>
         <div className="footer-links">
           <span>ABOUT</span>
-          <a href={pathFor("about")}>OUR STORY</a>
-          <a href={pathFor("materials")}>MATERIALS</a>
-          <a href={pathFor("refer")}>REFER A FRIEND</a>
-          <a href={pathFor("about")}>FAQ</a>
+          <a href={pathFor("about")} onClick={(event) => { event.preventDefault(); go("about"); }}>OUR STORY</a>
+          <a href={pathFor("materials")} onClick={(event) => { event.preventDefault(); go("materials"); }}>MATERIALS</a>
+          <a href={pathFor("refer")} onClick={(event) => { event.preventDefault(); go("refer"); }}>REFER A FRIEND</a>
+          <a href={pathFor("about")} onClick={(event) => { event.preventDefault(); go("about"); }}>FAQ</a>
         </div>
         <div className="footer-signup">
           <span>STAY CONNECTED</span>

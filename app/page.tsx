@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { Cart } from "./components/Cart";
 import { Footer } from "./components/Footer";
@@ -33,7 +34,7 @@ function lineFromProduct(item: ProductItem, variantId?: string): BagLine {
 }
 
 export default function XjxSite() {
-  const [pathname, setPathname] = useState("/");
+  const pathname = usePathname() || "/";
   const parsed = useMemo(() => routeFromPath(pathname), [pathname]);
   const route = parsed.route;
   const shopQuery = parsed.query ?? { type: "ALL", color: "ALL" };
@@ -47,13 +48,6 @@ export default function XjxSite() {
   const [bagReady, setBagReady] = useState(false);
   const [checkingOut, setCheckingOut] = useState(false);
   const [headerSolid, setHeaderSolid] = useState(false);
-
-  useEffect(() => {
-    const sync = () => setPathname(window.location.pathname);
-    sync();
-    window.addEventListener("popstate", sync);
-    return () => window.removeEventListener("popstate", sync);
-  }, []);
 
   useEffect(() => {
     document.body.classList.toggle("menu-open", menuOpen);
