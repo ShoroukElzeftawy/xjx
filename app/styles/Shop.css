@@ -283,7 +283,7 @@
 .product-chip.is-on {
   background: var(--gold);
   border-color: var(--gold);
-  color: var(--ink);
+  color: #fff;
 }
 
 .sold-out {
