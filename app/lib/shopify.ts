@@ -116,7 +116,7 @@ export function mapProduct(item: ShopifyProduct, index: number): ProductItem {
   const variants = item.variants?.nodes ?? [];
   const images = item.images?.nodes.map((image) => image.url) ?? [];
   const optionValues = item.options?.flatMap((option) => option.values) ?? [];
-  const source = [item.productType, item.title, optionValues.join(" ")].filter(Boolean).join(" ");
+  const source = [item.productType, item.title, item.handle, optionValues.join(" ")].filter(Boolean).join(" ");
   const type = inferType(source, inferType(item.productType || "", "NECKLACES"));
   const color = inferColor(source);
   const price = variants[0]?.price ?? item.priceRange?.minVariantPrice ?? { amount: "0", currencyCode: "USD" };
@@ -164,7 +164,8 @@ export async function fetchCatalog(buyerIp?: string) {
       const mapped = mapProduct(item, index);
       counts[mapped.type] = (counts[mapped.type] ?? 0) + 1;
       const generated = skuFor(mapped.type, counts[mapped.type]);
-      const sku = mapped.sku || generated;
+      const shopifySku = mapped.sku?.trim();
+      const sku = shopifySku && !/^XJ[1-5]/i.test(shopifySku) ? shopifySku : generated;
       return { ...mapped, code: sku, sku };
     }),
     collections: data.collections.nodes.map((item) => item.title.toUpperCase()),

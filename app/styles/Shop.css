@@ -281,9 +281,9 @@
 }
 
 .product-chip.is-on {
-  background: var(--ink);
-  border-color: var(--ink);
-  color: var(--paper);
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--ink);
 }
 
 .sold-out {

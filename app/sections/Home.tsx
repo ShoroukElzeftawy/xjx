@@ -7,6 +7,13 @@ import { skuFor, SLOGAN } from "../lib/copy";
 import { PRODUCT_COLORS, SHOP_TYPES } from "../lib/taxonomy";
 import type { Go, ProductItem } from "../lib/types";
 
+function categoryPhoto(pieces: ProductItem[], fallback?: string) {
+  const urls = pieces
+    .flatMap((item) => [item.image, ...(item.images ?? [])])
+    .filter((url): url is string => Boolean(url));
+  return urls.find((url) => /model/i.test(url)) || urls[0] || fallback;
+}
+
 function shopifyPhoto(items: ProductItem[], index = 1) {
   const urls = items
     .flatMap((item) => [item.image, ...(item.images ?? [])])
@@ -18,16 +25,19 @@ function shopifyPhoto(items: ProductItem[], index = 1) {
   return pool[index] || pool[0];
 }
 
-function choiceLine(pieces: ProductItem[], fallbackColors: readonly string[]) {
-  if (!pieces.length) {
-    return fallbackColors.map((color) => `${color} GOLD`).join(" · ");
-  }
+function choiceLine(pieces: ProductItem[]) {
+  if (!pieces.length) return "";
 
   const seen = new Set<string>();
   const values: string[] = [];
   const add = (raw?: string) => {
-    const clean = raw?.trim().replace(/\s+/g, " ");
+    const clean = raw
+      ?.trim()
+      .replace(/\s+/g, " ")
+      .replace(/\s*\/\s*(yellow|white|pink|rose)\s*gold/gi, "")
+      .trim();
     if (!clean || /default title/i.test(clean)) return;
+    if (/^(yellow|white|pink|rose)(\s*gold)?$/i.test(clean)) return;
     const key = clean.toUpperCase();
     if (seen.has(key)) return;
     seen.add(key);
@@ -36,7 +46,6 @@ function choiceLine(pieces: ProductItem[], fallbackColors: readonly string[]) {
 
   for (const item of pieces) {
     add(item.karat);
-    add(`${item.color} GOLD`);
     for (const value of item.optionValues ?? []) add(value);
     if (!item.optionValues?.length && item.options) {
       item.options.split("/").forEach((part) => add(part));
@@ -127,12 +136,10 @@ export function Home({
           <div className="shop-categories" ref={track}>
             {SHOP_TYPES.map((type) => {
               const pieces = listed.filter((item) => item.type === type);
-              const image =
-                pieces.find((item) => item.image)?.image ||
-                categoryPlaceholders[type];
+              const image = categoryPhoto(pieces, categoryPlaceholders[type]);
               const colors = [...new Set(pieces.map((item) => item.color))];
               const swatches = colors.length ? colors : [...PRODUCT_COLORS];
-              const varsLabel = choiceLine(pieces, swatches);
+              const varsLabel = choiceLine(pieces);
               return (
                 <article className="shop-category" key={type}>
                   <button
@@ -272,7 +279,12 @@ export function Home({
             <h2>THE PIECES</h2>
             <button type="button" onClick={() => go("shop")}>VIEW ALL →</button>
           </div>
-          <ProductGrid items={listed.slice(0, 8)} add={add} openProduct={openProduct} />
+          <ProductGrid
+            className="home-pieces"
+            items={listed.slice(0, 8)}
+            add={add}
+            openProduct={openProduct}
+          />
         </section>
       )}
       <section className="ref-campaign">

@@ -1,17 +1,18 @@
 export const PRODUCT_TYPES = ["EARRINGS", "BRACELETS", "RINGS", "NECKLACES", "CHAINS"] as const;
 export const SHOP_TYPES = ["EARRINGS", "BRACELETS", "RINGS", "NECKLACES", "CHAINS"] as const;
 export const PRODUCT_COLORS = ["YELLOW", "WHITE", "PINK"] as const;
-export const COMING_TYPES = ["BRACELETS", "RINGS", "NECKLACES"] as const;
+export const COMING_TYPES = ["RINGS", "NECKLACES"] as const;
 
 export type ProductType = (typeof PRODUCT_TYPES)[number];
 export type ProductColor = (typeof PRODUCT_COLORS)[number];
 
 const typeHints: [RegExp, ProductType][] = [
-  [/earring|hoop/i, "EARRINGS"],
-  [/bracelet|bangle/i, "BRACELETS"],
-  [/\brings?\b/i, "RINGS"],
-  [/chain/i, "CHAINS"],
-  [/necklace|pendant|choker/i, "NECKLACES"],
+  [/\bxj3[\s-]|bracelet|bangle/i, "BRACELETS"],
+  [/\bxj4[\s-]|earring/i, "EARRINGS"],
+  [/\bxj2[\s-]|\brings?\b/i, "RINGS"],
+  [/\bxj1[\s-]|chain/i, "CHAINS"],
+  [/\bxj5[\s-]|necklace|pendant|choker/i, "NECKLACES"],
+  [/hoop/i, "EARRINGS"],
 ];
 
 export function inferType(source: string, fallback: ProductType = "NECKLACES"): ProductType {

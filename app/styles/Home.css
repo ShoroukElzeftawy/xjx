@@ -95,12 +95,14 @@
   padding: 0 var(--page-gutter);
 }
 
-.ref-featured .products {
+.ref-featured .products.home-pieces {
   padding: 22px var(--page-gutter) 48px;
 }
 
-.ref-featured .product-grid {
+.ref-featured .home-pieces .product-grid {
+  display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-flow: row;
   gap: 22px;
   background: none;
 }
@@ -549,7 +551,7 @@
     padding: 0;
   }
 
-  .ref-featured .product-grid {
+  .ref-featured .home-pieces .product-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
@@ -608,5 +610,9 @@
   .material-spec .texture {
     grid-column: 1 / -1;
     height: 56px;
+  }
+
+  .ref-featured .home-pieces .product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

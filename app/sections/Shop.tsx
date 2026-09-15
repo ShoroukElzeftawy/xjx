@@ -39,7 +39,6 @@ export function Shop({
       <section className="page-head">
         <p className="eyebrow">[ SHOP / TYPE & COLOR ]</p>
         <h1>OBJECTS FOR<br /><i>THE BODY.</i></h1>
-        <p>{String(filtered.length).padStart(2, "0")} PIECES / {type === "ALL" ? "ALL TYPES" : type} / {color === "ALL" ? "ALL COLORS" : `${color} GOLD`}</p>
       </section>
       <div className="filters-stack">
         <div className="filters" role="tablist" aria-label="Shop by type">
