@@ -1,8 +1,9 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { imageForOption, productOptions } from "../lib/product-options";
+import { imageForOption, productColors, productOptions } from "../lib/product-options";
 import type { ProductItem } from "../lib/types";
+import { ColorDots } from "./ColorDots";
 
 export function ProductCard({
   item,
@@ -14,11 +15,13 @@ export function ProductCard({
   openProduct: (item: ProductItem) => void;
 }) {
   const options = useMemo(() => productOptions(item), [item]);
+  const colors = useMemo(() => productColors(item), [item]);
   const [picked, setPicked] = useState(options[0]?.id ?? "");
   const active = options.find((option) => option.id === picked) ?? options[0];
   const photo = active ? (active.image || imageForOption(item, active.label)) : item.image;
   const price = active?.price ?? item.price;
   const soldOut = item.variants?.length ? item.variants.every((variant) => !variant.available) : false;
+  const showChipDots = colors.length > 1;
 
   return (
     <article className="product-card">
@@ -28,7 +31,7 @@ export function ProductCard({
         onClick={() => openProduct(item)}
         aria-label={`View ${item.name}`}
       >
-        <small>{item.sku || item.code} / {item.type} / {item.color}</small>
+        <small>{item.sku || item.code} / {item.type}</small>
         <span className="product-view-cue">VIEW</span>
         {soldOut && <em className="sold-out">Sold out</em>}
       </button>
@@ -36,7 +39,8 @@ export function ProductCard({
         <div className="product-info-top">
           <button type="button" className="product-name" onClick={() => openProduct(item)}>
             <b>{item.name}</b>
-            <span>{item.type.replace(/S$/, "")} / {item.color} GOLD</span>
+            <ColorDots colors={colors} active={active?.color} />
+            <span className="product-meta">{item.type.replace(/S$/, "")}</span>
           </button>
           <div className="product-buy">
             <b>{price}</b>
@@ -59,6 +63,9 @@ export function ProductCard({
                 className={`product-chip${option.id === active?.id ? " is-on" : ""}`}
                 onClick={() => setPicked(option.id)}
               >
+                {showChipDots && option.color ? (
+                  <i className={`shop-swatch shop-swatch-${option.color.toLowerCase()}`} aria-hidden />
+                ) : null}
                 {option.label}
               </button>
             ))}

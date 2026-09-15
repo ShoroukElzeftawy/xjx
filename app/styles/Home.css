@@ -256,6 +256,8 @@
   border: 1px solid rgba(242, 242, 242, 0.7);
   border-radius: 50%;
   padding: 0;
+  display: inline-block;
+  flex: none;
 }
 
 .shop-swatch-yellow {

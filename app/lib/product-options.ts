@@ -1,3 +1,4 @@
+import { inferColor, PRODUCT_COLORS, type ProductColor } from "./taxonomy";
 import type { ProductItem, ProductVariant } from "./types";
 
 export type ProductOption = {
@@ -6,10 +7,42 @@ export type ProductOption = {
   price?: string;
   variantId?: string;
   image?: string;
+  color?: ProductColor;
 };
 
 function optionLabel(raw: string) {
   return raw.trim().replace(/\s+/g, " ");
+}
+
+export function stripColorFromLabel(raw: string) {
+  return optionLabel(raw)
+    .replace(/\s*\/\s*(yellow|white|pink|rose)\s*gold/gi, "")
+    .replace(/\b(yellow|white|pink|rose)\s*gold\b/gi, "")
+    .replace(/\s{2,}/g, " ")
+    .replace(/\s*\/\s*$/g, "")
+    .trim();
+}
+
+export function colorFromText(source: string): ProductColor | undefined {
+  if (!source) return undefined;
+  if (/white|wg\b/i.test(source)) return "WHITE";
+  if (/pink|rose/i.test(source)) return "PINK";
+  if (/yellow|yg\b/i.test(source)) return "YELLOW";
+  return undefined;
+}
+
+export function variantColor(item: ProductItem, variant?: { title?: string }): ProductColor {
+  return colorFromText(variant?.title || "") ?? inferColor(item.color || "", "YELLOW");
+}
+
+export function productColors(item: ProductItem): ProductColor[] {
+  const found = new Set<ProductColor>();
+  for (const variant of item.variants ?? []) {
+    const color = colorFromText(variant.title || "");
+    if (color) found.add(color);
+  }
+  if (!found.size && item.color) found.add(inferColor(item.color, "YELLOW"));
+  return PRODUCT_COLORS.filter((color) => found.has(color));
 }
 
 function isPlaceholderTitle(title: string) {
@@ -21,10 +54,11 @@ export function productOptions(item: ProductItem): ProductOption[] {
   if (variants.length) {
     return variants.map((variant) => ({
       id: variant.id,
-      label: optionLabel(variant.title),
+      label: stripColorFromLabel(variant.title) || optionLabel(variant.title),
       price: variant.price,
       variantId: variant.id,
       image: variant.image || imageForOption(item, variant.title),
+      color: colorFromText(variant.title),
     }));
   }
   return [];

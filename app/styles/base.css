@@ -37,7 +37,7 @@
   --track-sub: 0em;
   --leading-headline: 0.92;
   --leading-sub: 1.2;
-  --type-display: clamp(32px, 4.6vw, 56px);
+  --type-display: 48px;
   --type-body: 16px;
   --type-small: 12px;
   --header-h: calc(76px + env(safe-area-inset-top, 0px));
@@ -115,8 +115,20 @@ nav button,
   text-transform: uppercase;
 }
 
-h3 {
+h3,
+.ref-section-head h2 {
   font-size: var(--type-body);
+}
+
+.eyebrow,
+.frame-label,
+.footer-links span,
+.footer-signup > span,
+nav button,
+.tools button,
+small,
+legend {
+  font-size: var(--type-small);
 }
 
 .sold-out,

@@ -148,10 +148,24 @@
   border-left: 1px solid #aaa;
 }
 
+.buy-panel .eyebrow {
+  margin: 0;
+}
+
+.buy-panel .product-colors .shop-swatch,
+.buy-panel fieldset .shop-swatch,
+.specs .shop-swatch {
+  border-color: rgba(24, 26, 26, 0.4);
+}
+
 .buy-panel h1 {
   font-size: var(--type-display);
   line-height: var(--leading-headline);
   margin: 35px 0 12px;
+}
+
+.buy-panel > .product-colors {
+  margin: -4px 0 18px;
 }
 
 .price {
@@ -191,11 +205,15 @@
   border: 1px solid var(--line);
   background: none;
   padding: 12px 15px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .buy-panel fieldset .selected {
-  background: var(--ink);
-  color: white;
+  background: var(--blue);
+  border-color: var(--blue);
+  color: #fff;
 }
 
 .add {
