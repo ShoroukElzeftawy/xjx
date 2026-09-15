@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { ProductGrid } from "../components/ProductGrid";
 import { categoryPlaceholders, shopProducts } from "../lib/catalog";
 import { skuFor, SLOGAN } from "../lib/copy";
 import { PRODUCT_COLORS, SHOP_TYPES } from "../lib/taxonomy";
@@ -46,7 +47,17 @@ function choiceLine(pieces: ProductItem[], fallbackColors: readonly string[]) {
   return values.slice(0, 6).join(" · ");
 }
 
-export function Home({ go, catalog }: { go: Go; catalog: ProductItem[] }) {
+export function Home({
+  go,
+  catalog,
+  add,
+  openProduct,
+}: {
+  go: Go;
+  catalog: ProductItem[];
+  add: (item: ProductItem, variantId?: string) => void;
+  openProduct: (item: ProductItem) => void;
+}) {
   const listed = shopProducts(catalog);
   const manifestoImage = shopifyPhoto(catalog) || listed[0]?.image;
   const track = useRef<HTMLDivElement>(null);
@@ -255,6 +266,15 @@ export function Home({ go, catalog }: { go: Go; catalog: ProductItem[] }) {
           ))}
         </div>
       </section>
+      {listed.length > 0 && (
+        <section className="ref-featured">
+          <div className="ref-section-head">
+            <h2>THE PIECES</h2>
+            <button type="button" onClick={() => go("shop")}>VIEW ALL →</button>
+          </div>
+          <ProductGrid items={listed.slice(0, 8)} add={add} openProduct={openProduct} />
+        </section>
+      )}
       <section className="ref-campaign">
         <img className="campaign-photo" src="/campaign-hero.jpg?v=2" alt="" />
         <div className="campaign-ticker" aria-hidden="true">

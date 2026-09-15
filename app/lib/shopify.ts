@@ -25,6 +25,7 @@ type ShopifyProduct = {
       sku?: string;
       availableForSale: boolean;
       price: Money;
+      image?: { url: string } | null;
       selectedOptions?: { name: string; value: string }[];
     }[];
   };
@@ -94,12 +95,13 @@ const catalogQuery = `query XJXCatalog {
     nodes {
       id title handle description productType vendor tags
       featuredImage { url }
-      images(first: 8) { nodes { url } }
+      images(first: 50) { nodes { url } }
       options { name values }
       variants(first: 50) {
         nodes {
           id title sku availableForSale
           price { amount currencyCode }
+          image { url }
           selectedOptions { name value }
         }
       }
@@ -133,7 +135,7 @@ export function mapProduct(item: ShopifyProduct, index: number): ProductItem {
     image: item.featuredImage?.url ?? images[0],
     images: images.length ? images : item.featuredImage?.url ? [item.featuredImage.url] : [],
     handle: item.handle,
-    options: optionValues.slice(0, 6).join(" / ") || variants[0]?.title,
+    options: optionValues.join(" / ") || variants[0]?.title,
     optionValues,
     variantId: variants[0]?.id,
     variants: variants.map((variant) => ({
@@ -142,6 +144,7 @@ export function mapProduct(item: ShopifyProduct, index: number): ProductItem {
       price: money(variant.price),
       available: variant.availableForSale,
       sku: variant.sku,
+      image: variant.image?.url,
     })),
     description: item.description || undefined,
     vendor: item.vendor,

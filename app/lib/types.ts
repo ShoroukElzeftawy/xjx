@@ -11,6 +11,7 @@ export type ProductVariant = {
   price: string;
   available: boolean;
   sku?: string;
+  image?: string;
 };
 
 export type ProductItem = {

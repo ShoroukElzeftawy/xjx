@@ -1,4 +1,5 @@
 import type { ProductItem } from "../lib/types";
+import { ProductCard } from "./ProductCard";
 
 export function ProductGrid({
   items,
@@ -6,36 +7,14 @@ export function ProductGrid({
   openProduct,
 }: {
   items: ProductItem[];
-  add: (item: ProductItem) => void;
+  add: (item: ProductItem, variantId?: string) => void;
   openProduct: (item: ProductItem) => void;
 }) {
   return (
     <section className="products">
       <div className="product-grid">
         {items.map((item) => (
-          <article className="product-card" key={item.code}>
-            <button
-              className="product-visual has-image"
-              style={{ backgroundImage: `url(${item.image})` }}
-              onClick={() => openProduct(item)}
-              aria-label={`View ${item.name}`}
-            >
-              <small>{item.sku || item.code} / {item.type} / {item.color}</small>
-              {item.variants && item.variants.every((variant) => !variant.available) && (
-                <em className="sold-out">Sold out</em>
-              )}
-            </button>
-            <div className="product-info">
-              <button onClick={() => openProduct(item)}>
-                <b>{item.name}</b>
-                <span>{item.type.replace(/S$/, "")} / {item.color} GOLD / {item.options}</span>
-              </button>
-              <div>
-                <b>{item.price}</b>
-                <button className="plus" onClick={() => add(item)} aria-label={`Add ${item.name}`}>＋</button>
-              </div>
-            </div>
-          </article>
+          <ProductCard key={item.code} item={item} add={add} openProduct={openProduct} />
         ))}
       </div>
     </section>

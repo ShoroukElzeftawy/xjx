@@ -1,6 +1,7 @@
 .ref-shop,
 .ref-materials,
-.ref-manifesto {
+.ref-manifesto,
+.ref-featured {
   position: relative;
   isolation: isolate;
 }
@@ -83,6 +84,25 @@
 
 .ref-shop {
   padding: 34px var(--page-gutter) 54px;
+}
+
+.ref-featured {
+  background: var(--paper);
+  padding: 8px 0 0;
+}
+
+.ref-featured .ref-section-head {
+  padding: 0 var(--page-gutter);
+}
+
+.ref-featured .products {
+  padding: 22px var(--page-gutter) 48px;
+}
+
+.ref-featured .product-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 22px;
+  background: none;
 }
 
 .ref-section-head {
@@ -527,6 +547,10 @@
 
   .material-table {
     padding: 0;
+  }
+
+  .ref-featured .product-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 

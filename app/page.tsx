@@ -166,7 +166,7 @@ export default function XjxSite() {
     <>
       <Header route={route} bag={count} onBag={() => setCartOpen(true)} solid={headerSolid} />
       <main className={`site-shell page-${route}${route === "home" ? "" : " inner-page"}`}>
-      {route === "home" && <Home go={go} catalog={catalog} />}
+      {route === "home" && <Home go={go} catalog={catalog} add={add} openProduct={openProduct} />}
       {route === "shop" && <Shop go={go} add={add} catalog={catalog} query={shopQuery} openProduct={openProduct} live={shopLive} />}
       {route === "product" && <Product item={selected} add={add} go={go} />}
       {route === "custom" && <Custom />}
