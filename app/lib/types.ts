@@ -12,6 +12,7 @@ export type ProductVariant = {
   available: boolean;
   sku?: string;
   image?: string;
+  selectedOptions?: { name: string; value: string }[];
 };
 
 export type ProductItem = {

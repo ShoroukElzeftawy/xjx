@@ -2,10 +2,11 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
-import { colorFromText, galleryForVariant, productColors, stripColorFromLabel, variantColor } from "../lib/product-options";
+import { axesLabel, galleryForVariant, matchVariant, parseAxes, uniqueAxes } from "../lib/product-options";
 import type { ProductColor } from "../lib/taxonomy";
 import type { Go, ProductItem } from "../lib/types";
 import { ColorDots } from "../components/ColorDots";
+import { ProductOptions } from "../components/ProductOptions";
 
 export function Product({
   item,
@@ -17,7 +18,7 @@ export function Product({
   go: Go;
 }) {
   const variants = (item.variants ?? []).filter((variant) => variant.title && !/default title/i.test(variant.title));
-  const colors = useMemo(() => productColors(item), [item]);
+  const { colors } = useMemo(() => uniqueAxes(item), [item]);
   const [imageIndex, setImageIndex] = useState(0);
   const [viewerOpen, setViewerOpen] = useState(false);
   const [variantId, setVariantId] = useState(item.variantId ?? variants[0]?.id);
@@ -25,9 +26,8 @@ export function Product({
   const gallery = useMemo(() => galleryForVariant(item, active), [item, active]);
   const sku = active?.sku || item.sku || item.code;
   const photo = gallery[imageIndex] || item.image;
-  const activeColor = variantColor(item, active);
-  const optionLabel = stripColorFromLabel(active?.title || "") || active?.title || item.karat || "SEE OPTIONS";
-  const showChipDots = colors.length > 1;
+  const axes = parseAxes(item, active);
+  const activeColor = axes.color;
 
   useEffect(() => {
     setVariantId(item.variantId ?? item.variants?.[0]?.id);
@@ -65,7 +65,7 @@ export function Product({
   };
 
   const pickColor = (color: ProductColor) => {
-    const match = variants.find((variant) => variantColor(item, variant) === color);
+    const match = matchVariant(item, { color }, active);
     if (match) pickVariant(match.id);
   };
 
@@ -88,7 +88,7 @@ export function Product({
               </button>
             ) : null}
             <small>
-              {sku} / {stripColorFromLabel(active?.title || "") || "STANDARD"} / IMAGE {String(imageIndex + 1).padStart(2, "0")} OF {String(Math.max(gallery.length, 1)).padStart(2, "0")}
+              {sku} / {axesLabel(item, active)} / IMAGE {String(imageIndex + 1).padStart(2, "0")} OF {String(Math.max(gallery.length, 1)).padStart(2, "0")}
             </small>
             {gallery.length > 1 && (
               <div className="gallery-controls">
@@ -103,7 +103,7 @@ export function Product({
             {sku} / {item.type.replace(/S$/, "")}
           </p>
           <h1>{item.name}</h1>
-          <ColorDots colors={colors} active={activeColor} onPick={showChipDots ? pickColor : undefined} />
+          <ColorDots colors={colors} active={activeColor} onPick={colors.length > 1 ? pickColor : undefined} />
           <p className="price">{active?.price ?? item.price} <span>LIVE PRICE</span></p>
           <p className="description">
             {item.description || "An original XJEWELRYX object. Weight, karat, and options are listed. Size is given by comparison, not only millimeters."}
@@ -112,27 +112,7 @@ export function Product({
             <p>SIZE, COMPARED</p>
             <p>{item.sizeCompare || "We size against something you already wear — a coin, a hoop, a chain on the neck — not a tape measure alone."}</p>
           </div>
-          {variants.length > 0 && (
-            <fieldset>
-              <legend>AVAILABLE OPTIONS</legend>
-              {variants.map((variant) => {
-                const color = colorFromText(variant.title);
-                return (
-                  <button
-                    key={variant.id}
-                    type="button"
-                    className={variantId === variant.id ? "selected" : ""}
-                    onClick={() => pickVariant(variant.id)}
-                  >
-                    {showChipDots && color ? (
-                      <i className={`shop-swatch shop-swatch-${color.toLowerCase()}`} aria-hidden />
-                    ) : null}
-                    {stripColorFromLabel(variant.title) || variant.title}
-                  </button>
-                );
-              })}
-            </fieldset>
-          )}
+          <ProductOptions item={item} variantId={active?.id} onPick={pickVariant} labeled />
           <button className="add" type="button" onClick={() => add({ ...item, variantId: active?.id ?? variantId }, active?.id ?? variantId)}>
             ADD TO BAG — {active?.price ?? item.price} <b>↗</b>
           </button>
@@ -140,7 +120,8 @@ export function Product({
             <span>SKU<br /><b>{sku}</b></span>
             <span>TYPE<br /><b>{item.type}</b></span>
             <span>COLOR<br /><ColorDots colors={colors} active={activeColor} /></span>
-            <span>OPTION<br /><b>{optionLabel}</b></span>
+            <span>WEIGHT<br /><b>{axes.weight || "—"}</b></span>
+            {axes.profile ? <span>PROFILE<br /><b>{axes.profile}</b></span> : null}
           </div>
         </div>
       </section>

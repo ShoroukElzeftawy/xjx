@@ -145,6 +145,7 @@ export function mapProduct(item: ShopifyProduct, index: number): ProductItem {
       available: variant.availableForSale,
       sku: variant.sku,
       image: variant.image?.url,
+      selectedOptions: variant.selectedOptions,
     })),
     description: item.description || undefined,
     vendor: item.vendor,

@@ -1,9 +1,11 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { imageForOption, productColors, productOptions } from "../lib/product-options";
+import { matchVariant, parseAxes, uniqueAxes } from "../lib/product-options";
+import type { ProductColor } from "../lib/taxonomy";
 import type { ProductItem } from "../lib/types";
 import { ColorDots } from "./ColorDots";
+import { ProductOptions } from "./ProductOptions";
 
 export function ProductCard({
   item,
@@ -14,14 +16,18 @@ export function ProductCard({
   add: (item: ProductItem, variantId?: string) => void;
   openProduct: (item: ProductItem) => void;
 }) {
-  const options = useMemo(() => productOptions(item), [item]);
-  const colors = useMemo(() => productColors(item), [item]);
-  const [picked, setPicked] = useState(options[0]?.id ?? "");
-  const active = options.find((option) => option.id === picked) ?? options[0];
-  const photo = active ? (active.image || imageForOption(item, active.label)) : item.image;
+  const { colors } = useMemo(() => uniqueAxes(item), [item]);
+  const [picked, setPicked] = useState(item.variantId ?? item.variants?.[0]?.id ?? "");
+  const active = item.variants?.find((variant) => variant.id === picked) ?? item.variants?.[0];
+  const axes = parseAxes(item, active);
+  const photo = active?.image || item.image;
   const price = active?.price ?? item.price;
   const soldOut = item.variants?.length ? item.variants.every((variant) => !variant.available) : false;
-  const showChipDots = colors.length > 1;
+
+  const pickColor = (color: ProductColor) => {
+    const match = matchVariant(item, { color }, active);
+    if (match) setPicked(match.id);
+  };
 
   return (
     <article className="product-card">
@@ -39,7 +45,6 @@ export function ProductCard({
         <div className="product-info-top">
           <button type="button" className="product-name" onClick={() => openProduct(item)}>
             <b>{item.name}</b>
-            <ColorDots colors={colors} active={active?.color} />
             <span className="product-meta">{item.type.replace(/S$/, "")}</span>
           </button>
           <div className="product-buy">
@@ -47,30 +52,15 @@ export function ProductCard({
             <button
               className="plus"
               type="button"
-              onClick={() => add(item, active?.variantId)}
+              onClick={() => add(item, active?.id)}
               aria-label={`Add ${item.name}`}
             >
               +
             </button>
           </div>
         </div>
-        {options.length > 0 && (
-          <div className="product-options" role="group" aria-label={`${item.name} options`}>
-            {options.map((option) => (
-              <button
-                key={option.id}
-                type="button"
-                className={`product-chip${option.id === active?.id ? " is-on" : ""}`}
-                onClick={() => setPicked(option.id)}
-              >
-                {showChipDots && option.color ? (
-                  <i className={`shop-swatch shop-swatch-${option.color.toLowerCase()}`} aria-hidden />
-                ) : null}
-                {option.label}
-              </button>
-            ))}
-          </div>
-        )}
+        <ColorDots colors={colors} active={axes.color} onPick={colors.length > 1 ? pickColor : undefined} />
+        <ProductOptions item={item} variantId={active?.id} onPick={setPicked} />
       </div>
     </article>
   );

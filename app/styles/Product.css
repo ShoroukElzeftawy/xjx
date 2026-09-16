@@ -155,7 +155,9 @@
 .buy-panel .product-colors .shop-swatch,
 .buy-panel fieldset .shop-swatch,
 .specs .shop-swatch {
-  border-color: rgba(24, 26, 26, 0.4);
+  width: 16px;
+  height: 16px;
+  border: 0;
 }
 
 .buy-panel h1 {
@@ -166,6 +168,10 @@
 
 .buy-panel > .product-colors {
   margin: -4px 0 18px;
+}
+
+.buy-panel .product-axes {
+  margin: 28px 0;
 }
 
 .price {
