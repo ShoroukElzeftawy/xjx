@@ -101,7 +101,7 @@ export function Home({
             <br />
             No mystery, no artificial inflation.
           </p>
-          <button onClick={() => go("shop")}>
+          <button className="pill-cta" type="button" onClick={() => go("shop")}>
             DISCOVER NOW <span>→</span>
           </button>
         </div>
@@ -231,7 +231,9 @@ export function Home({
             WE BELIEVE IN TOTAL TRANSPARENCY. EVERY PIECE IS CRAFTED WITH
             PRECISION, USING PREMIUM MATERIALS AND RESPONSIBLE SOURCING.
           </p>
-          <button onClick={() => go("materials")}>LEARN MORE →</button>
+          <button className="pill-cta" type="button" onClick={() => go("materials")}>
+            LEARN MORE <span>→</span>
+          </button>
         </div>
         <div className="material-table">
           {[
@@ -283,11 +285,11 @@ export function Home({
           </span>
         </div>
         <button
-          className="campaign-cta"
+          className="campaign-cta pill-cta"
           type="button"
           onClick={() => go("shop", undefined, { type: "EARRINGS" })}
         >
-          SHOP EARRINGS
+          SHOP EARRINGS <span>→</span>
         </button>
       </section>
     </>

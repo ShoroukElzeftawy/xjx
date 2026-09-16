@@ -440,6 +440,15 @@
   .inner-page .product-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .product-slide {
+    width: 44px;
+    height: 44px;
+  }
+
+  .product-price-row .product-colors {
+    padding-right: 8px;
+  }
 }
 
 @media (max-width: 600px) {

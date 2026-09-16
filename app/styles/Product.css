@@ -350,6 +350,16 @@
   .gallery-main {
     min-height: min(70dvh, 560px);
   }
+
+  .gallery-controls button,
+  .image-viewer-nav {
+    width: 48px;
+    height: 48px;
+  }
+
+  .buy-panel .product-axes {
+    margin: 16px 0 8px;
+  }
 }
 
 @media (max-width: 600px) {

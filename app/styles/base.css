@@ -185,6 +185,39 @@ body.menu-open {
   margin-top: 25px;
 }
 
+.pill-cta {
+  width: min(290px, 100%);
+  min-height: 52px;
+  padding: 15px 22px;
+  border: 2px solid var(--paper);
+  border-radius: 999px;
+  background: rgba(11, 13, 13, 0.12);
+  color: var(--paper);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  font: var(--type-body) var(--font-body);
+  letter-spacing: var(--track-gotham);
+  white-space: nowrap;
+  appearance: none;
+}
+
+@media (max-width: 1100px) {
+  .pill-cta {
+    width: min(280px, 100%);
+    min-height: 48px;
+    padding: 14px 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .pill-cta {
+    width: min(290px, 100%);
+    gap: 14px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     scroll-behavior: auto;

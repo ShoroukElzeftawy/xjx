@@ -140,4 +140,8 @@
   .account-page h1 {
     margin: 28px 0 18px;
   }
+
+  .account-social-btn {
+    min-height: 48px;
+  }
 }

@@ -60,22 +60,8 @@
   color: rgba(242, 242, 242, 0.86);
 }
 
-.hero-editorial-copy button {
-  width: 290px;
-  padding: 15px 22px;
-  border: 2px solid var(--paper);
-  border-radius: 999px;
-  background: rgba(11, 13, 13, 0.12);
-  color: var(--paper);
-  display: flex;
-  justify-content: center;
-  gap: 18px;
-  font: var(--type-body) var(--font-body);
-  letter-spacing: var(--track-gotham);
-}
-
-.hero-editorial-copy button:hover,
-.hero-editorial-copy button:focus-visible {
+.hero-editorial-copy .pill-cta:hover,
+.hero-editorial-copy .pill-cta:focus-visible {
   background: var(--paper);
   color: var(--ink);
   outline: none;
@@ -110,12 +96,6 @@
     font-size: var(--type-body);
     max-width: 34em;
     margin: 12px 0 16px;
-  }
-
-  .hero-editorial-copy button {
-    width: min(280px, 100%);
-    min-height: 48px;
-    padding: 14px 20px;
   }
 
   .ref-hero-logo {

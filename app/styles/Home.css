@@ -369,18 +369,19 @@
   max-width: 340px;
 }
 
-.material-intro button {
-  width: 290px;
-  max-width: 100%;
-  padding: 15px 22px;
-  border: 2px solid var(--blue);
-  border-radius: 999px;
+.material-intro .pill-cta {
+  border-color: var(--blue);
   background: none;
   color: var(--blue);
-  display: flex;
-  justify-content: center;
-  font: var(--type-body) var(--font-body);
-  letter-spacing: var(--track-gotham);
+}
+
+.material-intro .pill-cta:hover,
+.material-intro .pill-cta:active,
+.material-intro .pill-cta:focus-visible {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: var(--paper);
+  outline: none;
 }
 
 .material-table {
@@ -556,7 +557,7 @@
   }
 
   .ref-featured .home-pieces .product-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 

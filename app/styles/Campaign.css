@@ -44,28 +44,17 @@
   position: absolute;
   z-index: 3;
   left: 50%;
-  top: 68%;
+  top: 56%;
   transform: translate(-50%, -50%);
-  width: 290px;
-  padding: 15px 22px;
-  border: 0;
-  border-radius: 999px;
-  background: #8797c5;
-  color: #fff;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font: var(--type-body) var(--font-body);
-  letter-spacing: var(--track-gotham);
-  white-space: nowrap;
 }
 
 .campaign-cta:hover,
+.campaign-cta:active,
 .campaign-cta:focus-visible {
-  filter: brightness(0.9);
-  outline: 2px solid #fff;
-  outline-offset: 3px;
+  background: var(--blue);
+  border-color: var(--blue);
+  color: var(--paper);
+  outline: none;
 }
 
 @keyframes ticker {
@@ -86,30 +75,21 @@
 
 @media (max-width: 1100px) {
   .ref-campaign {
-    min-height: 220px;
+    min-height: 280px;
   }
 
   .campaign-ticker span {
     font-size: var(--type-display);
-  }
-
-  .campaign-cta {
-    top: 70%;
   }
 }
 
 @media (max-width: 600px) {
   .ref-campaign {
     aspect-ratio: 16 / 9;
-    min-height: 200px;
+    min-height: 220px;
   }
 
   .campaign-ticker {
-    top: 42%;
-  }
-
-  .campaign-cta {
-    top: 68%;
-    width: min(290px, calc(100% - 40px));
+    top: 40%;
   }
 }
