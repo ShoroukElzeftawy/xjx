@@ -121,3 +121,15 @@ export function shopProducts(catalog: ProductItem[]) {
 export function productUrl(handle?: string) {
   return handle ? `${shopifyStoreUrl}/products/${handle}` : shopifyStoreUrl;
 }
+
+export function accountLoginUrl() {
+  return `${shopifyStoreUrl}/account/login`;
+}
+
+export function accountRegisterUrl() {
+  return `${shopifyStoreUrl}/account/register`;
+}
+
+export function accountRecoverUrl() {
+  return `${shopifyStoreUrl}/account/login#recover`;
+}

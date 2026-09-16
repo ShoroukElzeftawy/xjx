@@ -3,57 +3,33 @@
 import { useEffect, useRef, useState } from "react";
 import { ProductGrid } from "../components/ProductGrid";
 import { categoryPlaceholders, shopProducts } from "../lib/catalog";
-import { skuFor, SLOGAN } from "../lib/copy";
+import { familyCode, SLOGAN } from "../lib/copy";
 import { PRODUCT_COLORS, SHOP_TYPES } from "../lib/taxonomy";
 import type { Go, ProductItem } from "../lib/types";
 
-function categoryPhoto(pieces: ProductItem[], fallback?: string) {
+function categoryPhoto(pieces: ProductItem[], fallback?: string, skip?: string) {
   const urls = pieces
     .flatMap((item) => [item.image, ...(item.images ?? [])])
     .filter((url): url is string => Boolean(url));
-  return urls.find((url) => /model/i.test(url)) || urls[0] || fallback;
-}
-
-function shopifyPhoto(items: ProductItem[], index = 1) {
-  const urls = items
-    .flatMap((item) => [item.image, ...(item.images ?? [])])
-    .filter((url): url is string =>
-      Boolean(url && /cdn\.shopify\.com/i.test(url)),
-    );
-  const models = urls.filter((url) => /model/i.test(url));
-  const pool = models.length ? models : urls;
-  return pool[index] || pool[0];
-}
-
-function choiceLine(pieces: ProductItem[]) {
-  if (!pieces.length) return "";
-
-  const seen = new Set<string>();
-  const values: string[] = [];
-  const add = (raw?: string) => {
-    const clean = raw
-      ?.trim()
-      .replace(/\s+/g, " ")
-      .replace(/\s*\/\s*(yellow|white|pink|rose)\s*gold/gi, "")
-      .trim();
-    if (!clean || /default title/i.test(clean)) return;
-    if (/^(yellow|white|pink|rose)(\s*gold)?$/i.test(clean)) return;
-    const key = clean.toUpperCase();
-    if (seen.has(key)) return;
-    seen.add(key);
-    values.push(key);
-  };
-
-  for (const item of pieces) {
-    add(item.karat);
-    for (const value of item.optionValues ?? []) add(value);
-    if (!item.optionValues?.length && item.options) {
-      item.options.split("/").forEach((part) => add(part));
-    }
-    for (const variant of item.variants ?? []) add(variant.title);
+  const unique = [...new Set(urls)];
+  const models = unique.filter((url) => /model/i.test(url));
+  if (skip) {
+    const other = models.find((url) => url !== skip) || unique.find((url) => url !== skip);
+    if (other) return other;
   }
+  return models[0] || unique[0] || fallback;
+}
 
-  return values.slice(0, 6).join(" · ");
+function photoUrls(items: ProductItem[]) {
+  return [...new Set(items.flatMap((item) => [item.image, ...(item.images ?? [])]).filter((url): url is string => Boolean(url)))];
+}
+
+function manifestoPhoto(listed: ProductItem[]) {
+  const earringModel = photoUrls(listed.filter((item) => item.type === "EARRINGS")).find((url) => /model/i.test(url));
+  if (earringModel) return earringModel;
+  return (
+    photoUrls(listed).find((url) => /cdn\.shopify\.com/i.test(url) && /model/i.test(url)) || "/campaign-hero.jpg"
+  );
 }
 
 export function Home({
@@ -61,14 +37,18 @@ export function Home({
   catalog,
   add,
   openProduct,
+  likedIds,
+  onToggleLike,
 }: {
   go: Go;
   catalog: ProductItem[];
   add: (item: ProductItem, variantId?: string) => void;
   openProduct: (item: ProductItem) => void;
+  likedIds?: string[];
+  onToggleLike?: (item: ProductItem) => void;
 }) {
   const listed = shopProducts(catalog);
-  const manifestoImage = shopifyPhoto(catalog) || listed[0]?.image;
+  const manifestoImage = manifestoPhoto(listed);
   const track = useRef<HTMLDivElement>(null);
   const [canPrev, setCanPrev] = useState(false);
   const [canNext, setCanNext] = useState(true);
@@ -136,10 +116,13 @@ export function Home({
           <div className="shop-categories" ref={track}>
             {SHOP_TYPES.map((type) => {
               const pieces = listed.filter((item) => item.type === type);
-              const image = categoryPhoto(pieces, categoryPlaceholders[type]);
+              const image = categoryPhoto(
+                pieces,
+                categoryPlaceholders[type],
+                type === "EARRINGS" ? manifestoImage : undefined,
+              );
               const colors = [...new Set(pieces.map((item) => item.color))];
               const swatches = colors.length ? colors : [...PRODUCT_COLORS];
-              const varsLabel = choiceLine(pieces);
               return (
                 <article className="shop-category" key={type}>
                   <button
@@ -152,13 +135,12 @@ export function Home({
                     aria-label={`View all ${type.toLowerCase()}`}
                   />
                   <small>
-                    {skuFor(type, 1)}
+                    {familyCode[type] || "XJX"}
                     <br />
-                    {type} / {pieces.length ? "LIVE" : "COMING"}
+                    {type}
                   </small>
                   <div className="shop-category-foot">
                     <div className="shop-category-vars">
-                      <em>{varsLabel}</em>
                       <span className="shop-category-colors">
                         {swatches.map((color) => (
                           <button
@@ -284,6 +266,9 @@ export function Home({
             items={listed.slice(0, 8)}
             add={add}
             openProduct={openProduct}
+            likedIds={likedIds}
+            onToggleLike={onToggleLike}
+            lead="studio"
           />
         </section>
       )}

@@ -1,66 +1,94 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { matchVariant, parseAxes, uniqueAxes } from "../lib/product-options";
-import type { ProductColor } from "../lib/taxonomy";
+import { isStudioPhoto, listingGallery, uniqueAxes } from "../lib/product-options";
 import type { ProductItem } from "../lib/types";
 import { ColorDots } from "./ColorDots";
-import { ProductOptions } from "./ProductOptions";
+import { HeartIcon } from "./Heart";
 
 export function ProductCard({
   item,
-  add,
   openProduct,
+  liked,
+  onToggleLike,
+  lead = "model",
 }: {
   item: ProductItem;
-  add: (item: ProductItem, variantId?: string) => void;
+  add?: (item: ProductItem, variantId?: string) => void;
   openProduct: (item: ProductItem) => void;
+  liked?: boolean;
+  onToggleLike?: (item: ProductItem) => void;
+  lead?: "studio" | "model";
 }) {
-  const { colors } = useMemo(() => uniqueAxes(item), [item]);
-  const [picked, setPicked] = useState(item.variantId ?? item.variants?.[0]?.id ?? "");
-  const active = item.variants?.find((variant) => variant.id === picked) ?? item.variants?.[0];
-  const axes = parseAxes(item, active);
-  const photo = active?.image || item.image;
-  const price = active?.price ?? item.price;
+  const gallery = useMemo(() => listingGallery(item, lead), [item, lead]);
+  const [imageIndex, setImageIndex] = useState(0);
+  const photo = gallery.length ? gallery[imageIndex % gallery.length] : undefined;
+  const studio = isStudioPhoto(photo);
+  const colors = uniqueAxes(item).colors;
+  const price = item.variants?.[0]?.price ?? item.price;
   const soldOut = item.variants?.length ? item.variants.every((variant) => !variant.available) : false;
+  const canSlide = gallery.length > 1;
 
-  const pickColor = (color: ProductColor) => {
-    const match = matchVariant(item, { color }, active);
-    if (match) setPicked(match.id);
+  const move = (direction: -1 | 1) => {
+    setImageIndex((current) => (current + direction + gallery.length) % gallery.length);
   };
 
   return (
     <article className="product-card">
-      <button
-        className={`product-visual${photo ? " has-image" : ""}`}
-        style={photo ? { backgroundImage: `url(${photo})` } : undefined}
-        onClick={() => openProduct(item)}
-        aria-label={`View ${item.name}`}
-      >
-        <small>{item.sku || item.code} / {item.type}</small>
-        <span className="product-view-cue">VIEW</span>
+      <div className={`product-visual${photo ? " has-image" : ""}${studio ? " is-studio" : ""}`} style={photo ? { backgroundImage: `url(${photo})` } : undefined}>
+        <button type="button" className="product-open" onClick={() => openProduct(item)} aria-label={`View ${item.name}`} />
+        {canSlide ? (
+          <>
+            <button
+              type="button"
+              className="product-slide prev"
+              aria-label="Previous photo"
+              onClick={(event) => {
+                event.stopPropagation();
+                move(-1);
+              }}
+            >
+              ←
+            </button>
+            <button
+              type="button"
+              className="product-slide next"
+              aria-label="Next photo"
+              onClick={(event) => {
+                event.stopPropagation();
+                move(1);
+              }}
+            >
+              →
+            </button>
+          </>
+        ) : null}
         {soldOut && <em className="sold-out">Sold out</em>}
-      </button>
+      </div>
       <div className="product-info">
         <div className="product-info-top">
           <button type="button" className="product-name" onClick={() => openProduct(item)}>
-            <b>{item.name}</b>
-            <span className="product-meta">{item.type.replace(/S$/, "")}</span>
+            {item.name}
           </button>
-          <div className="product-buy">
-            <b>{price}</b>
+          {onToggleLike ? (
             <button
-              className="plus"
               type="button"
-              onClick={() => add(item, active?.id)}
-              aria-label={`Add ${item.name}`}
+              className={`like-toggle${liked ? " is-on" : ""}`}
+              aria-label={liked ? `Remove ${item.name} from saved` : `Save ${item.name}`}
+              aria-pressed={liked}
+              onClick={(event) => {
+                event.stopPropagation();
+                onToggleLike(item);
+              }}
             >
-              +
+              <HeartIcon filled={liked} />
             </button>
-          </div>
+          ) : null}
         </div>
-        <ColorDots colors={colors} active={axes.color} onPick={colors.length > 1 ? pickColor : undefined} />
-        <ProductOptions item={item} variantId={active?.id} onPick={setPicked} />
+        <div className="product-price-row">
+          <b className="product-price">{price}</b>
+          <ColorDots colors={colors} />
+        </div>
       </div>
     </article>
   );

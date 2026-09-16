@@ -132,7 +132,6 @@
   gap: 5%;
   background: var(--void);
   color: white;
-  border-top: 2px solid var(--gold);
 }
 
 .commission h2 {

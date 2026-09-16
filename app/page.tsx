@@ -5,19 +5,24 @@ import { useEffect, useMemo, useState } from "react";
 import { Cart } from "./components/Cart";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
+import { Search } from "./components/Search";
 import { Toast } from "./components/Toast";
+import { itemKey } from "./components/Heart";
 import { fallbackProducts, productUrl } from "./lib/catalog";
 import { pathFor, productFromHandle, routeFromPath } from "./lib/routes";
 import type { BagLine, ProductItem, Route, ShopQuery } from "./lib/types";
 import { About } from "./sections/About";
+import { Account } from "./sections/Account";
 import { Custom } from "./sections/Custom";
 import { Home } from "./sections/Home";
 import { Materials } from "./sections/Materials";
 import { Product } from "./sections/Product";
 import { Refer } from "./sections/Refer";
+import { Saved } from "./sections/Saved";
 import { Shop } from "./sections/Shop";
 
 const BAG_KEY = "xjx-bag";
+const LIKES_KEY = "xjx-saved";
 
 function lineFromProduct(item: ProductItem, variantId?: string): BagLine {
   const variant = item.variants?.find((entry) => entry.id === variantId) ?? item.variants?.[0];
@@ -39,12 +44,15 @@ export default function XjxSite() {
   const route = parsed.route;
   const shopQuery = parsed.query ?? { type: "ALL", color: "ALL" };
   const [cartOpen, setCartOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const [notice, setNotice] = useState("");
   const [catalog, setCatalog] = useState<ProductItem[]>(fallbackProducts);
   const [shopLive, setShopLive] = useState(false);
   const [selected, setSelected] = useState<ProductItem>(fallbackProducts[0]);
   const [bag, setBag] = useState<BagLine[]>([]);
   const [bagReady, setBagReady] = useState(false);
+  const [likes, setLikes] = useState<string[]>([]);
+  const [likesReady, setLikesReady] = useState(false);
   const [checkingOut, setCheckingOut] = useState(false);
   const [headerSolid, setHeaderSolid] = useState(false);
 
@@ -70,12 +78,24 @@ export default function XjxSite() {
       undefined;
     }
     setBagReady(true);
+    try {
+      const storedLikes = window.localStorage.getItem(LIKES_KEY);
+      if (storedLikes) setLikes(JSON.parse(storedLikes) as string[]);
+    } catch {
+      undefined;
+    }
+    setLikesReady(true);
   }, []);
 
   useEffect(() => {
     if (!bagReady) return;
     window.localStorage.setItem(BAG_KEY, JSON.stringify(bag));
   }, [bag, bagReady]);
+
+  useEffect(() => {
+    if (!likesReady) return;
+    window.localStorage.setItem(LIKES_KEY, JSON.stringify(likes));
+  }, [likes, likesReady]);
 
   useEffect(() => {
     if (parsed.handle) {
@@ -90,7 +110,7 @@ export default function XjxSite() {
         if (data?.products?.length) {
           setCatalog(data.products);
           setShopLive(Boolean(data.connected));
-          setSelected(productFromHandle(data.products, parsed.handle));
+          setSelected(productFromHandle(data.products, parsed.handle) ?? data.products[0]);
         }
       })
       .catch(() => undefined);
@@ -120,6 +140,12 @@ export default function XjxSite() {
     });
     setNotice(`${item.name} added to bag`);
     window.setTimeout(() => setNotice(""), 2800);
+  };
+
+  const toggleLike = (item: ProductItem) => {
+    const key = itemKey(item);
+    if (!key) return;
+    setLikes((current) => (current.includes(key) ? current.filter((entry) => entry !== key) : [...current, key]));
   };
 
   const changeQty = (variantId: string, quantity: number) => {
@@ -161,19 +187,41 @@ export default function XjxSite() {
   };
 
   const count = bag.reduce((sum, line) => sum + line.quantity, 0);
+  const savedItems = catalog.filter((item) => likes.includes(itemKey(item)));
+  const likeProps = { likedIds: likes, onToggleLike: toggleLike };
 
   return (
     <>
-      <Header route={route} bag={count} onBag={() => setCartOpen(true)} solid={headerSolid} />
+      <Header
+        route={route}
+        bag={count}
+        saved={likes.length}
+        onBag={() => setCartOpen(true)}
+        onSearch={() => setSearchOpen(true)}
+        solid={headerSolid}
+      />
       <main className={`site-shell page-${route}${route === "home" ? "" : " inner-page"}`}>
-      {route === "home" && <Home go={go} catalog={catalog} add={add} openProduct={openProduct} />}
-      {route === "shop" && <Shop go={go} add={add} catalog={catalog} query={shopQuery} openProduct={openProduct} live={shopLive} />}
-      {route === "product" && <Product item={selected} add={add} go={go} />}
+      {route === "home" && <Home go={go} catalog={catalog} add={add} openProduct={openProduct} {...likeProps} />}
+      {route === "shop" && <Shop go={go} add={add} catalog={catalog} query={shopQuery} openProduct={openProduct} live={shopLive} {...likeProps} />}
+      {route === "product" && (!parsed.handle || selected.handle === parsed.handle) && (
+        <Product item={selected} add={add} go={go} {...likeProps} />
+      )}
       {route === "custom" && <Custom />}
       {route === "materials" && <Materials go={go} catalog={catalog} />}
       {route === "about" && <About />}
       {route === "refer" && <Refer />}
+      {route === "saved" && <Saved items={savedItems} add={add} openProduct={openProduct} {...likeProps} />}
+      {route === "account" && <Account />}
       <Footer go={go} />
+      <Search
+        open={searchOpen}
+        catalog={catalog}
+        onClose={() => setSearchOpen(false)}
+        onPick={(item) => {
+          setSearchOpen(false);
+          openProduct(item);
+        }}
+      />
       <Cart
         open={cartOpen}
         lines={bag}

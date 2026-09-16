@@ -79,11 +79,27 @@
   pointer-events: auto;
   width: 54px;
   height: 54px;
-  border: 1px solid #ffffff88;
+  border: 0;
+  padding: 0;
+  display: grid;
+  place-items: center;
   border-radius: 50%;
-  background: rgba(24, 26, 26, 0.72);
-  color: white;
+  background: var(--gold-soft);
+  color: var(--paper);
   font-size: var(--type-body);
+}
+
+.gallery-main.is-studio .gallery-controls button {
+  background: none;
+  color: var(--ink);
+}
+
+.gallery-like {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  z-index: 4;
+  color: #f4f4f2;
 }
 
 .image-viewer {
@@ -125,10 +141,13 @@
   transform: translateY(-50%);
   width: 54px;
   height: 54px;
-  border: 1px solid #ffffff88;
+  border: 0;
+  padding: 0;
+  display: grid;
+  place-items: center;
   border-radius: 50%;
-  background: rgba(24, 26, 26, 0.72);
-  color: white;
+  background: var(--gold-soft);
+  color: var(--paper);
   font-size: var(--type-body);
   cursor: pointer;
 }
@@ -152,12 +171,15 @@
   margin: 0;
 }
 
-.buy-panel .product-colors .shop-swatch,
-.buy-panel fieldset .shop-swatch,
-.specs .shop-swatch {
-  width: 16px;
-  height: 16px;
-  border: 0;
+.buy-panel .product-chip .shop-swatch {
+  width: 14px;
+  height: 14px;
+  border: 1px solid var(--line);
+  flex: none;
+}
+
+.buy-panel .product-chip.is-on .shop-swatch {
+  border-color: rgba(255, 255, 255, 0.55);
 }
 
 .buy-panel h1 {
@@ -166,16 +188,23 @@
   margin: 35px 0 12px;
 }
 
-.buy-panel > .product-colors {
-  margin: -4px 0 18px;
-}
-
 .buy-panel .product-axes {
-  margin: 28px 0;
+  margin: 18px 0 8px;
 }
 
 .price {
-  font: var(--type-display) var(--font-body);
+  font: 700 var(--type-body)/1.3 var(--font-body);
+}
+
+.price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.buy-panel .like-toggle {
+  color: var(--ink);
 }
 
 .price span {
@@ -251,16 +280,6 @@
   max-width: 520px;
 }
 
-.specs {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 18px 12px;
-  margin-top: 30px;
-  padding-top: 25px;
-  border-top: 1px solid var(--line);
-  font: var(--type-small)/1.65 var(--font-body);
-}
-
 .detail-story {
   padding: 130px var(--page-gutter);
   background: var(--void);
@@ -268,7 +287,6 @@
   display: grid;
   grid-template-columns: 15% 52% 27%;
   gap: 3%;
-  border-top: 2px solid var(--blue);
 }
 
 .detail-story h2 {
@@ -353,10 +371,6 @@
 
   .buy-panel h1 {
     font-size: var(--type-display);
-  }
-
-  .specs {
-    grid-template-columns: 1fr;
   }
 
   .next-object button {

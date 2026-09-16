@@ -34,11 +34,16 @@ type ShopifyProduct = {
 };
 
 function money(value: Money) {
-  return new Intl.NumberFormat("en", {
+  const amount = Number(value.amount);
+  const currency = value.currencyCode || "CAD";
+  const formatted = new Intl.NumberFormat("en-CA", {
     style: "currency",
-    currency: value.currencyCode,
-    maximumFractionDigits: 0,
-  }).format(Number(value.amount));
+    currency,
+    currencyDisplay: "narrowSymbol",
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(amount);
+  return currency === "CAD" ? `${formatted} CAD` : formatted;
 }
 
 async function shopifyFetch<T>(
@@ -119,7 +124,7 @@ export function mapProduct(item: ShopifyProduct, index: number): ProductItem {
   const source = [item.productType, item.title, item.handle, optionValues.join(" ")].filter(Boolean).join(" ");
   const type = inferType(source, inferType(item.productType || "", "NECKLACES"));
   const color = inferColor(source);
-  const price = variants[0]?.price ?? item.priceRange?.minVariantPrice ?? { amount: "0", currencyCode: "USD" };
+  const price = variants[0]?.price ?? item.priceRange?.minVariantPrice ?? { amount: "0", currencyCode: "CAD" };
   const sku = variants[0]?.sku || skuFor(type, index + 1);
   const karat = item.title.match(/\b(\d{1,2}\s?KT)\b/i)?.[1]?.replace(/\s+/g, "").toUpperCase();
   return {

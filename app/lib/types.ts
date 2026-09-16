@@ -1,4 +1,4 @@
-export type Route = "home" | "shop" | "product" | "custom" | "materials" | "about" | "refer";
+export type Route = "home" | "shop" | "product" | "custom" | "materials" | "about" | "refer" | "saved" | "account";
 
 export type ShopQuery = {
   type?: string;

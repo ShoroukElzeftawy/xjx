@@ -139,6 +139,7 @@ body:has(main.inner-page) .wordmark {
 }
 
 .tools button,
+.tools a,
 .tools .menu {
   border: 0;
   background: none;
@@ -152,6 +153,20 @@ body:has(main.inner-page) .wordmark {
   line-height: 1;
   letter-spacing: var(--track-sub);
   color: #f4f4f2;
+  text-decoration: none;
+}
+
+.tools .tool-heart {
+  width: 44px;
+}
+
+.tools .tool-heart svg {
+  display: block;
+  overflow: visible;
+}
+
+.tools .tool-heart.active {
+  color: var(--blue);
 }
 
 .mobile-nav-toggle {
@@ -210,7 +225,8 @@ body:has(.mobile-nav-toggle:checked) {
     gap: 14px;
   }
 
-  .tools button:first-child {
+  .tools button:first-child,
+  .tools a:not(.tool-heart) {
     display: none;
   }
 
@@ -222,6 +238,7 @@ body:has(.mobile-nav-toggle:checked) {
   }
 
   .tools button,
+  .tools a,
   .tools .menu {
     height: 44px;
     min-height: 44px;
@@ -276,6 +293,7 @@ body:has(.mobile-nav-toggle:checked) {
   }
 
   .tools button,
+  .tools a,
   .tools .menu {
     font-size: var(--type-small);
     letter-spacing: var(--track-sub);

@@ -64,13 +64,24 @@ export function parseAxes(item: ProductItem, variant?: ProductVariant): VariantA
 }
 
 export function uniqueAxes(item: ProductItem) {
-  const parsed = usableVariants(item).map((variant) => parseAxes(item, variant));
-  const colors = PRODUCT_COLORS.filter((color) => parsed.some((entry) => entry.color === color));
+  const parsed = (item.variants ?? []).map((variant) => parseAxes(item, variant));
+  const fromVariants = PRODUCT_COLORS.filter((color) => parsed.some((entry) => entry.color === color));
+  const colors = fromVariants.length
+    ? fromVariants
+    : [inferColor([item.color, item.name, item.handle].filter(Boolean).join(" "), "YELLOW")];
   const weights = [...new Set(parsed.map((entry) => entry.weight).filter(Boolean))].sort(
     (a, b) => Number.parseFloat(a) - Number.parseFloat(b),
   );
   const profiles = ["Thin", "Thick"].filter((profile) => parsed.some((entry) => entry.profile === profile));
   return { colors, weights, profiles };
+}
+
+export function comboExists(item: ProductItem, wanted: Partial<VariantAxes>) {
+  const pool = (item.variants ?? []).length ? item.variants ?? [] : [];
+  return pool.some((variant) => {
+    const axes = parseAxes(item, variant);
+    return (Object.keys(wanted) as (keyof VariantAxes)[]).every((key) => !wanted[key] || axes[key] === wanted[key]);
+  });
 }
 
 export function matchVariant(item: ProductItem, next: Partial<VariantAxes>, current?: ProductVariant) {
@@ -81,17 +92,23 @@ export function matchVariant(item: ProductItem, next: Partial<VariantAxes>, curr
     weight: next.weight ?? base.weight,
     profile: next.profile ?? base.profile,
   };
-  const ranked = variants
-    .map((variant) => {
+
+  const find = (keys: (keyof VariantAxes)[]) =>
+    variants.find((variant) => {
       const axes = parseAxes(item, variant);
-      let score = 0;
-      if (wanted.color && axes.color === wanted.color) score += 4;
-      if (wanted.weight && axes.weight === wanted.weight) score += 3;
-      if (wanted.profile && axes.profile === wanted.profile) score += 3;
-      return { variant, score };
-    })
-    .sort((a, b) => b.score - a.score);
-  return ranked[0]?.variant ?? current ?? variants[0];
+      return keys.every((key) => !wanted[key] || axes[key] === wanted[key]);
+    });
+
+  return (
+    find(["color", "weight", "profile"]) ||
+    (next.profile ? find(["color", "profile"]) || find(["profile"]) : undefined) ||
+    (next.weight ? find(["color", "weight"]) || find(["weight"]) : undefined) ||
+    (next.color ? find(["color"]) : undefined) ||
+    find(["color", "profile"]) ||
+    find(["color", "weight"]) ||
+    current ||
+    variants[0]
+  );
 }
 
 export function variantColor(item: ProductItem, variant?: ProductVariant): ProductColor {
@@ -135,4 +152,26 @@ export function galleryForVariant(item: ProductItem, variant?: ProductVariant | 
   const lead = imageForVariant(item, variant);
   const rest = (item.images ?? []).filter((url) => url && url !== lead);
   return lead ? [lead, ...rest] : rest;
+}
+
+function photoRank(url: string) {
+  const hay = decodeURIComponent(url).toLowerCase();
+  const model = hay.includes("model");
+  const product = hay.includes("product");
+  if (product && !model) return 0;
+  if (/\.png(\?|$)/.test(hay) && !model) return 0;
+  if (model) return 2;
+  return 1;
+}
+
+export function isStudioPhoto(url?: string) {
+  return Boolean(url && photoRank(url) === 0);
+}
+
+export function listingGallery(item: ProductItem, lead: "studio" | "model" = "model") {
+  const urls = [item.image, ...(item.images ?? []), ...(item.variants?.map((variant) => variant.image) ?? [])].filter(
+    (url): url is string => Boolean(url),
+  );
+  const ranked = [...new Set(urls)].sort((a, b) => photoRank(a) - photoRank(b));
+  return lead === "studio" ? ranked : ranked.slice().reverse();
 }

@@ -44,7 +44,6 @@
 
 .mat-board-grid article {
   padding: 22px 0;
-  border-top: 2px solid var(--gold);
 }
 
 .mat-board-grid small {
@@ -263,7 +262,6 @@
   padding: 110px var(--page-gutter) 120px;
   background: var(--void);
   color: var(--paper);
-  border-top: 2px solid var(--gold);
 }
 
 .care h2 {

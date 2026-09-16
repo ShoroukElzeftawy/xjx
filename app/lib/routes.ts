@@ -2,7 +2,7 @@ import { isShopListed } from "./catalog";
 import { PRODUCT_COLORS, SHOP_TYPES } from "./taxonomy";
 import type { ProductItem, Route, ShopQuery } from "./types";
 
-const routes: Route[] = ["shop", "product", "custom", "materials", "about", "refer"];
+const routes: Route[] = ["shop", "product", "custom", "materials", "about", "refer", "saved", "account"];
 
 function isShopType(value?: string) {
   return Boolean(value && (value === "ALL" || (SHOP_TYPES as readonly string[]).includes(value)));
@@ -20,6 +20,7 @@ export function pathFor(route: Route, handle?: string, query?: ShopQuery) {
     const color = query?.color && query.color !== "ALL" ? query.color.toLowerCase() : "";
     if (type && color) return `/shop/${type}/${color}`;
     if (type) return `/shop/${type}`;
+    if (color) return `/shop/all/${color}`;
     return "/shop";
   }
   return `/${route}`;
@@ -43,11 +44,17 @@ export function routeFromPath(pathname: string): { route: Route; handle?: string
     const search = shopQueryFromSearch();
     const typeSeg = parts[1]?.toUpperCase();
     const colorSeg = parts[2]?.toUpperCase();
+    const typeFromPath = isShopType(typeSeg) ? typeSeg : "ALL";
+    const colorFromPath = isShopColor(colorSeg)
+      ? colorSeg
+      : !isShopType(typeSeg) && isShopColor(typeSeg)
+        ? typeSeg
+        : "";
     return {
       route: "shop",
       query: {
-        type: isShopType(typeSeg) ? typeSeg : search.type || "ALL",
-        color: isShopColor(colorSeg) ? colorSeg : search.color || "ALL",
+        type: typeFromPath,
+        color: colorFromPath || search.color || "ALL",
       },
     };
   }
@@ -55,7 +62,6 @@ export function routeFromPath(pathname: string): { route: Route; handle?: string
 }
 
 export function productFromHandle(catalog: ProductItem[], handle?: string) {
-  const listed = catalog.filter(isShopListed);
-  if (!handle) return listed[0] ?? catalog[0];
-  return catalog.find((item) => item.handle === handle) ?? listed[0] ?? catalog[0];
+  if (!handle) return catalog.filter(isShopListed)[0] ?? catalog[0];
+  return catalog.find((item) => item.handle === handle);
 }

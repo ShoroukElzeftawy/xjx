@@ -2,23 +2,25 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
-import { axesLabel, galleryForVariant, matchVariant, parseAxes, uniqueAxes } from "../lib/product-options";
-import type { ProductColor } from "../lib/taxonomy";
+import { axesLabel, galleryForVariant, isStudioPhoto, parseAxes } from "../lib/product-options";
 import type { Go, ProductItem } from "../lib/types";
-import { ColorDots } from "../components/ColorDots";
+import { HeartIcon, itemKey } from "../components/Heart";
 import { ProductOptions } from "../components/ProductOptions";
 
 export function Product({
   item,
   add,
   go,
+  likedIds,
+  onToggleLike,
 }: {
   item: ProductItem;
   add: (item: ProductItem, variantId?: string) => void;
   go: Go;
+  likedIds?: string[];
+  onToggleLike?: (item: ProductItem) => void;
 }) {
   const variants = (item.variants ?? []).filter((variant) => variant.title && !/default title/i.test(variant.title));
-  const { colors } = useMemo(() => uniqueAxes(item), [item]);
   const [imageIndex, setImageIndex] = useState(0);
   const [viewerOpen, setViewerOpen] = useState(false);
   const [variantId, setVariantId] = useState(item.variantId ?? variants[0]?.id);
@@ -26,8 +28,9 @@ export function Product({
   const gallery = useMemo(() => galleryForVariant(item, active), [item, active]);
   const sku = active?.sku || item.sku || item.code;
   const photo = gallery[imageIndex] || item.image;
+  const studio = isStudioPhoto(photo);
   const axes = parseAxes(item, active);
-  const activeColor = axes.color;
+  const liked = likedIds?.includes(itemKey(item));
 
   useEffect(() => {
     setVariantId(item.variantId ?? item.variants?.[0]?.id);
@@ -64,11 +67,6 @@ export function Product({
     setImageIndex(0);
   };
 
-  const pickColor = (color: ProductColor) => {
-    const match = matchVariant(item, { color }, active);
-    if (match) pickVariant(match.id);
-  };
-
   return (
     <>
       <section className="product-page">
@@ -81,7 +79,7 @@ export function Product({
           }}
           aria-label={`${item.name} image gallery`}
         >
-          <div className="gallery-main imported">
+          <div className={`gallery-main imported${studio ? " is-studio" : ""}`}>
             {photo ? (
               <button type="button" className="gallery-open" onClick={() => setViewerOpen(true)} aria-label={`Open ${item.name} image`}>
                 <img src={photo} alt="" />
@@ -96,6 +94,17 @@ export function Product({
                 <button type="button" onClick={() => moveImage(1)} aria-label="Next product image">→</button>
               </div>
             )}
+            {onToggleLike ? (
+              <button
+                type="button"
+                className={`like-toggle gallery-like${liked ? " is-on" : ""}`}
+                aria-label={liked ? `Remove ${item.name} from saved` : `Save ${item.name}`}
+                aria-pressed={liked}
+                onClick={() => onToggleLike(item)}
+              >
+                <HeartIcon filled={liked} />
+              </button>
+            ) : null}
           </div>
         </div>
         <div className="buy-panel">
@@ -103,8 +112,21 @@ export function Product({
             {sku} / {item.type.replace(/S$/, "")}
           </p>
           <h1>{item.name}</h1>
-          <ColorDots colors={colors} active={activeColor} onPick={colors.length > 1 ? pickColor : undefined} />
-          <p className="price">{active?.price ?? item.price} <span>LIVE PRICE</span></p>
+          <div className="price-row">
+            <p className="price">{active?.price ?? item.price} <span>LIVE PRICE</span></p>
+            {onToggleLike ? (
+              <button
+                type="button"
+                className={`like-toggle${liked ? " is-on" : ""}`}
+                aria-label={liked ? `Remove ${item.name} from saved` : `Save ${item.name}`}
+                aria-pressed={liked}
+                onClick={() => onToggleLike(item)}
+              >
+                <HeartIcon filled={liked} />
+              </button>
+            ) : null}
+          </div>
+          <ProductOptions item={item} variantId={active?.id} onPick={pickVariant} labeled />
           <p className="description">
             {item.description || "An original XJEWELRYX object. Weight, karat, and options are listed. Size is given by comparison, not only millimeters."}
           </p>
@@ -112,17 +134,9 @@ export function Product({
             <p>SIZE, COMPARED</p>
             <p>{item.sizeCompare || "We size against something you already wear — a coin, a hoop, a chain on the neck — not a tape measure alone."}</p>
           </div>
-          <ProductOptions item={item} variantId={active?.id} onPick={pickVariant} labeled />
           <button className="add" type="button" onClick={() => add({ ...item, variantId: active?.id ?? variantId }, active?.id ?? variantId)}>
             ADD TO BAG — {active?.price ?? item.price} <b>↗</b>
           </button>
-          <div className="specs">
-            <span>SKU<br /><b>{sku}</b></span>
-            <span>TYPE<br /><b>{item.type}</b></span>
-            <span>COLOR<br /><ColorDots colors={colors} active={activeColor} /></span>
-            <span>WEIGHT<br /><b>{axes.weight || "—"}</b></span>
-            {axes.profile ? <span>PROFILE<br /><b>{axes.profile}</b></span> : null}
-          </div>
         </div>
       </section>
       <section className="detail-story">

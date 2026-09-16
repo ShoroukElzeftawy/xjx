@@ -3,6 +3,7 @@
 import { useMemo } from "react";
 import { ProductGrid } from "../components/ProductGrid";
 import { shopProducts } from "../lib/catalog";
+import { uniqueAxes } from "../lib/product-options";
 import { COMING_TYPES, PRODUCT_COLORS, SHOP_TYPES } from "../lib/taxonomy";
 import type { Go, ProductItem, ShopQuery } from "../lib/types";
 
@@ -13,6 +14,8 @@ export function Shop({
   query,
   openProduct,
   live,
+  likedIds,
+  onToggleLike,
 }: {
   go: Go;
   add: (item: ProductItem) => void;
@@ -20,14 +23,18 @@ export function Shop({
   query: ShopQuery;
   openProduct: (item: ProductItem) => void;
   live?: boolean;
+  likedIds?: string[];
+  onToggleLike?: (item: ProductItem) => void;
 }) {
   const type = query.type || "ALL";
   const color = query.color || "ALL";
   const filtered = useMemo(
     () =>
-      shopProducts(catalog).filter(
-        (item) => (type === "ALL" || item.type === type) && (color === "ALL" || item.color === color),
-      ),
+      shopProducts(catalog).filter((item) => {
+        if (type !== "ALL" && item.type !== type) return false;
+        if (color === "ALL") return true;
+        return uniqueAxes(item).colors.includes(color as (typeof PRODUCT_COLORS)[number]) || item.color === color;
+      }),
     [catalog, type, color],
   );
 
@@ -59,7 +66,7 @@ export function Shop({
         </div>
       </div>
       {filtered.length ? (
-        <ProductGrid items={filtered} add={add} openProduct={openProduct} />
+        <ProductGrid items={filtered} add={add} openProduct={openProduct} likedIds={likedIds} onToggleLike={onToggleLike} />
       ) : (
         <div className="shop-empty">
           <p>{coming ? "Coming from the bench." : "Nothing in this category yet."}</p>

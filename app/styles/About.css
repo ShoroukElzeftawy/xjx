@@ -4,7 +4,6 @@
   grid-template-columns: 58% 42%;
   background: var(--void);
   color: var(--paper);
-  border-bottom: 2px solid var(--gold);
 }
 
 .about-page > div:first-child {

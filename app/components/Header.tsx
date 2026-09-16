@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { HeartIcon } from "./Heart";
 import { pathFor } from "../lib/routes";
 import type { Route } from "../lib/types";
 
@@ -15,16 +16,26 @@ const nav: [Route, string][] = [
 export function Header({
   route,
   bag,
+  saved,
   onBag,
+  onSearch,
   solid,
 }: {
   route: Route;
   bag: number;
+  saved: number;
   onBag: () => void;
+  onSearch: () => void;
   solid: boolean;
 }) {
   const [scrolled, setScrolled] = useState(false);
   const stuck = solid || scrolled;
+
+  const openSearch = () => {
+    const toggle = document.getElementById("mobile-nav-toggle");
+    if (toggle instanceof HTMLInputElement) toggle.checked = false;
+    onSearch();
+  };
 
   useEffect(() => {
     const readY = () => Math.max(window.scrollY, document.documentElement.scrollTop, document.body.scrollTop);
@@ -59,18 +70,34 @@ export function Header({
           ))}
         </nav>
         <div className="tools">
-          <button type="button" aria-label="Search">SEARCH</button>
+          <button type="button" className="tool-search" aria-label="Search" onClick={openSearch}>SEARCH</button>
+          <a className={route === "account" ? "active" : ""} href={pathFor("account")}>ACCOUNT</a>
+          <a className={`tool-heart${route === "saved" ? " active" : ""}`} href={pathFor("saved")} aria-label={`Saved [${saved}]`}>
+            <HeartIcon filled={saved > 0} />
+          </a>
           <label className="menu" htmlFor="mobile-nav-toggle">MENU</label>
           <button type="button" onClick={onBag}>BAG [{bag}]</button>
         </div>
       </header>
       <nav className="mobile-nav" id="mobile-nav" aria-label="Mobile">
+        <button type="button" onClick={openSearch}>
+          <span>00</span>
+          SEARCH
+        </button>
         {nav.map(([key, label], index) => (
           <a key={key} href={pathFor(key)}>
             <span>0{index + 1}</span>
             {label}
           </a>
         ))}
+        <a href={pathFor("saved")}>
+          <span>0{nav.length + 1}</span>
+          SAVED
+        </a>
+        <a href={pathFor("account")}>
+          <span>0{nav.length + 2}</span>
+          ACCOUNT
+        </a>
       </nav>
     </div>
   );
