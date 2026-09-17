@@ -13,7 +13,7 @@ function shopifyApi(): Plugin {
         const path = req.url?.split("?")[0] ?? "";
         try {
           if (req.method === "GET" && path === "/api/shopify") {
-            const { fetchCatalog } = await import("./app/lib/shopify.ts");
+            const { fetchCatalog } = await import("./app/lib/shopify");
             const data = await fetchCatalog("127.0.0.1");
             res.setHeader("Content-Type", "application/json");
             res.end(JSON.stringify(data));
@@ -28,7 +28,7 @@ function shopifyApi(): Plugin {
             const lines = (body.lines ?? [])
               .filter((line) => line.merchandiseId)
               .map((line) => ({ merchandiseId: line.merchandiseId, quantity: line.quantity ?? 1 }));
-            const { createCheckout, variantPermalink } = await import("./app/lib/shopify.ts");
+            const { createCheckout, variantPermalink } = await import("./app/lib/shopify");
             if (!lines.length) {
               res.statusCode = 400;
               res.setHeader("Content-Type", "application/json");

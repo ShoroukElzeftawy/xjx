@@ -1,15 +1,8 @@
 function publicEnv(name: string) {
-  let value = "";
-  try {
-    const env = import.meta.env as Record<string, string | undefined>;
-    value = env[name] ?? "";
-  } catch {
-    value = "";
-  }
-  if (!value && typeof process !== "undefined") {
-    value = process.env[name] ?? "";
-  }
-  return String(value).trim();
+  const meta = import.meta as ImportMeta & { env?: Record<string, string | undefined> };
+  const fromMeta = meta.env?.[name] ?? "";
+  const fromProcess = typeof process !== "undefined" ? process.env[name] ?? "" : "";
+  return String(fromMeta || fromProcess).trim();
 }
 
 function httpUrl(value: string) {
