@@ -23,7 +23,7 @@ export function Product({
   const variants = (item.variants ?? []).filter((variant) => variant.title && !/default title/i.test(variant.title));
   const [imageIndex, setImageIndex] = useState(0);
   const [viewerOpen, setViewerOpen] = useState(false);
-  const [variantId, setVariantId] = useState(item.variantId ?? variants[0]?.id);
+  const [variantId, setVariantId] = useState(item.variantId ?? variants[0]?.id ?? "");
   const active = variants.find((variant) => variant.id === variantId) ?? variants[0];
   const gallery = useMemo(() => galleryForVariant(item, active), [item, active]);
   const sku = active?.sku || item.sku || item.code;
@@ -33,7 +33,7 @@ export function Product({
   const liked = likedIds?.includes(itemKey(item));
 
   useEffect(() => {
-    setVariantId(item.variantId ?? item.variants?.[0]?.id);
+    setVariantId(item.variantId ?? item.variants?.[0]?.id ?? "");
     setImageIndex(0);
   }, [item.code, item.variantId, item.variants]);
 
