@@ -180,11 +180,14 @@ export function listingGalleryForColor(item: ProductItem, color: ProductColor, l
   const variant = matchVariant(item, { color });
   const leadImage = imageForVariant(item, variant);
   const all = listingGallery(item, lead);
-  const matching = all.filter((url) => {
-    const tagged = colorFromText(decodeURIComponent(url));
-    return !tagged || tagged === color;
-  });
-  const pool = matching.length ? matching : all;
-  if (leadImage) return [leadImage, ...pool.filter((url) => url !== leadImage)];
-  return pool;
+  const tagged = all.filter((url) => colorFromText(decodeURIComponent(url)) === color);
+  const pool = tagged.length ? tagged : all.filter((url) => colorFromText(decodeURIComponent(url)) !== invertColor(color));
+  const ordered = leadImage ? [leadImage, ...pool.filter((url) => url !== leadImage)] : pool;
+  return ordered.length ? ordered : all;
+}
+
+function invertColor(color: ProductColor): ProductColor | undefined {
+  if (color === "WHITE") return "YELLOW";
+  if (color === "YELLOW") return "WHITE";
+  return undefined;
 }

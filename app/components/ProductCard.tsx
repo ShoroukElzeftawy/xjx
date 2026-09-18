@@ -42,7 +42,8 @@ export function ProductCard({
   }, [colors, color]);
 
   const preferred = lead === "model" ? photoForSkin(gallery, skin) : undefined;
-  const preferredOk = preferred && (!colorFromText(preferred) || colorFromText(preferred) === color);
+  const preferredColor = preferred ? colorFromText(preferred) : undefined;
+  const preferredOk = preferred && (!preferredColor || preferredColor === color);
   const photo = gallery.length
     ? imageIndex === 0 && preferredOk
       ? preferred
