@@ -73,7 +73,7 @@ export function Shop({
           <span>
             {coming
               ? `${type} are being built now. Earrings are live. Try another type, or check back when this family leaves the bench.`
-              : "Try another type or color. Bracelets, rings, and necklaces are coming from the bench."}
+              : "Try another type or color. Bracelets, rings, and pendants are coming from the bench."}
           </span>
         </div>
       )}

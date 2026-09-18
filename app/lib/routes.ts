@@ -4,8 +4,15 @@ import type { ProductItem, Route, ShopQuery } from "./types";
 
 const routes: Route[] = ["shop", "product", "materials", "about", "refer", "saved", "account"];
 
+function canonicalShopType(value?: string) {
+  if (!value) return "";
+  if (value === "NECKLACES") return "PENDANTS";
+  return value;
+}
+
 function isShopType(value?: string) {
-  return Boolean(value && (value === "ALL" || (SHOP_TYPES as readonly string[]).includes(value)));
+  const type = canonicalShopType(value);
+  return Boolean(type && (type === "ALL" || (SHOP_TYPES as readonly string[]).includes(type)));
 }
 
 function isShopColor(value?: string) {
@@ -31,7 +38,7 @@ export function shopQueryFromSearch(search = typeof window === "undefined" ? "" 
   const type = params.get("type")?.toUpperCase();
   const color = params.get("color")?.toUpperCase();
   return {
-    type: isShopType(type) ? type : "ALL",
+    type: isShopType(type) ? canonicalShopType(type) : "ALL",
     color: isShopColor(color) ? color : "ALL",
   };
 }
@@ -44,7 +51,7 @@ export function routeFromPath(pathname: string): { route: Route; handle?: string
     const search = shopQueryFromSearch();
     const typeSeg = parts[1]?.toUpperCase();
     const colorSeg = parts[2]?.toUpperCase();
-    const typeFromPath = isShopType(typeSeg) ? typeSeg : "ALL";
+    const typeFromPath = isShopType(typeSeg) ? canonicalShopType(typeSeg) : "ALL";
     const colorFromPath = isShopColor(colorSeg)
       ? colorSeg
       : !isShopType(typeSeg) && isShopColor(typeSeg)

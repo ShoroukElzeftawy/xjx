@@ -108,7 +108,7 @@ export const categoryPlaceholders: Record<string, string> = {
   EARRINGS: "/landing-hero.jpg",
   BRACELETS: "/editorial-custom.jpg",
   RINGS: "/editorial-product.jpg",
-  NECKLACES: "/editorial-about.jpg",
+  PENDANTS: "/editorial-about.jpg",
   CHAINS: "/campaign-hero.jpg",
 };
 

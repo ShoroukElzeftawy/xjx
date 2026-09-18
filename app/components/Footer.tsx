@@ -21,7 +21,7 @@ export function Footer({ go }: { go: Go }) {
           <a href={pathFor("shop", undefined, { type: "RINGS" })} onClick={(event) => { event.preventDefault(); go("shop", undefined, { type: "RINGS" }); }}>RINGS</a>
           <a href={pathFor("shop", undefined, { type: "EARRINGS" })} onClick={(event) => { event.preventDefault(); go("shop", undefined, { type: "EARRINGS" }); }}>EARRINGS</a>
           <a href={pathFor("shop", undefined, { type: "BRACELETS" })} onClick={(event) => { event.preventDefault(); go("shop", undefined, { type: "BRACELETS" }); }}>BRACELETS</a>
-          <a href={pathFor("shop", undefined, { type: "NECKLACES" })} onClick={(event) => { event.preventDefault(); go("shop", undefined, { type: "NECKLACES" }); }}>NECKLACES</a>
+          <a href={pathFor("shop", undefined, { type: "PENDANTS" })} onClick={(event) => { event.preventDefault(); go("shop", undefined, { type: "PENDANTS" }); }}>PENDANTS</a>
           <a href={pathFor("shop", undefined, { type: "CHAINS" })} onClick={(event) => { event.preventDefault(); go("shop", undefined, { type: "CHAINS" }); }}>CHAINS</a>
         </div>
         <div className="footer-links">

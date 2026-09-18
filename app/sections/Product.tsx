@@ -162,7 +162,7 @@ export function Product({
       <section className="detail-story">
         <p>01 / CONSTRUCTION</p>
         <h2>STRUCTURAL GOLD.<br /><i>NO ROMANCE.</i></h2>
-        <p>Folder codes mark the family: XJ4 earrings, XJ3 bracelets, XJ2 rings, XJ5 necklaces, XJ1 chains. The number is the object. Karat is in the name, not hidden in a spec sheet.</p>
+        <p>Folder codes mark the family: XJ4 earrings, XJ3 bracelets, XJ2 rings, XJ5 pendants, XJ1 chains. The number is the object. Karat is in the name, not hidden in a spec sheet.</p>
       </section>
       <section className="next-object">
         <p>RETURN TO COLLECTION</p>

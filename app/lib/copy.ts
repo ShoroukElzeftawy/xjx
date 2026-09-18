@@ -5,7 +5,7 @@ export const familyCode: Record<string, string> = {
   RINGS: "XJ2",
   BRACELETS: "XJ3",
   EARRINGS: "XJ4",
-  NECKLACES: "XJ5",
+  PENDANTS: "XJ5",
 };
 
 export function skuFor(type: string, itemNumber: number) {

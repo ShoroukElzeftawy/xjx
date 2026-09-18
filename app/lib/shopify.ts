@@ -122,7 +122,7 @@ export function mapProduct(item: ShopifyProduct, index: number): ProductItem {
   const images = item.images?.nodes.map((image) => image.url) ?? [];
   const optionValues = item.options?.flatMap((option) => option.values) ?? [];
   const source = [item.productType, item.title, item.handle, optionValues.join(" ")].filter(Boolean).join(" ");
-  const type = inferType(source, inferType(item.productType || "", "NECKLACES"));
+  const type = inferType(source, inferType(item.productType || "", "PENDANTS"));
   const color = inferColor(source);
   const price = variants[0]?.price ?? item.priceRange?.minVariantPrice ?? { amount: "0", currencyCode: "CAD" };
   const sku = variants[0]?.sku || skuFor(type, index + 1);
