@@ -312,9 +312,16 @@
   border: 1px solid var(--line);
 }
 
+.product-colors button.shop-swatch {
+  padding: 0;
+  cursor: pointer;
+}
+
 .product-colors .shop-swatch.is-on {
+  outline: 1px solid var(--ink);
+  outline-offset: 2px;
   box-shadow: none;
-  transform: scale(1.12);
+  transform: none;
 }
 
 .product-buy {

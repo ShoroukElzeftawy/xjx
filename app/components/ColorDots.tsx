@@ -22,7 +22,10 @@ export function ColorDots({
               type="button"
               className={className}
               aria-label={`${color.toLowerCase()} gold`}
-              onClick={() => onPick(color as ProductColor)}
+              onClick={(event) => {
+                event.stopPropagation();
+                onPick(color as ProductColor);
+              }}
             />
           );
         }

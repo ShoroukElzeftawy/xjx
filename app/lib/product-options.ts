@@ -175,3 +175,16 @@ export function listingGallery(item: ProductItem, lead: "studio" | "model" = "mo
   const ranked = [...new Set(urls)].sort((a, b) => photoRank(a) - photoRank(b));
   return lead === "studio" ? ranked : ranked.slice().reverse();
 }
+
+export function listingGalleryForColor(item: ProductItem, color: ProductColor, lead: "studio" | "model" = "model") {
+  const variant = matchVariant(item, { color });
+  const leadImage = imageForVariant(item, variant);
+  const all = listingGallery(item, lead);
+  const matching = all.filter((url) => {
+    const tagged = colorFromText(decodeURIComponent(url));
+    return !tagged || tagged === color;
+  });
+  const pool = matching.length ? matching : all;
+  if (leadImage) return [leadImage, ...pool.filter((url) => url !== leadImage)];
+  return pool;
+}

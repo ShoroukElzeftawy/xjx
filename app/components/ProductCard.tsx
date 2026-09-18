@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { isStudioPhoto, listingGallery, uniqueAxes } from "../lib/product-options";
+import { colorFromText, isStudioPhoto, listingGalleryForColor, matchVariant, uniqueAxes } from "../lib/product-options";
 import { onSkinChange, photoForSkin, readStoredSkin, type SkinIndex } from "../lib/skin-tone";
+import type { ProductColor } from "../lib/taxonomy";
 import type { ProductItem } from "../lib/types";
 import { ColorDots } from "./ColorDots";
 import { HeartIcon } from "./Heart";
@@ -21,9 +22,11 @@ export function ProductCard({
   onToggleLike?: (item: ProductItem) => void;
   lead?: "studio" | "model";
 }) {
-  const gallery = useMemo(() => listingGallery(item, lead), [item, lead]);
+  const colors = uniqueAxes(item).colors;
   const [imageIndex, setImageIndex] = useState(0);
   const [skin, setSkin] = useState<SkinIndex>(2);
+  const [color, setColor] = useState<ProductColor>(colors[0] ?? "YELLOW");
+  const gallery = useMemo(() => listingGalleryForColor(item, color, lead), [item, color, lead]);
 
   useEffect(() => {
     setSkin(readStoredSkin());
@@ -32,17 +35,21 @@ export function ProductCard({
 
   useEffect(() => {
     setImageIndex(0);
-  }, [skin]);
+  }, [skin, color]);
+
+  useEffect(() => {
+    if (!colors.includes(color)) setColor(colors[0] ?? "YELLOW");
+  }, [colors, color]);
 
   const preferred = lead === "model" ? photoForSkin(gallery, skin) : undefined;
+  const preferredOk = preferred && (!colorFromText(preferred) || colorFromText(preferred) === color);
   const photo = gallery.length
-    ? imageIndex === 0 && preferred
+    ? imageIndex === 0 && preferredOk
       ? preferred
       : gallery[imageIndex % gallery.length]
     : undefined;
   const studio = isStudioPhoto(photo);
-  const colors = uniqueAxes(item).colors;
-  const price = item.variants?.[0]?.price ?? item.price;
+  const price = matchVariant(item, { color })?.price ?? item.variants?.[0]?.price ?? item.price;
   const soldOut = item.variants?.length ? item.variants.every((variant) => !variant.available) : false;
   const canSlide = gallery.length > 1;
 
@@ -104,7 +111,14 @@ export function ProductCard({
         </div>
         <div className="product-price-row">
           <b className="product-price">{price}</b>
-          <ColorDots colors={colors} />
+          <ColorDots
+            colors={colors}
+            active={color}
+            onPick={(next) => {
+              setColor(next);
+              setImageIndex(0);
+            }}
+          />
         </div>
       </div>
     </article>
