@@ -10,17 +10,23 @@ function clamp01(value: number) {
 export function SkinToneSlider({
   available = true,
   fixed = false,
+  docked = true,
   inputId = "skin-tone",
 }: {
   available?: boolean;
   fixed?: boolean;
+  docked?: boolean;
   inputId?: string;
 }) {
+  const rootRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const draggingRef = useRef(false);
   const [skin, setSkin] = useState<SkinIndex>(2);
   const [pos, setPos] = useState(2);
   const [dragging, setDragging] = useState(false);
+  const [opened, setOpened] = useState(false);
+
+  const expanded = !fixed || docked || opened;
 
   useEffect(() => {
     const stored = readStoredSkin();
@@ -33,12 +39,33 @@ export function SkinToneSlider({
     });
   }, []);
 
+  useEffect(() => {
+    if (!docked) setOpened(false);
+  }, [docked]);
+
+  useEffect(() => {
+    if (!fixed || !opened || docked) return;
+    const onPointer = (event: PointerEvent) => {
+      if (rootRef.current?.contains(event.target as Node)) return;
+      setOpened(false);
+    };
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpened(false);
+    };
+    document.addEventListener("pointerdown", onPointer);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("pointerdown", onPointer);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [fixed, opened, docked]);
+
   const moveTo = (clientX: number) => {
     const track = trackRef.current;
     if (!track) return;
     const rect = track.getBoundingClientRect();
-    const thumb = 32;
-    const pad = 4;
+    const thumb = 30;
+    const pad = 5;
     const usable = Math.max(1, rect.width - pad * 2 - thumb);
     const next = clamp01((clientX - rect.left - pad - thumb / 2) / usable) * 4;
     const snapped = Math.round(next) as SkinIndex;
@@ -61,50 +88,72 @@ export function SkinToneSlider({
 
   return (
     <div
-      className={`skin-slider${fixed ? " is-fixed" : ""}${dragging ? " is-dragging" : ""}`}
+      ref={rootRef}
+      className={`skin-slider${fixed ? " is-fixed" : ""}${dragging ? " is-dragging" : ""}${expanded ? "" : " is-collapsed"}`}
       onClick={(event) => event.stopPropagation()}
       onPointerDown={(event) => event.stopPropagation()}
     >
-      <div
-        ref={trackRef}
-        className="skin-slider-track"
-        role="slider"
-        id={inputId}
-        tabIndex={0}
-        aria-valuemin={0}
-        aria-valuemax={4}
-        aria-valuenow={skin}
-        aria-valuetext={bubble.label}
-        aria-label="Skin tone"
-        style={{ ["--skin-pos" as string]: String(pos / 4) }}
-        onPointerDown={(event) => {
-          event.currentTarget.setPointerCapture(event.pointerId);
-          draggingRef.current = true;
-          setDragging(true);
-          moveTo(event.clientX);
-        }}
-        onPointerMove={(event) => {
-          if (!draggingRef.current) return;
-          moveTo(event.clientX);
-        }}
-        onPointerUp={stopDrag}
-        onPointerCancel={stopDrag}
-        onKeyDown={(event) => {
-          if (event.key === "ArrowLeft" || event.key === "ArrowDown") {
-            event.preventDefault();
-            writeStoredSkin(Math.max(0, skin - 1) as SkinIndex);
-          }
-          if (event.key === "ArrowRight" || event.key === "ArrowUp") {
-            event.preventDefault();
-            writeStoredSkin(Math.min(4, skin + 1) as SkinIndex);
-          }
-        }}
-      >
-        <span className="skin-slider-word" aria-hidden="true">
-          SKINTONE
-        </span>
-        <span className="skin-slider-bubble" aria-hidden="true" style={{ background: bubble.swatch }} />
-      </div>
+      {fixed ? (
+        <button
+          type="button"
+          className="skin-slider-toggle"
+          aria-expanded={expanded}
+          aria-controls={inputId}
+          aria-label={expanded ? "Hide skin tone" : "Show skin tone"}
+          onClick={() => setOpened((open) => !open)}
+        >
+          <span className="skin-slider-toggle-dot" aria-hidden="true">
+            <span style={{ background: bubble.swatch }} />
+          </span>
+          <span className="skin-slider-word" aria-hidden="true">
+            SKINTONE
+          </span>
+        </button>
+      ) : null}
+      {expanded ? (
+        <div
+          ref={trackRef}
+          className="skin-slider-track"
+          role="slider"
+          id={inputId}
+          tabIndex={0}
+          aria-valuemin={0}
+          aria-valuemax={4}
+          aria-valuenow={skin}
+          aria-valuetext={bubble.label}
+          aria-label="Skin tone"
+          style={{ ["--skin-pos" as string]: String(pos / 4) }}
+          onPointerDown={(event) => {
+            event.currentTarget.setPointerCapture(event.pointerId);
+            draggingRef.current = true;
+            setDragging(true);
+            moveTo(event.clientX);
+          }}
+          onPointerMove={(event) => {
+            if (!draggingRef.current) return;
+            moveTo(event.clientX);
+          }}
+          onPointerUp={stopDrag}
+          onPointerCancel={stopDrag}
+          onKeyDown={(event) => {
+            if (event.key === "ArrowLeft" || event.key === "ArrowDown") {
+              event.preventDefault();
+              writeStoredSkin(Math.max(0, skin - 1) as SkinIndex);
+            }
+            if (event.key === "ArrowRight" || event.key === "ArrowUp") {
+              event.preventDefault();
+              writeStoredSkin(Math.min(4, skin + 1) as SkinIndex);
+            }
+          }}
+        >
+          <span className="skin-slider-word" aria-hidden="true">
+            SKINTONE
+          </span>
+          <span className="skin-slider-bubble" aria-hidden="true">
+            <span style={{ background: bubble.swatch }} />
+          </span>
+        </div>
+      ) : null}
     </div>
   );
 }

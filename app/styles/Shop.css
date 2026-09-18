@@ -2,6 +2,7 @@
   padding: 28px var(--page-gutter) 22px;
   position: relative;
   isolation: isolate;
+  overflow: hidden;
   background: var(--void);
   color: white;
 }
@@ -9,12 +10,13 @@
 .page-head:after {
   content: "";
   position: absolute;
-  right: var(--page-gutter);
-  bottom: 12px;
-  width: 88px;
-  height: 88px;
+  right: -10%;
+  bottom: -72%;
+  width: min(56vw, 480px);
+  height: min(56vw, 480px);
   background: var(--blue);
-  opacity: 0.12;
+  opacity: 0.16;
+  pointer-events: none;
   mask: url("/brand-assets/shapes/xjx-logo-mark.png") center/contain no-repeat;
   -webkit-mask: url("/brand-assets/shapes/xjx-logo-mark.png") center/contain no-repeat;
 }

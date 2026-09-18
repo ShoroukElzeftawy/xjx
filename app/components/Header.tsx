@@ -79,7 +79,7 @@ export function Header({
           <button type="button" onClick={onBag}>BAG [{bag}]</button>
         </div>
       </header>
-      <SkinToneSlider fixed inputId="nav-skin-tone" />
+      <SkinToneSlider fixed docked={route === "home" && !stuck} inputId="nav-skin-tone" />
       <nav className="mobile-nav" id="mobile-nav" aria-label="Mobile">
         <button type="button" onClick={openSearch}>
           <span>00</span>
