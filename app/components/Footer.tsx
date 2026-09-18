@@ -25,12 +25,6 @@ export function Footer({ go }: { go: Go }) {
           <a href={pathFor("shop", undefined, { type: "CHAINS" })} onClick={(event) => { event.preventDefault(); go("shop", undefined, { type: "CHAINS" }); }}>CHAINS</a>
         </div>
         <div className="footer-links">
-          <span>CUSTOM</span>
-          <a href={pathFor("custom")} onClick={(event) => { event.preventDefault(); go("custom"); }}>BESPOKE</a>
-          <a href={pathFor("custom")} onClick={(event) => { event.preventDefault(); go("custom"); }}>ENGRAVING</a>
-          <a href={pathFor("custom")} onClick={(event) => { event.preventDefault(); go("custom"); }}>GALLERY</a>
-        </div>
-        <div className="footer-links">
           <span>ABOUT</span>
           <a href={pathFor("about")} onClick={(event) => { event.preventDefault(); go("about"); }}>OUR STORY</a>
           <a href={pathFor("materials")} onClick={(event) => { event.preventDefault(); go("materials"); }}>MATERIALS</a>

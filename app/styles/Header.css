@@ -200,6 +200,10 @@ body:has(.mobile-nav-toggle:checked) {
   pointer-events: auto;
 }
 
+.mobile-nav-toggle:checked ~ .skin-slider {
+  display: none;
+}
+
 @media (max-width: 1100px) {
   :root {
     --header-h: calc(64px + env(safe-area-inset-top, 0px));

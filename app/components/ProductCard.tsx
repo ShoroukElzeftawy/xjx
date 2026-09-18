@@ -1,7 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { isStudioPhoto, listingGallery, uniqueAxes } from "../lib/product-options";
+import { onSkinChange, photoForSkin, readStoredSkin, type SkinIndex } from "../lib/skin-tone";
 import type { ProductItem } from "../lib/types";
 import { ColorDots } from "./ColorDots";
 import { HeartIcon } from "./Heart";
@@ -22,7 +23,23 @@ export function ProductCard({
 }) {
   const gallery = useMemo(() => listingGallery(item, lead), [item, lead]);
   const [imageIndex, setImageIndex] = useState(0);
-  const photo = gallery.length ? gallery[imageIndex % gallery.length] : undefined;
+  const [skin, setSkin] = useState<SkinIndex>(2);
+
+  useEffect(() => {
+    setSkin(readStoredSkin());
+    return onSkinChange(setSkin);
+  }, []);
+
+  useEffect(() => {
+    setImageIndex(0);
+  }, [skin]);
+
+  const preferred = lead === "model" ? photoForSkin(gallery, skin) : undefined;
+  const photo = gallery.length
+    ? imageIndex === 0 && preferred
+      ? preferred
+      : gallery[imageIndex % gallery.length]
+    : undefined;
   const studio = isStudioPhoto(photo);
   const colors = uniqueAxes(item).colors;
   const price = item.variants?.[0]?.price ?? item.price;

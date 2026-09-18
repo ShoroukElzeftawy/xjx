@@ -4,32 +4,27 @@ import { useEffect, useRef, useState } from "react";
 import { ProductGrid } from "../components/ProductGrid";
 import { categoryPlaceholders, shopProducts } from "../lib/catalog";
 import { familyCode, SLOGAN } from "../lib/copy";
+import { onSkinChange, photoForSkin, readStoredSkin, type SkinIndex } from "../lib/skin-tone";
 import { PRODUCT_COLORS, SHOP_TYPES } from "../lib/taxonomy";
 import type { Go, ProductItem } from "../lib/types";
 
-function categoryPhoto(pieces: ProductItem[], fallback?: string, skip?: string) {
+function categoryPhoto(pieces: ProductItem[], fallback?: string, skip?: string, skin: SkinIndex = 2) {
   const urls = pieces
     .flatMap((item) => [item.image, ...(item.images ?? [])])
     .filter((url): url is string => Boolean(url));
   const unique = [...new Set(urls)];
   const models = unique.filter((url) => /model/i.test(url));
-  if (skip) {
-    const other = models.find((url) => url !== skip) || unique.find((url) => url !== skip);
-    if (other) return other;
-  }
-  return models[0] || unique[0] || fallback;
+  const pool = skip ? unique.filter((url) => url !== skip) : unique;
+  return photoForSkin(pool, skin) || models.find((url) => url !== skip) || pool[0] || fallback;
 }
 
 function photoUrls(items: ProductItem[]) {
   return [...new Set(items.flatMap((item) => [item.image, ...(item.images ?? [])]).filter((url): url is string => Boolean(url)))];
 }
 
-function manifestoPhoto(listed: ProductItem[]) {
-  const earringModel = photoUrls(listed.filter((item) => item.type === "EARRINGS")).find((url) => /model/i.test(url));
-  if (earringModel) return earringModel;
-  return (
-    photoUrls(listed).find((url) => /cdn\.shopify\.com/i.test(url) && /model/i.test(url)) || "/campaign-hero.jpg"
-  );
+function manifestoPhoto(listed: ProductItem[], skin: SkinIndex = 2) {
+  const earringModels = photoUrls(listed.filter((item) => item.type === "EARRINGS"));
+  return photoForSkin(earringModels, skin) || photoForSkin(photoUrls(listed), skin) || "/campaign-hero.jpg";
 }
 
 export function Home({
@@ -48,10 +43,16 @@ export function Home({
   onToggleLike?: (item: ProductItem) => void;
 }) {
   const listed = shopProducts(catalog);
-  const manifestoImage = manifestoPhoto(listed);
+  const [skin, setSkin] = useState<SkinIndex>(2);
+  const manifestoImage = manifestoPhoto(listed, skin);
   const track = useRef<HTMLDivElement>(null);
   const [canPrev, setCanPrev] = useState(false);
   const [canNext, setCanNext] = useState(true);
+
+  useEffect(() => {
+    setSkin(readStoredSkin());
+    return onSkinChange(setSkin);
+  }, []);
 
   const updateArrows = () => {
     const row = track.current;
@@ -120,6 +121,7 @@ export function Home({
                 pieces,
                 categoryPlaceholders[type],
                 type === "EARRINGS" ? manifestoImage : undefined,
+                skin,
               );
               const colors = [...new Set(pieces.map((item) => item.color))];
               const swatches = colors.length ? colors : [...PRODUCT_COLORS];
@@ -270,7 +272,7 @@ export function Home({
             openProduct={openProduct}
             likedIds={likedIds}
             onToggleLike={onToggleLike}
-            lead="studio"
+            lead="model"
           />
         </section>
       )}

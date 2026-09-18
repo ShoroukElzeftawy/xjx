@@ -2,12 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { HeartIcon } from "./Heart";
+import { SkinToneSlider } from "./SkinToneSlider";
 import { pathFor } from "../lib/routes";
 import type { Route } from "../lib/types";
 
 const nav: [Route, string][] = [
   ["shop", "SHOP"],
-  ["custom", "CUSTOM"],
   ["materials", "MATERIALS"],
   ["about", "ABOUT"],
   ["refer", "REFER"],
@@ -79,6 +79,7 @@ export function Header({
           <button type="button" onClick={onBag}>BAG [{bag}]</button>
         </div>
       </header>
+      <SkinToneSlider fixed inputId="nav-skin-tone" />
       <nav className="mobile-nav" id="mobile-nav" aria-label="Mobile">
         <button type="button" onClick={openSearch}>
           <span>00</span>

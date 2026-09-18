@@ -3,9 +3,11 @@
 import { useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
 import { axesLabel, galleryForVariant, isStudioPhoto, parseAxes } from "../lib/product-options";
+import { modelPhotos, onSkinChange, photoForSkin, readStoredSkin, type SkinIndex } from "../lib/skin-tone";
 import type { Go, ProductItem } from "../lib/types";
 import { HeartIcon, itemKey } from "../components/Heart";
 import { ProductOptions } from "../components/ProductOptions";
+import { SkinToneSlider } from "../components/SkinToneSlider";
 
 export function Product({
   item,
@@ -24,13 +26,23 @@ export function Product({
   const [imageIndex, setImageIndex] = useState(0);
   const [viewerOpen, setViewerOpen] = useState(false);
   const [variantId, setVariantId] = useState(item.variantId ?? variants[0]?.id ?? "");
+  const [skin, setSkin] = useState<SkinIndex>(2);
   const active = variants.find((variant) => variant.id === variantId) ?? variants[0];
   const gallery = useMemo(() => galleryForVariant(item, active), [item, active]);
+  const models = useMemo(
+    () => modelPhotos([item.image, ...(item.images ?? []), ...(item.variants ?? []).map((variant) => variant.image)].filter((url): url is string => Boolean(url))),
+    [item],
+  );
   const sku = active?.sku || item.sku || item.code;
   const photo = gallery[imageIndex] || item.image;
   const studio = isStudioPhoto(photo);
   const axes = parseAxes(item, active);
   const liked = likedIds?.includes(itemKey(item));
+
+  useEffect(() => {
+    setSkin(readStoredSkin());
+    return onSkinChange(setSkin);
+  }, []);
 
   useEffect(() => {
     setVariantId(item.variantId ?? item.variants?.[0]?.id ?? "");
@@ -40,6 +52,13 @@ export function Product({
   useEffect(() => {
     setImageIndex(0);
   }, [variantId]);
+
+  useEffect(() => {
+    const match = photoForSkin(models.length ? models : gallery, skin);
+    if (!match) return;
+    const index = gallery.indexOf(match);
+    if (index >= 0) setImageIndex(index);
+  }, [gallery, skin]);
 
   useEffect(() => {
     if (!viewerOpen) return;
@@ -94,6 +113,7 @@ export function Product({
                 <button type="button" onClick={() => moveImage(1)} aria-label="Next product image">→</button>
               </div>
             )}
+            <SkinToneSlider available={models.length > 1} inputId="pdp-skin-tone" />
             {onToggleLike ? (
               <button
                 type="button"

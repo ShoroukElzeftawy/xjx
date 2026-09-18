@@ -63,6 +63,10 @@
   font: var(--type-small) var(--font-body);
 }
 
+.gallery-main:has(.skin-slider) small {
+  bottom: 118px;
+}
+
 .gallery-controls {
   position: absolute;
   left: 24px;

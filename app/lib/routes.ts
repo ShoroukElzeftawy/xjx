@@ -2,7 +2,7 @@ import { isShopListed } from "./catalog";
 import { PRODUCT_COLORS, SHOP_TYPES } from "./taxonomy";
 import type { ProductItem, Route, ShopQuery } from "./types";
 
-const routes: Route[] = ["shop", "product", "custom", "materials", "about", "refer", "saved", "account"];
+const routes: Route[] = ["shop", "product", "materials", "about", "refer", "saved", "account"];
 
 function isShopType(value?: string) {
   return Boolean(value && (value === "ALL" || (SHOP_TYPES as readonly string[]).includes(value)));

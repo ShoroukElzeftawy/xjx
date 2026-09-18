@@ -13,7 +13,6 @@ import { pathFor, productFromHandle, routeFromPath } from "./lib/routes";
 import type { BagLine, ProductItem, Route, ShopQuery } from "./lib/types";
 import { About } from "./sections/About";
 import { Account } from "./sections/Account";
-import { Custom } from "./sections/Custom";
 import { Home } from "./sections/Home";
 import { Materials } from "./sections/Materials";
 import { Product } from "./sections/Product";
@@ -206,7 +205,6 @@ export default function XjxSite() {
       {route === "product" && (!parsed.handle || selected.handle === parsed.handle) && (
         <Product item={selected} add={add} go={go} {...likeProps} />
       )}
-      {route === "custom" && <Custom />}
       {route === "materials" && <Materials go={go} catalog={catalog} />}
       {route === "about" && <About />}
       {route === "refer" && <Refer />}
