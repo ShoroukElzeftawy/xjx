@@ -1,5 +1,8 @@
 /** @type {import("next").NextConfig} */
 const nextConfig = {
+  typescript: {
+    tsconfigPath: "tsconfig.json",
+  },
   webpack: (config) => {
     config.watchOptions = {
       ...(config.watchOptions ?? {}),

@@ -50,4 +50,6 @@ xjx/.gemini/
 xjx/.react-router/
 xjx/prisma/*.sqlite
 xjx/prisma/*.sqlite-journal
+/prisma/*.sqlite
+/prisma/*.sqlite-journal
 
