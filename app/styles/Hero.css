@@ -12,7 +12,8 @@
   position: absolute;
   inset: 0;
   z-index: 0;
-  background: url("/landing-hero.jpg") center 42% / cover no-repeat;
+  background: var(--hero-photo, url("/landing-hero.jpg")) center 42% / cover no-repeat;
+  transition: background-image 0.35s ease;
 }
 
 .ref-hero:after {

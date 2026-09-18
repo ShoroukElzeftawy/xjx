@@ -18,6 +18,8 @@ export const fallbackProducts: ProductItem[] = [
     image: "https://cdn.shopify.com/s/files/1/0808/2194/4571/files/1.67g_Model_1_800x800.jpg?v=1785932912",
     images: [
       "https://cdn.shopify.com/s/files/1/0808/2194/4571/files/1.67g_Model_1_800x800.jpg?v=1785932912",
+      "/landing-hero-model-skin-4.jpg",
+      "/landing-hero-model-skin-5.jpg",
       "https://cdn.shopify.com/s/files/1/0808/2194/4571/files/1.67g_Product_2_800x800.png?v=1785932912",
     ],
   },

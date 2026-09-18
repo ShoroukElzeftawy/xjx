@@ -8,6 +8,14 @@ import { onSkinChange, photoForSkin, readStoredSkin, type SkinIndex } from "../l
 import { PRODUCT_COLORS, SHOP_TYPES } from "../lib/taxonomy";
 import type { Go, ProductItem } from "../lib/types";
 
+const HERO_BY_SKIN = [
+  "/landing-hero.jpg",
+  "/landing-hero.jpg",
+  "/landing-hero.jpg",
+  "/landing-hero-model-skin-4.jpg",
+  "/landing-hero-model-skin-5.jpg",
+] as const;
+
 function categoryPhoto(pieces: ProductItem[], fallback?: string, skip?: string, skin: SkinIndex = 2) {
   const urls = pieces
     .flatMap((item) => [item.image, ...(item.images ?? [])])
@@ -87,7 +95,12 @@ export function Home({
 
   return (
     <>
-      <section className="ref-hero">
+      <section
+        className="ref-hero"
+        style={{
+          ["--hero-photo" as string]: `url("${HERO_BY_SKIN[skin]}")`,
+        }}
+      >
         <div className="hero-editorial-copy">
           <h1>
             HIGH QUALITY/
